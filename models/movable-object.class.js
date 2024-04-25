@@ -4,6 +4,7 @@ class MovableObject {
   img;
   height = 150;
   width = 100;
+
   // 1.Bilder Einfügen
   loadImage(path) {
     this.img = new Image();

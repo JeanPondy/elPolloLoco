@@ -1,5 +1,9 @@
 class Chicken extends MovableObject {
-  y = 280;
+  width = 55; // Standardbreite festlegen
+  height = 65; // Standardhöhe festlegen
+
+  y = 360;
+
   constructor() {
     super();
 

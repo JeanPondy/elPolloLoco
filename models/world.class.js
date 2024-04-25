@@ -1,7 +1,9 @@
 class World {
   character = new Character();
   enemies = [new Chicken(), new Chicken(), new Chicken()];
+  clouds = [new Cloud()];
   canvas;
+
   ctx; // mit context kann man funltion aufrufen
 
   constructor() {
@@ -26,6 +28,16 @@ class World {
         enemy.y,
         enemy.width,
         enemy.height
+      );
+    });
+
+    this.clouds.forEach((cloud) => {
+      this.ctx.drawImage(
+        cloud.img,
+        cloud.x,
+        cloud.y,
+        cloud.width,
+        cloud.height
       );
     });
 

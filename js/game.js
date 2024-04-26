@@ -7,7 +7,7 @@ function init() {
   world = new World(canvas, keyboard);
 
   console.log("My Character is", world.character);
-  console.log("My enemies are", world.enemies);
+  console.log("My enemies are", world.level.enemies);
 }
 
 // ob ein Taske nicht gedrückt ist oder losgelassen ist // Keyboard Objekt

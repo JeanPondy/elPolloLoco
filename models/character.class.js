@@ -13,6 +13,7 @@ class Character extends MovableObject {
     "./img/2_character_pepe/2_walk/W-26.png",
   ];
   world;
+  walking_sound = new Audio("audio/running2.mp3");
 
   constructor() {
     super();
@@ -23,15 +24,18 @@ class Character extends MovableObject {
   }
   animate() {
     setInterval(() => {
+      this.walking_sound.pause();
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.x += this.speed;
         this.otherDirection = false;
+        this.walking_sound.play();
       }
 
       if (this.world.keyboard.LEFT && this.x > 0) {
         // Character bleibt links im Bild
         this.x -= this.speed;
         this.otherDirection = true;
+        this.walking_sound.play();
       }
       this.world.camera_x = -this.x + 100; //Character weiter 100px nach links
     }, 1000 / 60);

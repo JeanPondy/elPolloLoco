@@ -55,6 +55,17 @@ class MovableObject {
     );
   }
 
+  hit() {
+    this.energy -= 5;
+    if (this.energy < 0) {
+      this.energy = 0;
+    }
+  }
+
+  isDead() {
+    return this.energy == 0;
+  }
+
   /**
    *
    * @param {Array} arr - ['img/image1.png','img/image1.png', ... ]

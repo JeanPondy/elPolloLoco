@@ -8,6 +8,21 @@ class MovableObject {
   currentImage = 0;
   speed = 0.15;
   otherDirection = false;
+  speedY = 0;
+  acceleration = 3;
+
+  applyGravity() {
+    setInterval(() => {
+      if (this.isAboveGround()) {
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
+      }
+    }, 1000 / 25);
+  }
+  // ist user Character in der Boden?
+  isAboveGround() {
+    return this.y < 143;
+  }
 
   // 1.Bilder Einfügen
   loadImage(path) {

@@ -51,6 +51,11 @@ class Character extends MovableObject {
         this.otherDirection = true;
         this.walking_sound.play();
       }
+      //console.log("this.speedY", this.speedY);
+      if (this.world.keyboard.UP) {
+        this.speedY = 20;
+      }
+
       this.world.camera_x = -this.x + 100; //Character weiter 100px nach links
     }, 1000 / 60);
 

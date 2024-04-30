@@ -8,6 +8,7 @@ class World {
   keyboard;
   camera_x = 0;
   statusBar = new StatusBar(); // statusBar1
+  hurt_sound = new Audio("audio/hurt.mp3");
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -28,9 +29,22 @@ class World {
         if (this.character.isColliding(enemy)) {
           this.character.hit();
           this.statusBar.setPercentage(this.character.energy);
+          // Sound abspielen
+          this.playHurtSound();
         }
       });
     }, 200);
+  }
+
+  /* -------------------- */
+  playHurtSound() {
+    // Überprüfen, ob der Sound abgespielt wird
+    if (this.hurt_sound.paused) {
+      this.hurt_sound.play();
+    } else {
+      // Zurücksetzen, um den Sound erneut abzuspielen
+      this.hurt_sound.currentTime = 0;
+    }
   }
 
   draw() {

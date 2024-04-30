@@ -17,6 +17,7 @@ class World {
     this.setWorld();
     this.checkCollisions();
   }
+
   setWorld() {
     this.character.world = this;
   }

@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "zabars";
+  src: url("fonts/zabars.ttf") format("truetype");
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  background-image: url("./assets/sunset-1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: "zabars", Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 64px;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: rgb(236, 78, 136);
+}
+
+canvas {
+  background-color: black;
+  margin-bottom: 80px;
+}

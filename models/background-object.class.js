@@ -1,11 +1,13 @@
 class BackgroundObject extends MovableObject {
-  width = 720;
-  height = 480;
+  // Festlegen der Breite und Höhe des Hintergrundobjekts
+  width = 720; // Breite des Hintergrundobjekts (entspricht der Canvas-Breite)
+  height = 480; // Höhe des Hintergrundobjekts (entspricht der Canvas-Höhe)
+
   constructor(imagePath, x) {
-    //  super().loadImage(imagePath);
-    super(); // Superklasse aufrufen
-    this.loadImage(imagePath); // loadImage-Methode aufrufen, um das Bild zu laden
-    this.x = x;
-    this.y = 480 - this.height; // Canvashöhe - BackgroundObjectshöhe( 480 - 400 = 80)
+    super(); // Aufruf des Konstruktors der Elternklasse (MovableObject)
+
+    this.loadImage(imagePath); // Laden des Hintergrundbilds anhand des übergebenen Bildpfads
+    this.x = x; // Setzen der horizontalen Position (X-Koordinate) des Hintergrundobjekts
+    this.y = 480 - this.height; // Setzen der vertikalen Position (Y-Koordinate) basierend auf der Höhe des Hintergrundobjekts
   }
 }

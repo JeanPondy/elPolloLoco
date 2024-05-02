@@ -1,8 +1,9 @@
 const level1 = new Level(
+  // Array mit Feinden und dem Endboss
   [new Chicken(), new Chicken(), new Chicken(), new Endboss()],
-
-  [new Cloud()],
-
+  // Array mit Wolken-Objekten
+  [new Cloud()], // Neues Cloud-Objekt
+  // Array mit Hintergrundobjekten (BackgroundObjects)
   [
     new BackgroundObject("./img/5_background/layers/air.png", -719),
     new BackgroundObject("./img/5_background/layers/3_third_layer/2.png", -719),

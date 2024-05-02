@@ -1,4 +1,5 @@
 class StatusBar extends DrawableObject {
+  //Array für verschiedenen Bildern der Statusleiste enthält, die den Gesundheitszustand in verschiedenen Prozentsätzen darstellen.
   IMAGES_HEALTH = [
     "img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png",
     "img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png",
@@ -11,25 +12,26 @@ class StatusBar extends DrawableObject {
   percentage = 100;
 
   constructor() {
-    super();
-    /*   this.loadImage(
-      "./img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png"
-    ); */
+    super(); // Aufruf des Konstruktors der Elternklasse (DrawableObject)
+    // Laden aller Bilder für die Statusleiste
     this.loadImages(this.IMAGES_HEALTH);
+    // Festlegen der Position und Größe der Statusleiste
     this.x = 40;
     this.y = 0;
     this.width = 200;
     this.height = 60;
-    this.setPercentage(100);
+    this.setPercentage(100); // Standardmäßige Anzeige der Statusleiste mit vollem Prozentwert
   }
 
-  //setPercentage(50)
+  // Methode zum Setzen des Prozentsatzes der Statusleiste
   setPercentage(percentage) {
-    this.percentage = percentage;
+    this.percentage = percentage; // Aktualisieren des prozentualen Werts
+    // Bestimmen des Pfads des Bildes anhand des prozentualen Werts
     let path = this.IMAGES_HEALTH[this.resolveImageIndex()];
+    // Laden des entsprechenden Bildes aus dem Cache
     this.img = this.imageCache[path];
   }
-
+  // Methode zur Bestimmung des Index des Anzeigebildes basierend auf dem Prozentsatz
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;

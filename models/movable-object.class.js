@@ -14,10 +14,9 @@ class MovableObject extends DrawableObject {
       }
     }, 1000 / 25);
   }
-  // ist user Character in der Boden?
+
   isAboveGround() {
     if (this instanceof ThrowableObject) {
-      // throwable object should always fall
       return true;
     } else {
       return this.y < 143;

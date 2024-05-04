@@ -1,3 +1,8 @@
+/* let level1; 
+initLevel(){
+  level1 = new Level(alle Arrays)
+} */
+
 const level1 = new Level(
   // Array mit Feinden und dem Endboss
   [new Chicken(), new Chicken(), new Chicken(), new Endboss()],

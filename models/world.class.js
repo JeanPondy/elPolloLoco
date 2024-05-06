@@ -12,6 +12,7 @@ class World {
   statusBar = new StatusBar(); // statusBar1 // Erstellen der Statusleiste
   bottlesBar = new BottlesBar();
   coinsBar = new CoinsBar();
+  endbossBar = new EndbossBar();
   hurt_sound = new Audio("audio/hurt3.mp3"); // Audio für Verletzungssound
   throwableObjects = []; // Array für werfbare Objekte
 
@@ -85,6 +86,7 @@ class World {
     this.addToMap(this.statusBar); // Zeichnen der Statusleiste
     this.addToMap(this.bottlesBar);
     this.addToMap(this.coinsBar);
+    this.addToMap(this.endbossBar);
     this.ctx.translate(this.camera_x, 0); // Erneutes Anwenden der Kamera-Übersetzung
     /* ------Space End */
 

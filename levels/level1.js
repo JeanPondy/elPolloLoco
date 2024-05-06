@@ -5,7 +5,14 @@ initLevel(){
 
 const level1 = new Level(
   // Array mit Feinden und dem Endboss
-  [new Chicken(), new Chicken(), new Chicken(), new Endboss()],
+  [
+    new Chicken(),
+    new Chicken(),
+    new Chicken(),
+    new Chicken(),
+    new Chicken(),
+    new Endboss(),
+  ],
   // Array mit Wolken-Objekten
   [new Cloud()], // Neues Cloud-Objekt
   // Array mit Hintergrundobjekten (BackgroundObjects)

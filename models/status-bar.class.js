@@ -16,7 +16,7 @@ class StatusBar extends DrawableObject {
     // Laden aller Bilder für die Statusleiste
     this.loadImages(this.IMAGES_HEALTH);
     // Festlegen der Position und Größe der Statusleiste
-    this.x = 40;
+    this.x = 10;
     this.y = 0;
     this.width = 200;
     this.height = 60;

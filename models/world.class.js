@@ -3,13 +3,14 @@
 class World {
   // Initialisierung der Spielwelt mit Charakter, Level, Canvas usw.
   character = new Character(); // Erstellen des Spielcharakters
-
+  //bottlesBar = new BottlesBar(); // Endboss Health Bar
   level = level1; // Festlegen des Spiellevels
   canvas;
   ctx; // mit context kann man funltion aufrufen
   keyboard;
   camera_x = 0; // X-Position der Kamera (für Kameraverfolgung)
   statusBar = new StatusBar(); // statusBar1 // Erstellen der Statusleiste
+  bottlesBar = new BottlesBar();
   hurt_sound = new Audio("audio/hurt3.mp3"); // Audio für Verletzungssound
   throwableObjects = []; // Array für werfbare Objekte
 
@@ -81,11 +82,13 @@ class World {
     // Zeichnen der festen Objekte (z. B. Statusleiste)
     this.ctx.translate(-this.camera_x, 0); // Zurücksetzen der Übersetzung
     this.addToMap(this.statusBar); // Zeichnen der Statusleiste
+    this.addToMap(this.bottlesBar);
     this.ctx.translate(this.camera_x, 0); // Erneutes Anwenden der Kamera-Übersetzung
     /* ------Space End */
 
     // Hinzufügen und Zeichnen von Charakter, Wolken, Feinden und werfbaren Objekten
     this.addToMap(this.character);
+    //this.addToMap(this.bottlesBar);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.bottles);

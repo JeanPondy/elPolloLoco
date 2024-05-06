@@ -19,7 +19,7 @@ class Chicken extends MovableObject {
     // Laden der Bilder für die Laufanimation des Hühnchens
     this.loadImages(this.IMAGES_WALKING);
     // Zufällige X-Position für das Hühnchen innerhalb eines bestimmten Bereichs
-    this.x = 200 + Math.random() * 500;
+    this.x = 400 + Math.random() * 1700;
     // Zufällige Bewegungsgeschwindigkeit des Hühnchens
     this.speed = 0.15 + Math.random() * 0.5;
     this.animate(); // Starten der Animation des Hühnchens

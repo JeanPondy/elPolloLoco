@@ -66,5 +66,13 @@ const level1 = new Level(
       "./img/5_background/layers/1_first_layer/1.png",
       719 * 4
     ),
+  ],
+  [
+    new Bottle(300),
+    new Bottle(650),
+    new Bottle(1220),
+    new Bottle(1480),
+    new Bottle(1620),
+    new Bottle(1860),
   ]
 );

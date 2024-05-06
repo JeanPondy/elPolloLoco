@@ -3,6 +3,7 @@
 class World {
   // Initialisierung der Spielwelt mit Charakter, Level, Canvas usw.
   character = new Character(); // Erstellen des Spielcharakters
+
   level = level1; // Festlegen des Spiellevels
   canvas;
   ctx; // mit context kann man funltion aufrufen
@@ -87,6 +88,7 @@ class World {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.bottles);
     this.addObjectsToMap(this.throwableObjects);
     // Zurücksetzen der Kamera-Übersetzung
     this.ctx.translate(-this.camera_x, 0);

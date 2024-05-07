@@ -34,7 +34,8 @@ class ThrowableObject extends MovableObject {
     this.applyGravity(); // Anwenden der Gravitation auf das werfbare Objekt
     // Animation für das Horizontalscrollen des geworfenen Objekts
     setInterval(() => {
-      this.x += 10; // Bewegung um 10 Pixel nach rechts
+      this.x += 10;
+      this.playAnimation(this.IMAGES_ROTATE);
     }, 25); //pro 25 Millisekunden
   }
 }

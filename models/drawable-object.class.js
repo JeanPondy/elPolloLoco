@@ -21,11 +21,18 @@ class DrawableObject {
 
   // Methode zum Zeichnen des Rahmens des Objekts (z. B. für Debugging-Zwecke)
   drawFrame(ctx) {
-    if (this instanceof Character || this instanceof Chicken) {
+    if (
+      this instanceof Character ||
+      this instanceof ChickenSmall ||
+      this instanceof Chicken ||
+      this instanceof Endboss ||
+      this instanceof Bottle ||
+      this instanceof Coin
+    ) {
       // Prüfen, ob das Objekt eine Spielfigur oder ein Huhn ist
+      ctx.beginPath(); // Neuen Pfad beginnen
       ctx.lineWidth = "2"; // Linienbreite für den Rahmen festlegen
       ctx.strokeStyle = "blue"; // Rahmenfarbe festlegen
-      ctx.beginPath(); // Neuen Pfad beginnen
       ctx.rect(this.x, this.y, this.width, this.height); // Rechteck um das Objekt zeichnen
       ctx.stroke(); // Rahmen zeichnen
     }

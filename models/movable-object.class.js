@@ -4,6 +4,8 @@ class MovableObject extends DrawableObject {
   speedY = 0;
   acceleration = 3;
   energy = 100;
+  isToCollect = true;
+  groundY = 143;
   lastHit = 0;
 
   applyGravity() {
@@ -19,7 +21,7 @@ class MovableObject extends DrawableObject {
     if (this instanceof ThrowableObject) {
       return true;
     } else {
-      return this.y < 143;
+      return this.y <= this.groundY;
     }
   }
 
@@ -66,5 +68,13 @@ class MovableObject extends DrawableObject {
 
   moveLeft() {
     this.x -= this.speed;
+  }
+  removeObject() {
+    this.speedY = 10;
+    this.applyGravity();
+    setInterval(() => {
+      this.x += 5;
+      this.y += 10;
+    }, 25);
   }
 }

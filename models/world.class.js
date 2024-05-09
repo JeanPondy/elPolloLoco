@@ -1,20 +1,28 @@
 // in Welt ist unsere Spiel Logik
 
 class World {
-  // Initialisierung der Spielwelt mit Charakter, Level, Canvas usw.
+  collision = new Collision();
+
   character = new Character(); // Erstellen des Spielcharakters
+  statusBar = new StatusBar(); // statusBar1 // Erstellen der Statusleiste
+  bottlesBar = new BottlesBar();
+  coinsBar = new CoinsBar();
+  endbossBar = new EndbossBar();
+  hurt_sound = new Audio("audio/hurt3.mp3"); // Audio für Verletzungssound
   //bottlesBar = new BottlesBar(); // Endboss Health Bar
   level = level1; // Festlegen des Spiellevels
   canvas;
   ctx; // mit context kann man funltion aufrufen
   keyboard;
   camera_x = 0; // X-Position der Kamera (für Kameraverfolgung)
-  statusBar = new StatusBar(); // statusBar1 // Erstellen der Statusleiste
-  bottlesBar = new BottlesBar();
-  coinsBar = new CoinsBar();
-  endbossBar = new EndbossBar();
-  hurt_sound = new Audio("audio/hurt3.mp3"); // Audio für Verletzungssound
+
   throwableObjects = []; // Array für werfbare Objekte
+  totalBottles = 5;
+  bottlePower = 30;
+  bottlescore = 0;
+  coinTotal = 5;
+  coinscore = 0;
+  bottle;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d"); // Kontext für das Zeichnen auf dem Canvas
@@ -27,11 +35,12 @@ class World {
   // Verknüpfung des Charakters mit der Spielwelt
   setWorld() {
     this.character.world = this;
+    this.collision.world = this;
   }
   // Hauptfunktion zur Ausführung der Spiellogik (wird wiederholt aufgerufen)
   run() {
     setInterval(() => {
-      this.checkCollisions(); // Kollisionsüberprüfung zwischen Charakter und Feinden
+      this.collision.checkCollisions(); // Kollisionsüberprüfung zwischen Charakter und Feinden
       this.checkThrowObjects(); // Überprüfung zum Werfen von Objekten
     }, 200); // Zeitintervall für die Ausführung der Überprüfungen
   }
@@ -46,18 +55,6 @@ class World {
       this.throwableObjects.push(bottle); // Hinzufügen des Objekts zum Array
       this.playHurtSound(); // Abspielen des Verletzungssounds ....später für werfen
     }
-  }
-
-  // Überprüfung und Behandlung von Kollisionen zwischen Charakter und Feinden
-  checkCollisions() {
-    this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
-        this.character.hit(); // Charakter wird getroffen
-        this.statusBar.setPercentage(this.character.energy); // Aktualisieren des Energiebalkens
-        // Sound abspielen
-        this.playHurtSound(); // Abspielen des Verletzungssounds
-      }
-    });
   }
 
   /* -------------------- */

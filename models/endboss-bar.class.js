@@ -16,23 +16,16 @@ class EndbossBar extends DrawableObject {
   constructor() {
     super();
     this.loadImages(this.IMAGES_ENDBOSS);
-    this.setPercentage(100);
+    this.setPercentage(100); // Startwert für die Endboss-Lebensleiste
   }
 
-  /**
-   * This sets the endboss health bar to a given percentage
-   * @param {Number} percentage Sets the percentage of the bar
-   */
   setPercentage(percentage) {
-    this.percentage = percentage; // => 0 ... 5 and creates let percentage
-    let path = this.IMAGES_ENDBOSS[this.resolveImageIndex()];
-    this.img = this.imageCache[path];
+    this.percentage = percentage;
+    let imageIndex = this.resolveImageIndex();
+    let imagePath = this.IMAGES_ENDBOSS[imageIndex];
+    this.img = this.imageCache[imagePath];
   }
 
-  /**
-   * This resolves the percentage and sets the corresponding image
-   * @returns {Number} Index of Image from IMAGE Array
-   */
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;

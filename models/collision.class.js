@@ -10,7 +10,6 @@ class Collision {
     this.enemiesHitCharacter();
     this.characterHitEnemies();
     this.chickenHitCharacter();
-
     this.checkEndbossProximity();
     this.characterHitEndbossWithBottle();
     this.endbossHitCharacter();
@@ -115,14 +114,16 @@ class Collision {
   }
   characterHitEndbossWithBottle() {
     this.world.throwableObjects.forEach((bottle) => {
-      let endboss =
-        this.world.level.enemies[this.world.level.enemies.length - 1];
-      if (endboss.isColliding(bottle) && bottle.active) {
-        endboss.endbossHit(this.world.bottlePower);
-        this.world.bottle.splash();
-        this.world.bottle.removeObject();
-        this.world.endbossBar.setPercentage(endboss.energy);
-        bottle.active = false;
+      let endboss = this.world.level.enemies.find(
+        (enemy) => enemy instanceof Endboss && enemy.active
+      );
+
+      if (endboss && endboss.isColliding(bottle) && bottle.active) {
+        endboss.endbossHit(this.world.bottlePower); // Reduziere die Energie des Endbosses entsprechend der Flaschenkraft
+        this.world.bottle.splash(); // Spiele die Splash-Animation der Flasche ab
+        this.world.bottle.removeObject(); // Entferne die Flasche aus der Spielwelt
+        this.world.endbossBar.setPercentage(endboss.energy); // Aktualisiere die Endboss-Lebensleiste
+        bottle.active = false; // Deaktiviere die Flasche, um weitere Kollisionen zu verhindern
       }
     });
   }

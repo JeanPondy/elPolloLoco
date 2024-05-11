@@ -1,42 +1,75 @@
 class Chicken extends MovableObject {
-  // Festlegen der Breite und Höhe des Hühnchens
-  width = 55;
-  height = 65;
-  y = 360; // Y-Position (vertikale Position) des Hühnchens auf dem Canvas
-  // Array mit Bildpfaden für die Laufanimation des Hühnchens
-  IMAGES_WALKING = [
-    "./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
-    "./img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
-    "./img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
-  ];
-  chicken_sound = new Audio("audio/chicken.mp3"); // Audio-Objekt für Laufgeräusche
-
   constructor() {
-    super(); // Aufruf des Konstruktors der Elternklasse (MovableObject)
-
-    // Laden des Standard-Bilds für das Hühnchen
-    this.loadImage("./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
-    // Laden der Bilder für die Laufanimation des Hühnchens
-    this.loadImages(this.IMAGES_WALKING);
-    // Zufällige X-Position für das Hühnchen innerhalb eines bestimmten Bereichs
-    this.x = 400 + Math.random() * 1700;
-    // Zufällige Bewegungsgeschwindigkeit des Hühnchens
+    super();
+    this.x = 400 + Math.random() * 1500;
+    this.y = 360;
+    this.height = 70;
+    this.width = 70;
     this.speed = 0.15 + Math.random() * 0.5;
-    this.animate(); // Starten der Animation des Hühnchens
+  /*   this.offset = {
+      top: 8,
+      left: 25,
+      right: 25,
+      bottom: 8,
+    }; */
+    this.attack = false;
+    this.crushPlayed = false;
+
+    this.IMAGES_WALKING = [
+      "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
+      "img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
+      "img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
+    ];
+
+    this.IMAGES_DEAD = ["img/3_enemies_chicken/chicken_normal/2_dead/dead.png"];
+
+    this.loadImage(this.IMAGES_WALKING[0]); // Laden des Standard-Bilds
+    this.loadImages(this.IMAGES_WALKING); // Vorladen der Animationsbilder
+    this.loadImages(this.IMAGES_DEAD); // Vorladen der Todesanimation
+
+    // Animationen starten
+    this.startAnimations();
   }
 
-  // Animation des Hühnchens (Bewegung nach links und laufende Animation)
-  animate() {
-    // Periodische Bewegung des Hühnchens nach links
-    setInterval(() => {
-      // Abspielen des Laufgeräusches, wenn das Huhn zu laufen beginnt
-      //this.chicken_sound.play();
-      this.moveLeft(); // Bewegung des Hühnchens nach links
-    }, 1000 / 60); // Aktualisierungsgeschwindigkeit der Bewegung (60 Frames pro Sekunde)
+  startAnimations() {
+    // Intervalle für die Animationen
+    this.chickenAnimations = setInterval(() => {
+      this.updateState(); // Zustand überprüfen (Angriff, Tod)
+    }, 1000 / 20);
 
-    // Periodisches Abspielen der Laufanimation des Hühnchens
-    setInterval(() => {
-      this.playAnimation(this.IMAGES_WALKING); // Abspielen der Laufanimation
-    }, 1000 / 5); // Geschwindigkeit der Laufanimation (5 Bilder pro Sekunde)
+    this.walkingAnimations = setInterval(() => {
+      this.playAnimation(this.IMAGES_WALKING); // Laufanimation abspielen
+    }, 1000 / 8);
+
+    this.movingAnimations = setInterval(() => {
+      this.moveLeft(); // Nach links bewegen
+    }, 1000 / 60);
+  }
+
+  updateState() {
+    if (this.isDead()) {
+      this.handleDeath(); // Aktionen ausführen, wenn das Huhn tot ist
+    }
+
+    if (this.attack && !this.attackSoundPlayed) {
+      this.speed = 1.5; // Geschwindigkeit erhöhen, wenn das Huhn angreift
+    }
+  }
+
+  handleDeath() {
+    this.active = false; // Deaktivieren, damit es nicht mehr in der Spielwelt angezeigt wird
+    this.playAnimation(this.IMAGES_DEAD); // Todesanimation abspielen
+
+    clearInterval(this.walkingAnimations); // Laufanimation stoppen
+    clearInterval(this.movingAnimations); // Bewegungsanimation stoppen
+
+    setTimeout(() => {
+      this.removeObject(); // Nach einer Verzögerung das Huhn aus der Spielwelt entfernen
+    }, 1500);
+
+    if (audio && !this.crushPlayed) {
+      this.crush_sound.play(); // Sound abspielen, wenn das Huhn stirbt
+      this.crushPlayed = true; // Markieren, dass der Sound abgespielt wurde
+    }
   }
 }

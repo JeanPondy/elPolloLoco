@@ -15,8 +15,6 @@ const level1 = new Level(
     new ChickenSmall(),
     new ChickenSmall(),
     new ChickenSmall(),
-    new ChickenSmall(),
-    new ChickenSmall(),
     new Endboss(),
   ],
   // Array mit Wolken-Objekten
@@ -86,15 +84,6 @@ const level1 = new Level(
     new Bottle(1220),
     new Bottle(1480),
     new Bottle(1620),
-    new Bottle(1860),
   ],
-  [
-    new Coin(500),
-    new Coin(750),
-    new Coin(950),
-    new Coin(1000),
-    new Coin(1400),
-    new Coin(1550),
-    new Coin(2050),
-  ]
+  [new Coin(500), new Coin(750), new Coin(950), new Coin(1000), new Coin(1400)]
 );

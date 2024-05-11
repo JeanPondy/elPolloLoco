@@ -14,28 +14,41 @@ class ThrowableObject extends MovableObject {
     "img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png",
     "img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
   ];
+
+  throw_sound = new Audio("audio/throw.mp3");
+  splash_sound = new Audio("audio/splash.mp3");
   constructor(x, y) {
-    super(); // Aufruf des Konstruktors der Elternklasse (MovableObject)
-    // Laden des Bildes für das werfbare Objekt (z. B. Salsa-Flasche)
-    this.loadImage("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png");
-    this.loadImages(this.IMAGES_SPLASH);
-    this.loadImages(this.IMAGES_ROTATE);
-    // Festlegen der Anfangsposition und Größe des werfbaren Objekts
+    super();
     this.x = x;
     this.y = y;
     this.height = 60;
     this.width = 50;
+    // Laden des Bildes für das werfbare Objekt (z. B. Salsa-Flasche)
+    this.loadImage(this.IMAGES_ROTATE[0]);
+    this.loadImages(this.IMAGES_SPLASH);
+    this.loadImages(this.IMAGES_ROTATE);
     // Starten der Wurfanimation
     this.throw();
   }
   //Methode für werfbaren Objekten
+
   throw() {
-    this.speedY = 30; // Setzen der vertikalen Wurfgeschwindigkeit (nach oben)
-    this.applyGravity(); // Anwenden der Gravitation auf das werfbare Objekt
-    // Animation für das Horizontalscrollen des geworfenen Objekts
-    setInterval(() => {
-      this.x += 10;
+    this.speedY = 15;
+    this.applyGravity();
+    this.movingAnimations = setInterval(() => {
+      this.x += 20;
       this.playAnimation(this.IMAGES_ROTATE);
-    }, 25); //pro 25 Millisekunden
+    }, 25);
+  }
+
+  splash() {
+    clearInterval(this.movingAnimations);
+    this.playAnimation(this.IMAGES_SPLASH);
+    if (audio) {
+      this.splash_sound.play();
+    }
+    setTimeout(() => {
+      this.removeObject();
+    }, 1500);
   }
 }

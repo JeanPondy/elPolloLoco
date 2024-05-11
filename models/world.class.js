@@ -17,6 +17,7 @@ class World {
   camera_x = 0; // X-Position der Kamera (für Kameraverfolgung)
 
   throwableObjects = []; // Array für werfbare Objekte
+  throw;
   totalBottles = 5;
   bottlePower = 30;
   bottlescore = 0;
@@ -32,6 +33,7 @@ class World {
     this.draw(); // Starten der Zeichenfunktion
     this.setWorld(); // Initialisieren der Spielwelt
     this.run(); // Starten der Spiellogik
+    this.throwObject();
   }
   // Verknüpfung des Charakters mit der Spielwelt
   setWorld() {
@@ -46,15 +48,23 @@ class World {
     }, 200);
   }
 
+  throwObject() {
+    this.throwObjectsInterval = setInterval(() => {
+      this.throwObjects();
+    }, 1000 / 10);
+  }
   // Überprüfung und Ausführung des Wurfens von Objekten
-  checkThrowObjects() {
-    if (this.keyboard.D) {
-      let bottle = new ThrowableObject(
+  throwObjects() {
+    if (this.keyboard.D == true && this.bottlescore > 0) {
+      this.bottle = new ThrowableObject(
         this.character.x + 100,
         this.character.y + 100
-      ); // Erstellen eines neuen werfbaren Objekts (Flasche)
-      this.throwableObjects.push(bottle); // Hinzufügen des Objekts zum Array
-      this.playHurtSound(); // Abspielen des Verletzungssounds ....später für werfen
+      );
+      this.throwableObjects.push(this.bottle);
+      this.bottlescore--;
+      this.bottlesBar.setPercentage(
+        this.bottlescore * (100 / this.totalBottles)
+      );
     }
   }
 

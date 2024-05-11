@@ -10,7 +10,10 @@ class Collision {
     this.enemiesHitCharacter();
     this.characterHitEnemies();
     this.chickenHitCharacter();
+
     this.checkEndbossProximity();
+    this.characterHitEndbossWithBottle();
+    this.endbossHitCharacter();
   }
 
   // Methode zum Aufnehmen von Flaschen durch den Charakter
@@ -60,6 +63,7 @@ class Collision {
       }
     });
   }
+
   chickenHitCharacter() {
     // Durchlaufe alle Feinde (Enemies) in der aktuellen Spielwelt
     this.world.level.enemies
@@ -72,9 +76,9 @@ class Collision {
           !this.world.character.isHurt() // Der Character ist nicht bereits verletzt
         ) {
           // Wenn die obigen Bedingungen erfüllt sind:
-          this.world.character.hit(20); // Character wird mit einem Schaden von 80 Punkten getroffen
+          this.world.character.hit(40); // Character wird mit einem Schaden von 80 Punkten getroffen
           this.world.character.lastAction = new Date().getTime(); // Aktualisiere den Zeitpunkt der letzten Aktion des Characters
-          this.world.healthBar.setPercentage(this.world.character.energy); // Aktualisiere die Gesundheitsleiste des Characters
+          this.world.statusBar.setPercentage(this.world.character.energy); // Aktualisiere die Gesundheitsleiste des Characters
         }
 
         // Überprüfe, ob der Chicken sich dem Character auf weniger als 550 Pixel nähert
@@ -82,7 +86,7 @@ class Collision {
           enemy.x - this.world.character.x + this.world.character.width <
           550
         ) {
-          enemy.attack = true; // Setze den Angriffsstatus des Chickens auf true (der Chicken beginnt anzugreifen)
+          enemy.attack = true;
         }
       });
   }
@@ -106,6 +110,31 @@ class Collision {
           clearInterval(enemy.walkingAnimations);
           clearInterval(enemy.movingAnimations);
           // Füge hier weitere Aktionen hinzu, die bei einem Kopfstoß ausgeführt werden sollen
+        }
+      });
+  }
+  characterHitEndbossWithBottle() {
+    this.world.throwableObjects.forEach((bottle) => {
+      let endboss =
+        this.world.level.enemies[this.world.level.enemies.length - 1];
+      if (endboss.isColliding(bottle) && bottle.active) {
+        endboss.endbossHit(this.world.bottlePower);
+        this.world.bottle.splash();
+        this.world.bottle.removeObject();
+        this.world.endbossBar.setPercentage(endboss.energy);
+        bottle.active = false;
+      }
+    });
+  }
+
+  endbossHitCharacter() {
+    this.world.level.enemies
+      .filter((enemy) => enemy instanceof Endboss)
+      .forEach((enemy) => {
+        if (this.world.character.isColliding(enemy) && enemy.active) {
+          this.world.character.energy = 0;
+          this.world.character.lastAction = new Date().getTime();
+          this.world.healthBar.setPercentage(this.world.character.energy);
         }
       });
   }

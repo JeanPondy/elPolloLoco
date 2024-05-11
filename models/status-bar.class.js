@@ -9,10 +9,9 @@ class StatusBar extends DrawableObject {
     "img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png",
   ];
 
-  percentage = 100;
-
   constructor() {
     super(); // Aufruf des Konstruktors der Elternklasse (DrawableObject)
+    this.loadImage(this.IMAGES_HEALTH[0]);
     // Laden aller Bilder für die Statusleiste
     this.loadImages(this.IMAGES_HEALTH);
     // Festlegen der Position und Größe der Statusleiste

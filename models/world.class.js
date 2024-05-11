@@ -2,7 +2,7 @@
 
 class World {
   collision = new Collision();
-
+  interval = new Interval();
   character = new Character(); // Erstellen des Spielcharakters
   statusBar = new StatusBar(); // statusBar1 // Erstellen der Statusleiste
   bottlesBar = new BottlesBar();
@@ -23,6 +23,7 @@ class World {
   coinTotal = 5;
   coinscore = 0;
   bottle;
+  mainInterval;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d"); // Kontext für das Zeichnen auf dem Canvas
@@ -36,13 +37,13 @@ class World {
   setWorld() {
     this.character.world = this;
     this.collision.world = this;
+    this.interval.world = this;
   }
   // Hauptfunktion zur Ausführung der Spiellogik (wird wiederholt aufgerufen)
   run() {
-    setInterval(() => {
-      this.collision.checkCollisions(); // Kollisionsüberprüfung zwischen Charakter und Feinden
-      this.checkThrowObjects(); // Überprüfung zum Werfen von Objekten
-    }, 200); // Zeitintervall für die Ausführung der Überprüfungen
+    this.mainInterval = setInterval(() => {
+      this.collision.checkCollisions();
+    }, 200);
   }
 
   // Überprüfung und Ausführung des Wurfens von Objekten

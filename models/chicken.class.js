@@ -6,7 +6,7 @@ class Chicken extends MovableObject {
     this.height = 70;
     this.width = 70;
     this.speed = 0.15 + Math.random() * 0.5;
-  /*   this.offset = {
+    /*   this.offset = {
       top: 8,
       left: 25,
       right: 25,
@@ -14,6 +14,8 @@ class Chicken extends MovableObject {
     }; */
     this.attack = false;
     this.crushPlayed = false;
+
+    // this.DYINGCHICKEN_SOUND = AUDIO("dyingChicken.mp3");
 
     this.IMAGES_WALKING = [
       "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",

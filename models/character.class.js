@@ -4,6 +4,12 @@ class Character extends MovableObject {
   height = 290; // Höhe der Spielfigur
   x = 120; // Start-X-Position der Spielfigur
   y = 43; // Start-Y-Position der Spielfigur (angepasst auf 43px)
+  offset = {
+    top: 150,
+    left: 40,
+    right: 40,
+    bottom: 30,
+  };
   speed = 10; // Bewegungsgeschwindigkeit der Spielfigur
   world; // Referenz auf die Spielwelt, in der sich die Spielfigur befindet
   walking_sound = new Audio("audio/running2.mp3"); // Audio-Objekt für Laufgeräusche
@@ -108,5 +114,15 @@ class Character extends MovableObject {
   // Funktion für das Springen der Spielfigur
   jump() {
     this.speedY = 30; // Setze die Sprunggeschwindigkeit der Spielfigur
+  }
+
+  /*  // Methode zum Überprüfen, ob der Charakter über dem Enemy ist
+  isAbove(enemy) {
+    return this.y < enemy.y;
+  } */
+
+  // Methode zum Überprüfen, ob der Charakter fällt (sich nach unten bewegt)
+  isFalling() {
+    return this.speedY > 0; // true, wenn der Charakter sich nach unten bewegt
   }
 }

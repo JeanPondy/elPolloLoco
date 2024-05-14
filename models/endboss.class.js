@@ -4,7 +4,12 @@ class Endboss extends MovableObject {
   width = 250; // Breite des Endgegners
   y = 60; // Start-Y-Position des Endgegners
   x = 2500; // Start-X-Position des Endgegners
-  // Abstand der Kollisionserkennung vom Rand des Endgegners
+  offset = {
+    top: 80,
+    left: 50,
+    right: 50,
+    bottom: 90,
+  };
   speed = 4; // Bewegungsgeschwindigkeit des Endgegners
   alerted = false; // Flag, um anzuzeigen, ob der Endgegner alarmiert ist
   angry = false; // Flag, um anzuzeigen, ob der Endgegner wütend ist

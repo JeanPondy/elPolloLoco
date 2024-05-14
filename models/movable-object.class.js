@@ -12,6 +12,16 @@ class MovableObject extends DrawableObject {
     this.lastHit = 0;
   }
 
+  // Variables for Intervals
+  chickenAnimations;
+  walkingAnimations;
+  characterAnimations;
+  movingAnimations;
+  chickenSmallAnimations; //Poult
+  hurtAnimations;
+  deadAnimations;
+  gravityAnimation;
+
   applyGravity() {
     setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
@@ -33,14 +43,28 @@ class MovableObject extends DrawableObject {
 
   isAboveGround() {
     // Werfbare Objekte sollten immer zum Boden fallen
-    return this instanceof ThrowableObject || this.y <= this.groundY;
+    if (this instanceof ThrowableObject) {
+      //Throwable Objects should always fall to bottom
+      return true;
+    } else {
+      return this.y <= this.groundY;
+    }
   }
 
   isColliding(mo) {
     return (
+      this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+      this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+      this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+      this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
+    );
+  }
+
+  isCollidingWith(mo) {
+    return (
       this.x + this.width > mo.x &&
       this.y + this.height > mo.y &&
-      this.x < mo.x + mo.width &&
+      this.x < mo.x &&
       this.y < mo.y + mo.height
     );
   }

@@ -1,6 +1,12 @@
 class Bottle extends MovableObject {
   y = 365;
   x = 300;
+  offset = {
+    top: 8,
+    left: 25,
+    right: 15,
+    bottom: 8,
+  };
 
   IMAGES_BOTTLES = [
     "img/6_salsa_bottle/1_salsa_bottle_on_ground.png",
@@ -24,16 +30,3 @@ class Bottle extends MovableObject {
     this.width = 70;
   }
 }
-/* super();
-// Laden des Standard-Bilds für das Hühnchen
-this.loadImage("img/6_salsa_bottle/1_salsa_bottle_on_ground.png");
-// Laden der Bilder für die Laufanimation des Hühnchens
-this.loadImages(this.IMAGES_BOTTLES);
-
-// Setzen der x-Position des Objekts
-this.x = x;
-
-// Festlegen der Höhe und Breite des Objekts
-this.height = 60;
-this.width = 70;
-} */

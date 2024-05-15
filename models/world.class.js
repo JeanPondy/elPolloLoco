@@ -3,6 +3,7 @@
 class World {
   gemeEnd = false;
   gameLost = false;
+  gameWon = false;
   collision = new Collision();
   interval = new Interval();
   character = new Character(); // Erstellen des Spielcharakters

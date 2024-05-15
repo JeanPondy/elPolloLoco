@@ -25,14 +25,15 @@ class ThrowableObject extends MovableObject {
   splash_sound = new Audio("audio/splash.mp3");
   constructor(x, y) {
     super();
-    this.x = x;
-    this.y = y;
-    this.height = 60;
-    this.width = 50;
     // Laden des Bildes für das werfbare Objekt (z. B. Salsa-Flasche)
     this.loadImage(this.IMAGES_ROTATE[0]);
     this.loadImages(this.IMAGES_SPLASH);
     this.loadImages(this.IMAGES_ROTATE);
+    this.x = x;
+    this.y = y;
+    this.height = 60;
+    this.width = 50;
+
     // Starten der Wurfanimation
     this.throw();
   }

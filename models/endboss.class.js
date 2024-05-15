@@ -63,11 +63,11 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_ALERTED);
     // Starte die Animation des Endgegners
-    this.animate();
+    this.startAnimations();
   }
 
   // Starte die verschiedenen Animationen des Endgegners
-  animate() {
+  startAnimations() {
     this.endbossWalk(); // Animation der Gehbewegung
     this.endbossHurt(); // Animation des Verletztseins
     this.endbossDeadCheck(); // Überprüfung des Todeszustands des Endgegners
@@ -115,6 +115,7 @@ class Endboss extends MovableObject {
     // Entferne den Endgegner aus dem Spiel
     this.removeObject();
     // Setze das Spielgewonnen-Flag in der Spielwelt
+    // END OF THE GAME
     world.gameWon = true;
   }
 

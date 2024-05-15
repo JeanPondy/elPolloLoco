@@ -14,6 +14,15 @@ class DrawableObject {
     this.img.src = path; // Bildpfad zuweisen
   }
 
+  loadImages(arr) {
+    arr.forEach((path) => {
+      // Für jeden Bildpfad im Array
+      let img = new Image(); // Neues Image-Objekt erstellen
+      img.src = path; // Bildpfad zuweisen
+      this.imageCache[path] = img; // Bild im Cache speichern
+    });
+  }
+
   // Methode zum Zeichnen des Objekts auf dem Canvas
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height); // Bild auf dem Canvas zeichnen
@@ -36,18 +45,5 @@ class DrawableObject {
       ctx.rect(this.x, this.y, this.width, this.height); // Rechteck um das Objekt zeichnen
       ctx.stroke(); // Rahmen zeichnen
     }
-  }
-
-  /**
-   * Methode zum Laden einer Liste von Bildpfaden in den Bildcache
-   * @param {Array} arr - Array von Bildpfaden ['img/image1.png','img/image2.png', ... ]
-   */
-  loadImages(arr) {
-    arr.forEach((path) => {
-      // Für jeden Bildpfad im Array
-      let img = new Image(); // Neues Image-Objekt erstellen
-      img.src = path; // Bildpfad zuweisen
-      this.imageCache[path] = img; // Bild im Cache speichern
-    });
   }
 }

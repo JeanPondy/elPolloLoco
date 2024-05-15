@@ -1,6 +1,8 @@
 // in Welt ist unsere Spiel Logik
 
 class World {
+  gemeEnd = false;
+  gameLost = false;
   collision = new Collision();
   interval = new Interval();
   character = new Character(); // Erstellen des Spielcharakters

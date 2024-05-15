@@ -98,7 +98,8 @@ class Collision {
       ) {
         // Überprüfen, ob der Charakter über dem Feind ist oder sich nach unten bewegt (fällt)
         const character = this.world.character;
-        if (character.isAbove(enemy) || character.isFalling()) {
+        if (character.isAboveGround()) {
+          // Hier wurde isAbove durch isAboveGround ersetzt
           if (enemy instanceof Endboss) {
             character.jump(30); // Charakter springt, wenn er den Endboss trifft
           }

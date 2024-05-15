@@ -111,6 +111,7 @@ class Character extends MovableObject {
       this.characterMoveRight();
       this.characterMoveLeft();
       this.characterJump();
+      this.updateState();
 
       this.world.camera_x = -this.x + 100; // Kamera-Verfolgung der Spielfigur
     }, 1000 / 60); // Aktualisierungsgeschwindigkeit der Animation
@@ -185,5 +186,15 @@ class Character extends MovableObject {
         clearInterval(this.world.level.enemies[6].movingAnimations);
       }
     }, 1000);
+  }
+  updateState() {
+    // Beispielhafte Methode, in der der Fehler auftritt
+    if (this.someObject && this.someObject.setPercentage) {
+      this.someObject.setPercentage(50); // Beispiel für den Aufruf von setPercentage
+    } else {
+      console.log(
+        "Fehler: someObject oder setPercentage nicht korrekt definiert"
+      );
+    }
   }
 }

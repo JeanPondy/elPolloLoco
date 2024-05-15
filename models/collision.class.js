@@ -5,6 +5,7 @@ class Collision {
 
   // Methode zum Überprüfen von Kollisionen und Aufnehmen von Flaschen
   checkCollisions() {
+    this.chickenSmallHitCharacter();
     this.collectBottles();
     this.collectCoins();
     this.enemiesHitCharacter();
@@ -13,6 +14,22 @@ class Collision {
     this.checkEndbossProximity();
     this.characterHitEndbossWithBottle();
     this.endbossHitCharacter();
+  }
+  chickenSmallHitCharacter() {
+    this.world.level.enemies
+      .filter(
+        (enemy) =>
+          enemy instanceof ChickenSmall &&
+          enemy.active &&
+          !this.world.character.isHurt()
+      )
+      .forEach((enemy) => {
+        if (this.world.character.isColliding(enemy)) {
+          this.world.character.hit(10);
+          this.world.character.lastAction = Date.now();
+          this.world.statusBarBar.setPercentage(this.world.character.energy);
+        }
+      });
   }
 
   // Methode zum Aufnehmen von Flaschen durch den Charakter
@@ -96,17 +113,14 @@ class Collision {
         this.world.character.isCollidingWith(enemy) &&
         enemy.active
       ) {
-        // Überprüfen, ob der Charakter über dem Feind ist oder sich nach unten bewegt (fällt)
         const character = this.world.character;
         if (character.isAboveGround()) {
-          // Hier wurde isAbove durch isAboveGround ersetzt
           if (enemy instanceof Endboss) {
-            character.jump(30); // Charakter springt, wenn er den Endboss trifft
+            character.jump(30);
           }
-          enemy.energy = 0; // Feind wird besiegt
+          enemy.energy = 0;
           clearInterval(enemy.walkingAnimations);
           clearInterval(enemy.movingAnimations);
-          // Weitere Aktionen bei Treffen ausführen (z. B. Animationen)
         }
       }
     });
@@ -135,7 +149,7 @@ class Collision {
         if (this.world.character.isColliding(enemy) && enemy.active) {
           this.world.character.energy = 0;
           this.world.character.lastAction = new Date().getTime();
-          this.world.healthBar.setPercentage(this.world.character.energy);
+          this.world.statusBar.setPercentage(this.world.character.energy);
         }
       });
   }

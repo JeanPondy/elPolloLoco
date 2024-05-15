@@ -75,3 +75,64 @@ class ChickenSmall extends MovableObject {
     }, 1000 / 60);
   }
 }
+/*   constructor() {
+    super(); // Aufruf des Konstruktors der Elternklasse (MovableObject)
+
+    this.x = 400 + Math.random() * 1700;
+    this.y = 390;
+    this.height = 40;
+    this.width = 40;
+    this.offset = {
+      top: 8,
+      left: 8,
+      right: 8,
+      bottom: 8,
+    };
+    this.speed = 0.15 + Math.random() * 0.5;
+
+    this.IMAGES_WALKING = [
+      "./img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
+      "./img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
+      "./img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
+    ];
+    this.IMAGES_DEAD = ["./img/3_enemies_chicken/chicken_small/dead.png"];
+
+    // Laden der Bilder für die Laufanimation des Hühnchens
+    this.loadImages(this.IMAGES_WALKING);
+
+    // Animationen starten
+    this.startAnimations();
+  }
+
+  startAnimations() {
+    // Periodische Bewegung des Hühnchens nach links
+    this.chickenSmallAnimations = setInterval(() => {
+      if (this.isDead()) {
+        this.chickenSmallDead();
+      } else {
+        this.chickenSmallMoveLeft(); // Bewegung des Hühnchens nach links
+        this.chickenSmallWalk(); // Laufanimation des Hühnchens abspielen
+      }
+    }, 1000 / 60); // Aktualisierungsgeschwindigkeit der Bewegung (60 Frames pro Sekunde)
+  }
+
+  // Periodisches Abspielen der Laufanimation des Hühnchens
+  chickenSmallWalk() {
+    this.playAnimation(this.IMAGES_WALKING); // Abspielen der Laufanimation
+  }
+
+  // Bewegung des Hühnchens nach links
+  chickenSmallMoveLeft() {
+    this.moveLeft(); // Bewegung des Hühnchens nach links
+  }
+
+  // Methode zur Behandlung des Todes des Hühnchens
+  chickenSmallDead() {
+    this.active = false; // Huhn als inaktiv markieren
+    this.playAnimation(this.IMAGES_DEAD); // Todesanimation des Hühnchens abspielen
+
+    // Hühnchen nach einer Verzögerung entfernen
+    setTimeout(() => {
+      this.removeObject(); // Huhn aus der Spielwelt entfernen
+    }, 1500);
+  } */

@@ -17,7 +17,7 @@ class MovableObject extends DrawableObject {
   walkingAnimations;
   characterAnimations;
   movingAnimations;
-  chickenSmallAnimations; //Poult
+  chickenSmallAnimations;
   hurtAnimations;
   deadAnimations;
   gravityAnimation;

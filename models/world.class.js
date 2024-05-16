@@ -6,20 +6,19 @@ class World {
   gameWon = false;
   collision = new Collision();
   interval = new Interval();
-  character = new Character(); // Erstellen des Spielcharakters
-  statusBar = new StatusBar(); // statusBar1 // Erstellen der Statusleiste
+  character = new Character();
+  statusBar = new StatusBar();
   bottlesBar = new BottlesBar();
   coinsBar = new CoinsBar();
   endbossBar = new EndbossBar();
-  hurt_sound = new Audio("audio/hurt3.mp3"); // Audio für Verletzungssound
-  //bottlesBar = new BottlesBar(); // Endboss Health Bar
-  level = level1; // Festlegen des Spiellevels
-  canvas;
-  ctx; // mit context kann man funltion aufrufen
-  keyboard;
-  camera_x = 0; // X-Position der Kamera (für Kameraverfolgung)
 
-  throwableObjects = []; // Array für werfbare Objekte
+  level = level1;
+  canvas;
+  ctx;
+  keyboard;
+  camera_x = 0;
+
+  throwableObjects = [];
   throw;
   totalBottles = 5;
   bottlePower = 30;
@@ -27,6 +26,10 @@ class World {
   coinTotal = 5;
   coinscore = 0;
   bottle;
+  hurt_sound = new Audio("audio/hurt3.mp3");
+  backgroundSound = new Audio("audio/music.mp3");
+  coin_sound = new Audio("audio/coin.mp3");
+  bottle_sound = new Audio("audio/bottle.mp3");
   mainInterval;
 
   constructor(canvas, keyboard) {

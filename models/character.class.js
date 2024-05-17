@@ -17,9 +17,9 @@ class Character extends MovableObject {
   world = null; // Referenz auf die Spielwelt, in der sich die Spielfigur befindet
   hurtPlayed = false;
   walking_sound = new Audio("audio/running2.mp3"); // Audio-Objekt für Laufgeräusche
-  jumping_sound = new Audio("audio/jump.mp3");
-  hurt_sound = new Audio("audio/hurt.mp3");
-  dead_sound = new Audio("audio/dead.mp3");
+  jumping_sound = new Audio("audio/hurt2.mp3");
+  hurt_sound = new Audio("audio/hurt2.mp3");
+  dead_sound = new Audio("audio/hurt2.mp3");
 
   // Array mit Bildpfaden für verschiedene Animationen der Spielfigur
   IMAGES_WALKING = [
@@ -111,7 +111,7 @@ class Character extends MovableObject {
       this.characterMoveRight();
       this.characterMoveLeft();
       this.characterJump();
-      this.updateState();
+      //this.updateState();
 
       this.world.camera_x = -this.x + 100; // Kamera-Verfolgung der Spielfigur
     }, 1000 / 60); // Aktualisierungsgeschwindigkeit der Animation
@@ -187,7 +187,7 @@ class Character extends MovableObject {
       }
     }, 1000);
   }
-  updateState() {
+  /*  updateState() {
     // Beispielhafte Methode, in der der Fehler auftritt
     if (this.someObject && this.someObject.setPercentage) {
       this.someObject.setPercentage(50); // Beispiel für den Aufruf von setPercentage
@@ -196,5 +196,5 @@ class Character extends MovableObject {
         "Fehler: someObject oder setPercentage nicht korrekt definiert"
       );
     }
-  }
+  } */
 }

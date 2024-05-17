@@ -20,6 +20,7 @@ class Chicken extends MovableObject {
     }; */
     this.attack = false;
     this.crushPlayed = false;
+    this.crush_sound = new Audio("audio/hurt2.mp3");
 
     // this.DYINGCHICKEN_SOUND = AUDIO("dyingChicken.mp3");
 

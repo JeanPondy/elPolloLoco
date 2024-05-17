@@ -120,10 +120,20 @@ class MovableObject extends DrawableObject {
   }
 
   playAnimation(images) {
-    let i = this.currentImage % images.length;
-    let path = images[i];
-    this.img = this.imageCache[path];
-    this.currentImage++;
+    if (Array.isArray(images) && images.length > 0) {
+      // Überprüfen, ob images ein Array ist und mindestens ein Element enthält
+      let i = this.currentImage % images.length;
+      let path = images[i];
+      if (this.imageCache && this.imageCache[path]) {
+        // Überprüfen, ob das Bild im imageCache vorhanden ist
+        this.img = this.imageCache[path];
+        this.currentImage++;
+      } else {
+        console.error(`Bildpfad '${path}' nicht im Cache gefunden.`);
+      }
+    } else {
+      console.error("Ungültiges oder leeres Array von Bildpfaden.");
+    }
   }
 
   jump(speedY = 30) {

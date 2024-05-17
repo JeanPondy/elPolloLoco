@@ -34,7 +34,10 @@ class Endboss extends MovableObject {
       "img/4_enemie_boss_chicken/5_dead/G25.png",
       "img/4_enemie_boss_chicken/5_dead/G26.png",
     ];
+    this.nugget_sound = new Audio("audio/hurt4.mp3");
+    this.gamewon_sound = new Audio("audio/hurt4.mp3"); //win sound
 
+    this.hadFirstContact = false;
     this.loadImage(this.IMAGES_WALKING[0]);
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_HURT);

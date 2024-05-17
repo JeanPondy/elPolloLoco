@@ -21,8 +21,8 @@ class ThrowableObject extends MovableObject {
     "img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
   ];
 
-  throw_sound = new Audio("audio/throw.mp3");
-  splash_sound = new Audio("audio/splash.mp3");
+  throw_sound = new Audio("audio/hurt2.mp3");
+  splash_sound = new Audio("audio/hurt2.mp3");
   constructor(x, y) {
     super();
     // Laden des Bildes für das werfbare Objekt (z. B. Salsa-Flasche)

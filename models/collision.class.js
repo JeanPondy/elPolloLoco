@@ -69,12 +69,11 @@ class Collision {
     });
   }
 
-  enemiesHitCharacter() {
+  enemiesHitCharacter(val = 5) {
     this.world.level.enemies.forEach((enemy) => {
       if (this.world.character.isColliding(enemy)) {
-        this.world.character.hit(); // Charakter wird getroffen
+        this.world.character.hit(val); // Charakter wird getroffen mit dem angegebenen Wert 'val'
         this.world.statusBar.setPercentage(this.world.character.energy); // Aktualisieren des Energiebalkens
-        // Sound abspielen
         this.world.playHurtSound(); // Abspielen des Verletzungssounds
       }
     });
@@ -125,31 +124,62 @@ class Collision {
       }
     });
   }
-
+  /* ---------------------------------------------------------------------------- */
   characterHitEndbossWithBottle() {
+    const val = 20; // Festlegen des Werts für die Flaschenkraft
+
     this.world.throwableObjects.forEach((bottle) => {
       let endboss = this.world.level.enemies.find(
         (enemy) => enemy instanceof Endboss && enemy.active
       );
 
       if (endboss && endboss.isColliding(bottle) && bottle.active) {
-        endboss.endbossHit(this.world.bottlePower); // Reduziere die Energie des Endbosses entsprechend der Flaschenkraft
+        // Reduziere die Energie des Endbosses um den festen Wert von 5 (Flaschenkraft)
+        endboss.endbossHit(val);
+
+        // Führe andere Aktionen durch, z.B. Splash-Animation der Flasche
         this.world.bottle.splash(); // Spiele die Splash-Animation der Flasche ab
         this.world.bottle.removeObject(); // Entferne die Flasche aus der Spielwelt
-        this.world.endbossBar.setPercentage(endboss.energy); // Aktualisiere die Endboss-Lebensleiste
-        bottle.active = false; // Deaktiviere die Flasche, um weitere Kollisionen zu verhindern
+
+        // Aktualisiere die Endboss-Lebensleiste in der Spielwelt
+        this.world.endbossBar.setPercentage(this.world.endboss.energy);
+
+        // Deaktiviere die Flasche, um weitere Kollisionen zu verhindern
+        bottle.active = false;
       }
     });
   }
 
-  endbossHitCharacter() {
+  /* 
+  
+  characterHitEndbossWithBottle() {
+  const endboss = this.world.level.enemies.find(
+    (enemy) => enemy instanceof Endboss && enemy.active
+  );
+
+  if (endboss) {
+    this.world.throwableObjects.forEach((bottle) => {
+      if (endboss.isColliding(bottle) && bottle.active) {
+        endboss.endbossHit(this.world.bottlePower);
+        this.world.bottle.splash();
+        this.world.bottle.removeObject();
+        this.world.endbossBar.setPercentage(endboss.energy);
+        bottle.active = false;
+      }
+    });
+  }
+}
+ */
+
+  /* ---------------------------------------------------------------------------- */
+  endbossHitCharacter(val = 100) {
     this.world.level.enemies
       .filter((enemy) => enemy instanceof Endboss)
-      .forEach((enemy) => {
-        if (this.world.character.isColliding(enemy) && enemy.active) {
-          this.world.character.energy = 0;
-          this.world.character.lastAction = new Date().getTime();
-          this.world.statusBar.setPercentage(this.world.character.energy);
+      .forEach((endboss) => {
+        if (this.world.character.isColliding(endboss) && endboss.active) {
+          this.world.character.hit(val); // Charakter wird vom Endboss getroffen mit dem angegebenen Wert 'val'
+          this.world.statusBar.setPercentage(this.world.character.energy); // Aktualisieren des Energiebalkens
+          this.world.playHurtSound(); // Abspielen des Verletzungssounds
         }
       });
   }

@@ -4,7 +4,7 @@ let world;
 let keyboard = new Keyboard(); // Neue Instanz der Keyboard-Klasse erstellen
 
 // Funktion zum Initialisieren des Spiels
-function init() {
+function initGame() {
   canvas = document.getElementById("canvas"); // Das Canvas-Element mit der ID "canvas" aus dem DOM abrufen
   world = new World(canvas, keyboard); // Neue Instanz der World-Klasse erstellen und das Canvas-Element sowie das Keyboard-Objekt übergeben
 

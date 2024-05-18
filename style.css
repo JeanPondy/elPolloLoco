@@ -21,16 +21,12 @@ canvas {
   margin-bottom: 80px;
   display: block;
 }
-img {
-  height: 480px;
-  width: 320px;
-}
 
 h1 {
   font-size: 64px;
   letter-spacing: 3px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  color: rgb(236, 78, 136);
+  color: rgb(255, 100, 68);
 }
 .d-none {
   display: none !important;

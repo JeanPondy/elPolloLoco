@@ -1,15 +1,20 @@
-class Endscreen extends DrawableObject {
-  x = 0;
-  y = 0;
-  width = 720;
-  height = 480;
+class Endscreen {
+  constructor(gameWon) {
+    this.gameWon = gameWon;
+    this.loadImage();
+  }
 
-  constructor(gamewon) {
-    super();
-    if (gamewon) {
-      this.loadImage("img/9_intro_outro_screens/game_over/game won.png");
+  loadImage() {
+    if (this.gameWon) {
+      this.img = new Image();
+      this.img.src = "img/9_intro_outro_screens/game_over/gameover.png"; // Pfad zum "win" Bild
     } else {
-      this.loadImage("img/9_intro_outro_screens/game_over/game over!.png");
+      this.img = new Image();
+      this.img.src = "img/9_intro_outro_screens/game_over/youlosto.png"; // Pfad zum "game_over" Bild
     }
+  }
+
+  draw(ctx) {
+    ctx.drawImage(this.img, 0, 0, ctx.canvas.width, ctx.canvas.height);
   }
 }

@@ -26,7 +26,9 @@ class World {
   backgroundSound = new Audio("audio/hurt3.mp3");
   coin_sound = new Audio("audio/hurt3.mp3");
   bottle_sound = new Audio("audio/hurt3.mp3");
+  throw_sound = new Audio("audio/shot_bottle.mp3"); // Neuer Sound für das Werfen der Flasche
   mainInterval;
+  throwObjectsInterval;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -49,31 +51,28 @@ class World {
       { once: true }
     ); // Nur einmalig ausführen
   }
-
   enableAudio() {
-    this.hurt_sound.play().catch((error) => {
-      console.error("Audio playback failed:", error);
-    });
-    this.hurt_sound.pause();
-    this.hurt_sound.currentTime = 0;
+    this.playAndResetSound(this.hurt_sound);
+    this.playAndResetSound(this.backgroundSound);
+    this.playAndResetSound(this.coin_sound);
+    this.playAndResetSound(this.bottle_sound);
+    this.playAndResetSound(this.throw_sound);
+  }
 
-    this.backgroundSound.play().catch((error) => {
-      console.error("Audio playback failed:", error);
-    });
-    this.backgroundSound.pause();
-    this.backgroundSound.currentTime = 0;
+  playAndResetSound(sound) {
+    this.playSound(sound);
+    this.resetSound(sound);
+  }
 
-    this.coin_sound.play().catch((error) => {
+  playSound(sound) {
+    sound.play().catch((error) => {
       console.error("Audio playback failed:", error);
     });
-    this.coin_sound.pause();
-    this.coin_sound.currentTime = 0;
+  }
 
-    this.bottle_sound.play().catch((error) => {
-      console.error("Audio playback failed:", error);
-    });
-    this.bottle_sound.pause();
-    this.bottle_sound.currentTime = 0;
+  resetSound(sound) {
+    sound.pause();
+    sound.currentTime = 0;
   }
 
   setWorld() {
@@ -104,7 +103,15 @@ class World {
       this.bottlesBar.setPercentage(
         this.bottlescore * (100 / this.totalBottles)
       );
+      this.playThrowSound(); // Sound für das Werfen der Flasche abspielen
     }
+  }
+
+  playThrowSound() {
+    this.throw_sound.currentTime = 0; // Setzt den Sound auf den Anfang zurück
+    this.throw_sound.play().catch((error) => {
+      console.error("Audio playback failed:", error);
+    });
   }
 
   playHurtSound() {
@@ -122,13 +129,28 @@ class World {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.drawBackground();
+    this.drawStatusBars();
+    this.drawGameObjects();
+    this.scheduleNextFrame();
+
+    this.checkGameEnd();
+  }
+
+  drawBackground() {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObejcts);
     this.ctx.translate(-this.camera_x, 0);
+  }
+
+  drawStatusBars() {
     this.addToMap(this.statusBar);
     this.addToMap(this.bottlesBar);
     this.addToMap(this.coinsBar);
     this.addToMap(this.endbossBar);
+  }
+
+  drawGameObjects() {
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.clouds);
@@ -137,34 +159,39 @@ class World {
     this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);
+  }
 
+  checkGameEnd() {
+    if (this.gameEnd) {
+      // Audio-Wiedergabe stoppen
+      this.hurt_sound.pause();
+      this.backgroundSound.pause();
+      this.coin_sound.pause();
+      this.bottle_sound.pause();
+
+      if (this.gameWon) {
+        this.addToMap(new Endscreen(true));
+      } else {
+        this.addToMap(new Endscreen(false));
+      }
+
+      setTimeout(() => {
+        this.stopAllAnimations();
+      }, 1500);
+    }
+  }
+
+  scheduleNextFrame() {
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
     });
   }
 
-  checkGameEnd() {
-    if (this.gameEnd) {
-      audio = false;
-      if (this.gameWon) {
-        this.addToMap(new Endscreen(true));
-        setTimeout(() => {
-          this.drawEnd();
-        }, 1500);
-      } else {
-        this.addToMap(new Endscreen(false));
-        setTimeout(() => {
-          this.drawEnd();
-        }, 1500);
-      }
-    }
-  }
-
-  drawEnd() {
+  stopAllAnimations() {
     setTimeout(() => {
-      this.interval.clearAllIntervals();
-      cancelAnimationFrame(this.requestframeid);
+      clearInterval(this.mainInterval);
+      clearInterval(this.throwObjectsInterval);
     }, 1000);
   }
 
@@ -179,7 +206,9 @@ class World {
       this.flipImage(mo);
     }
     mo.draw(this.ctx);
-    mo.drawFrame(this.ctx);
+    if (typeof mo.drawFrame === "function") {
+      mo.drawFrame(this.ctx);
+    }
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }

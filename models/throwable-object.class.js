@@ -22,7 +22,7 @@ class ThrowableObject extends MovableObject {
     "img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
   ];
 
-  throw_sound = new Audio("audio/hurt2.mp3");
+  throw_sound = new Audio("audio/hurt4.mp3");
   splash_sound = new Audio("audio/hurt2.mp3");
 
   constructor(x, y) {

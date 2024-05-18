@@ -1,13 +1,15 @@
 class Endscreen extends DrawableObject {
+  x = 0;
+  y = 0;
+  width = 720;
+  height = 480;
+
   constructor(gamewon) {
     super();
-    this.x = 0;
-    this.y = 0;
-    this.width = 720;
-    this.height = 480;
-    this.imagePath = gamewon
-      ? "img/9_intro_outro_screens/game_over/game_won.png"
-      : "img/9_intro_outro_screens/game_over/game_over.png";
-    this.loadImage(this.imagePath);
+    if (gamewon) {
+      this.loadImage("img/9_intro_outro_screens/game_over/game won.png");
+    } else {
+      this.loadImage("img/9_intro_outro_screens/game_over/game over!.png");
+    }
   }
 }

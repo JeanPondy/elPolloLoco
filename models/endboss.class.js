@@ -15,6 +15,7 @@ class Endboss extends MovableObject {
     this.alerted = false;
     this.angry = false;
     this.energy = 100;
+    this.active = true; // Der Endboss ist aktiv
 
     this.IMAGES_WALKING = [
       "img/4_enemie_boss_chicken/1_walk/G1.png",
@@ -34,14 +35,26 @@ class Endboss extends MovableObject {
       "img/4_enemie_boss_chicken/5_dead/G25.png",
       "img/4_enemie_boss_chicken/5_dead/G26.png",
     ];
+
+    this.IMAGES_ALERTED = [
+      "img/4_enemie_boss_chicken/2_alert/G5.png",
+      "img/4_enemie_boss_chicken/2_alert/G6.png",
+      "img/4_enemie_boss_chicken/2_alert/G7.png",
+      "img/4_enemie_boss_chicken/2_alert/G8.png",
+      "img/4_enemie_boss_chicken/2_alert/G9.png",
+      "img/4_enemie_boss_chicken/2_alert/G10.png",
+      "img/4_enemie_boss_chicken/2_alert/G11.png",
+      "img/4_enemie_boss_chicken/2_alert/G12.png",
+    ];
     this.nugget_sound = new Audio("audio/hurt4.mp3");
-    this.gamewon_sound = new Audio("audio/hurt4.mp3"); //win sound
+    this.gamewon_sound = new Audio("audio/dyingChicken.mp3"); //win sound
 
     this.hadFirstContact = false;
     this.loadImage(this.IMAGES_WALKING[0]);
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
+    this.loadImages(this.IMAGES_ALERTED);
 
     this.startWalkingAnimation();
     this.startHurtAnimation();
@@ -66,7 +79,7 @@ class Endboss extends MovableObject {
   startDeadCheck() {
     this.deadCheck = setInterval(() => {
       if (this.isDead()) {
-        this.handleDeath();
+        this.handleDeath(true); // Sound abspielen
       } else if (this.alerted && !this.angry) {
         this.startAngryAnimation();
       }
@@ -81,8 +94,8 @@ class Endboss extends MovableObject {
     }, 1200);
   }
 
-  handleDeath() {
-    if (audio) {
+  handleDeath(playSound = false) {
+    if (playSound) {
       this.gamewon_sound.play();
     }
     world.gameEnd = true;

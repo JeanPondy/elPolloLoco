@@ -5,6 +5,7 @@ class ThrowableObject extends MovableObject {
     right: 0,
     bottom: 0,
   };
+
   IMAGES_SPLASH = [
     "img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
     "img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
@@ -23,6 +24,7 @@ class ThrowableObject extends MovableObject {
 
   throw_sound = new Audio("audio/hurt2.mp3");
   splash_sound = new Audio("audio/hurt2.mp3");
+
   constructor(x, y) {
     super();
     // Laden des Bildes für das werfbare Objekt (z. B. Salsa-Flasche)
@@ -37,8 +39,8 @@ class ThrowableObject extends MovableObject {
     // Starten der Wurfanimation
     this.throw();
   }
-  //Methode für werfbaren Objekten
 
+  // Methode für werfbare Objekte
   throw() {
     this.speedY = 15;
     this.applyGravity();
@@ -51,9 +53,7 @@ class ThrowableObject extends MovableObject {
   splash() {
     clearInterval(this.movingAnimations);
     this.playAnimation(this.IMAGES_SPLASH);
-    if (audio) {
-      this.splash_sound.play();
-    }
+    this.splash_sound.play(); // Direktes Abspielen des Sounds
     setTimeout(() => {
       this.removeObject();
     }, 1500);

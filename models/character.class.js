@@ -175,7 +175,7 @@ class Character extends MovableObject {
 
   animateDead() {
     this.deadShown = true;
-    if (audio) {
+    if (typeof audio !== "undefined" && audio) {
       this.dead_sound.play();
     }
     setTimeout(() => {

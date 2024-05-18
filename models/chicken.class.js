@@ -12,17 +12,9 @@ class Chicken extends MovableObject {
       bottom: 8,
     };
     this.speed = 0.15 + Math.random() * 0.5;
-    /*   this.offset = {
-      top: 8,
-      left: 25,
-      right: 25,
-      bottom: 8,
-    }; */
     this.attack = false;
     this.crushPlayed = false;
     this.crush_sound = new Audio("audio/hurt2.mp3");
-
-    // this.DYINGCHICKEN_SOUND = AUDIO("dyingChicken.mp3");
 
     this.IMAGES_WALKING = [
       "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
@@ -76,7 +68,7 @@ class Chicken extends MovableObject {
       this.removeObject(); // Nach einer Verzögerung das Huhn aus der Spielwelt entfernen
     }, 1500);
 
-    if (audio && !this.crushPlayed) {
+    if (!this.crushPlayed) {
       this.crush_sound.play(); // Sound abspielen, wenn das Huhn stirbt
       this.crushPlayed = true; // Markieren, dass der Sound abgespielt wurde
     }

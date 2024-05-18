@@ -15,6 +15,7 @@ class Collision {
     this.characterHitEndbossWithBottle();
     this.endbossHitCharacter();
   }
+
   chickenSmallHitCharacter() {
     this.world.level.enemies
       .filter(
@@ -27,7 +28,12 @@ class Collision {
         if (this.world.character.isColliding(enemy)) {
           this.world.character.hit(10);
           this.world.character.lastAction = Date.now();
-          this.world.statusBarBar.setPercentage(this.world.character.energy);
+          if (
+            this.world.statusBarBar &&
+            typeof this.world.statusBarBar.setPercentage === "function"
+          ) {
+            this.world.statusBarBar.setPercentage(this.world.character.energy);
+          }
         }
       });
   }
@@ -44,9 +50,7 @@ class Collision {
         this.world.bottlescore += 1; // Erhöhe den Flaschenzähler
         this.world.bottlesBar.setPercentage(this.world.bottlescore * 20); // Aktualisiere die Flaschenanzeige
         bottle.removeObject(); // Entferne die Flasche aus der Spielwelt
-        if (audio) {
-          this.world.bottle_sound.play(); // Spiele den Sound für das Aufnehmen der Flasche ab
-        }
+        this.world.bottle_sound.play(); // Spiele den Sound für das Aufnehmen der Flasche ab
       }
     });
   }
@@ -58,13 +62,11 @@ class Collision {
         this.world.coinscore < 5 &&
         coin.isToCollect
       ) {
-        coin.isToCollect = false; // Markiere die Flasche als aufgenommen
-        this.world.coinscore += 1; // Erhöhe den Flaschenzähler
-        this.world.coinsBar.setPercentage(this.world.coinscore * 20); // Aktualisiere die Flaschenanzeige
-        coin.removeObject(); // Entferne die Flasche aus der Spielwelt
-        if (audio) {
-          this.world.coin_sound.play(); // Spiele den Sound für das Aufnehmen der Flasche ab
-        }
+        coin.isToCollect = false; // Markiere die Münze als aufgenommen
+        this.world.coinscore += 1; // Erhöhe den Münzzähler
+        this.world.coinsBar.setPercentage(this.world.coinscore * 20); // Aktualisiere die Münzanzeige
+        coin.removeObject(); // Entferne die Münze aus der Spielwelt
+        this.world.coin_sound.play(); // Spiele den Sound für das Aufnehmen der Münze ab
       }
     });
   }
@@ -124,9 +126,8 @@ class Collision {
       }
     });
   }
-  /* ---------------------------------------------------------------------------- */
   characterHitEndbossWithBottle() {
-    const val = 20; // Festlegen des Werts für die Flaschenkraft
+    const val = 25; // Festlegen des Werts für die Flaschenkraft
 
     this.world.throwableObjects.forEach((bottle) => {
       let endboss = this.world.level.enemies.find(
@@ -134,44 +135,17 @@ class Collision {
       );
 
       if (endboss && endboss.isColliding(bottle) && bottle.active) {
-        // Reduziere die Energie des Endbosses um den festen Wert von 5 (Flaschenkraft)
         endboss.endbossHit(val);
 
-        // Führe andere Aktionen durch, z.B. Splash-Animation der Flasche
-        this.world.bottle.splash(); // Spiele die Splash-Animation der Flasche ab
-        this.world.bottle.removeObject(); // Entferne die Flasche aus der Spielwelt
+        bottle.splash();
+        bottle.removeObject();
 
-        // Aktualisiere die Endboss-Lebensleiste in der Spielwelt
-        this.world.endbossBar.setPercentage(this.world.endboss.energy);
-
-        // Deaktiviere die Flasche, um weitere Kollisionen zu verhindern
+        this.world.endbossBar.setPercentage(endboss.energy); // Aktualisiere die Endboss-Lebensleiste
         bottle.active = false;
       }
     });
   }
 
-  /* 
-  
-  characterHitEndbossWithBottle() {
-  const endboss = this.world.level.enemies.find(
-    (enemy) => enemy instanceof Endboss && enemy.active
-  );
-
-  if (endboss) {
-    this.world.throwableObjects.forEach((bottle) => {
-      if (endboss.isColliding(bottle) && bottle.active) {
-        endboss.endbossHit(this.world.bottlePower);
-        this.world.bottle.splash();
-        this.world.bottle.removeObject();
-        this.world.endbossBar.setPercentage(endboss.energy);
-        bottle.active = false;
-      }
-    });
-  }
-}
- */
-
-  /* ---------------------------------------------------------------------------- */
   endbossHitCharacter(val = 100) {
     this.world.level.enemies
       .filter((enemy) => enemy instanceof Endboss)

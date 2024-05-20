@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Pollo Loco</title>
     <link rel="stylesheet" href="./style.css" />
     <script src="./levels/level1-preloadMedia.js"></script>
@@ -31,10 +30,93 @@
     <script src="./models/coin.class.js"></script>
     <script src="./levels/level1.js"></script>
     <script src="./js/game.js"></script>
+   
+ 
+    <!-- <audio id="backgroundAudio" controls="controls" autoplay>
+      <source src="audio/backgroundSound.mp3" type="audio/mp3" />
+    </audio> -->
   </head>
-  <body onload=" initGame() ">
+  <body onload="initGame()">
     <h1 class="h1">El Pollo Loco</h1>
-    <main class="container">
+   
+    <!-- ---------------------  -->
+    <div id="mainContainer" class="container">
+      <div id="help-box" class="help-bar">
+        <div
+          class="help info"
+          id="helpoverlay"
+          onclick="toggleInfobox(event)"
+          ontouchstart="toggleInfobox(event)"
+        >
+          Info
+        </div>
+        <div class="help">
+          <span class="key-description">Move Left</span>
+          <span class="key">LEFT</span>
+        </div>
+        <div class="help">
+          <span class="key-description">Move Right</span>
+          <span class="key">RIGHT</span>
+        </div>
+        <div class="help">
+          <span class="key-description">Jump</span>
+          <span class="key">SPACE</span>
+        </div>
+        <div class="help">
+          <span class="key-description">Throw</span>
+          <span class="key">D</span>
+        </div>
+      </div>
+      <div id="infobox" class="info-box d-none">
+        <div
+          class="close"
+          onclick="toggleInfobox(event)"
+          ontouchstart="toggleInfobox(event)"
+        >
+          X
+        </div>
+        <div class="instructions-box">
+          El Pollo Loco is a 2D action game where a Mexican hero battles against
+          chicks, chickens, and a giant chicken boss.<br /><br />
+          Jump on chicks and chickens, and hurl Tabasco bottles at the boss to
+          win.<br /><br />
+          Hit the boss to emerge victorious!
+        </div>
+      </div>
+      <div id="overlay-icons" class="overlay">
+        <div
+          class="overlay-icon overlay-icon-menu"
+          id="menu"
+          onclick="toggleMenu(event)"
+          ontouchstart="toggleMenu(event)"
+        >
+        <!-- ---------- -->
+          <img src="assets/menu.svg"/>
+        </div>
+        <div
+          class="overlay-icon mute"
+          id="audiobtn"
+          onclick="toggleAudio(event)"
+          ontouchstart="toggleAudio(event)"
+        >
+        <img id="audioimg" src="assets/volume-high.svg" />
+        <img id="audioimg-off" src="assets/volume-off.svg" style="display: none;" /> <!-- Neu hinzugefügtes Bild für ausgeschaltetes Audio, standardmäßig ausgeblendet -->
+
+        </div>
+        <div
+          class="overlay-icon fullscreen"
+          onclick="toggleFullScreen(event)"
+          ontouchstart="toggleFullScreen(event)"
+        >
+          <img   src="assets/fullscreen.svg" />
+        </div>
+      </div>
+      <div class="mobile-control d-none" id="control-icons">
+        <div class="mobile-icon icon-left" id="left"></div>
+        <div class="mobile-icon icon-right" id="right"></div>
+        <div class="mobile-icon icon-jump" id="space"></div>
+        <div class="mobile-icon icon-bottle" id="d"></div>
+      </div>
       <div id="startpage" class="start-page">
         <div
           class="start-btn"
@@ -53,7 +135,12 @@
           RESTART
         </div>
       </div>
-      <canvas id="canvas" width="720" height="480"></canvas>
-    </main>
+      <canvas id="canvas" class="d-none" width="720" height="480">
+       
+      </canvas>
+      
+    </div>
+    <div class="turn-phone-overlay">Turn the screen to play the game</div>
+  </body>
   </body>
 </html>

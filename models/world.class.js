@@ -1,4 +1,5 @@
 class World {
+  gameOver = false;
   gameEnd = false;
   gameLost = false;
   gameWon = false;
@@ -14,6 +15,7 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
+  audioEnabled = true; // Neuer Audio-Status innerhalb der World-Klasse
 
   throwableObjects = [];
   totalBottles = 5;
@@ -23,7 +25,7 @@ class World {
   coinscore = 0;
   bottle;
   hurt_sound = new Audio("audio/hurt3.mp3");
-  backgroundSound = new Audio("audio/hurt3.mp3");
+  backgroundSound = new Audio("audio/backgroundSound.mp3");
   coin_sound = new Audio("audio/hurt3.mp3");
   bottle_sound = new Audio("audio/hurt3.mp3");
   throw_sound = new Audio("audio/shot_bottle.mp3"); // Neuer Sound für das Werfen der Flasche
@@ -83,6 +85,10 @@ class World {
   run() {
     this.mainInterval = setInterval(() => {
       this.collision.checkCollisions();
+      if (this.audioEnabled) {
+        // Überprüfe den Audio-Status vor dem Abspielen des Hintergrundsounds
+        this.playBackgroundMusic();
+      }
     }, 200);
   }
 
@@ -105,6 +111,14 @@ class World {
       );
       this.playThrowSound(); // Sound für das Werfen der Flasche abspielen
     }
+  }
+
+  playBackgroundMusic() {
+    let self = this;
+    this.backgroundSound.addEventListener("canplaythrough", function () {
+      self.backgroundSound.play();
+      self.backgroundSound.volume = 0.1;
+    });
   }
 
   playThrowSound() {
@@ -189,6 +203,7 @@ class World {
   }
 
   stopAllAnimations() {
+    this.gameOver = true; // Setzt das Spiel auf beendet
     setTimeout(() => {
       clearInterval(this.mainInterval);
       clearInterval(this.throwObjectsInterval);

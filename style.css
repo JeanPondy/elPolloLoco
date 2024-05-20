@@ -1,60 +1,163 @@
+/* Definiere eine benutzerdefinierte Schriftart "zabars" */
 @font-face {
-  font-family: "zabars";
-  src: url("fonts/zabars.ttf") format("truetype");
+  font-family: "zabars"; /* Name der Schriftart */
+  src: url("fonts/zabars.ttf") format("truetype"); /* Pfad zur Schriftart-Datei und ihr Format */
 }
 
+/* Stil für den gesamten Body-Bereich */
 body {
-  font-family: "zabars", Arial, Helvetica, sans-serif;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  background-image: url("./assets/sunset-1.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  font-family: "zabars", Arial, Helvetica, sans-serif; /* Verwende zuerst "zabars", wenn nicht verfügbar, dann Arial, Helvetica, oder eine serifenlose Schrift */
+  height: 100vh; /* Höhe des Body auf die gesamte Höhe des Viewports setzen */
+  display: flex; /* Flexbox-Layout verwenden */
+  flex-direction: column; /* Elemente vertikal anordnen */
+  justify-content: center; /* Elemente vertikal zentrieren */
+  align-items: center; /* Elemente horizontal zentrieren */
+  margin: 0; /* Standardabstände entfernen */
+  background-image: url("./assets/sunset-1.jpg"); /* Hintergrundbild festlegen */
+  background-size: cover; /* Hintergrundbild auf die gesamte Fläche skalieren */
+  background-position: center; /* Hintergrundbild zentrieren */
+  background-repeat: no-repeat; /* Hintergrundbild nicht wiederholen */
 }
+
+/* Stil für das Canvas-Element */
 canvas {
-  background-color: black;
-  margin-bottom: 80px;
-  display: block;
+  display: block; /* Canvas als Block-Element darstellen */
 }
 
+/* Stil für Überschrift 1 (h1) */
 h1 {
-  font-size: 64px;
-  letter-spacing: 3px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  color: rgb(255, 100, 68);
+  font-size: 64px; /* Schriftgröße auf 64px setzen */
+  letter-spacing: 3px; /* Buchstabenabstand auf 3px setzen */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Textschatten hinzufügen */
+  color: rgb(255, 130, 68); /* Schriftfarbe setzen */
 }
-.d-none {
-  display: none !important;
-}
-.container {
-  width: 100%;
-  max-width: 720px;
 
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Klasse, um ein Element auszublenden */
+.d-none {
+  display: none !important; /* Element ausblenden */
 }
+
+/* Stil für Container */
+.container {
+  width: 100%; /* Breite auf 100% setzen */
+  max-width: 720px; /* Maximale Breite auf 720px setzen */
+  aspect-ratio: 1.5/1; /* Seitenverhältnis 1.5:1 setzen */
+  position: relative; /* Relative Positionierung */
+  display: flex; /* Flexbox-Layout verwenden */
+  justify-content: center; /* Elemente horizontal zentrieren */
+  align-items: center; /* Elemente vertikal zentrieren */
+}
+
+/* Stil für die Hilfe-Leiste */
+.help-bar {
+  position: absolute; /* Absolute Positionierung */
+  left: -170px; /* Linke Position auf -170px setzen */
+  top: 0; /* Obere Position auf 0 setzen */
+  height: 100%; /* Höhe auf 100% setzen */
+  display: flex; /* Flexbox-Layout verwenden */
+  flex-direction: column; /* Elemente vertikal anordnen */
+  justify-content: space-around; /* Elemente gleichmäßig verteilen */
+  background-color: rgb(
+    248 125 29 / 56%
+  ); /* Hintergrundfarbe mit Transparenz */
+  padding: 0 10px; /* Innenabstände */
+}
+
+/* Stil für Beschreibungen von Tasten */
+.key-description {
+  font-size: 12px; /* Schriftgröße auf 12px setzen */
+}
+
+/* Stil für die Hilfe-Box */
+.help {
+  display: flex; /* Flexbox-Layout verwenden */
+  flex-direction: column; /* Elemente vertikal anordnen */
+  align-items: center; /* Elemente horizontal zentrieren */
+  gap: 10px; /* Abstand zwischen den Elementen */
+}
+
+/* Stil für Informationstext */
+.info {
+  color: #fff; /* Schriftfarbe weiß */
+  text-shadow: 2px 2px black; /* Textschatten */
+}
+
+/* Stil für Informationstext beim Hover */
+.info:hover {
+  cursor: pointer; /* Zeiger als Cursor anzeigen */
+}
+
+/* Stil für Tastenbeschriftung */
+.key {
+  color: #ffd500; /* Schriftfarbe gelb */
+  text-shadow: 2px 2px black; /* Textschatten */
+  font-size: 18px !important; /* Schriftgröße auf 18px setzen */
+}
+
+/* Stil für Overlay */
+.overlay {
+  position: absolute; /* Absolute Positionierung */
+  right: 20px; /* Rechte Position auf 20px setzen */
+  top: 60px; /* Obere Position auf 60px setzen */
+  display: flex; /* Flexbox-Layout verwenden */
+  gap: 16px; /* Abstand zwischen den Elementen */
+}
+
+/* Stil für Overlay-Icon beim Hover */
+.overlay-icon:hover {
+  cursor: pointer; /* Zeiger als Cursor anzeigen */
+}
+
+/* Stil für Bilder innerhalb von Overlay-Icons */
+.overlay-icon > img {
+  height: 30px; /* Höhe auf 30px setzen */
+  width: 30px; /* Breite auf 30px setzen */
+}
+
+/* Stil für Fullscreen- und Mute-Icons beim Hover */
+.fullscreen:hover,
+.mute:hover {
+  cursor: pointer; /* Zeiger als Cursor anzeigen */
+  color: #ffd500; /* Schriftfarbe gelb */
+}
+
+/* Stil für die Informationsbox */
+.info-box {
+  background-color: #ffd70b; /* Hintergrundfarbe gelb */
+  z-index: 10; /* Stapelreihenfolge */
+  position: absolute; /* Absolute Positionierung */
+  top: 0; /* Obere Position auf 0 setzen */
+  left: 0; /* Linke Position auf 0 setzen */
+  height: 100%; /* Höhe auf 100% setzen */
+  width: 100%; /* Breite auf 100% setzen */
+}
+
+/* Stil für das Schließen der Informationsbox */
+.close {
+  width: 100%; /* Breite auf 100% setzen */
+  display: flex; /* Flexbox-Layout verwenden */
+  justify-content: flex-end; /* Elemente am rechten Rand ausrichten */
+  padding: 40px 80px 0 0; /* Innenabstände */
+  box-sizing: border-box; /* Box-Modell setzen */
+}
+
+/* Stil für das Schließen-Icon beim Hover */
+.close:hover {
+  cursor: pointer; /* Zeiger als Cursor anzeigen */
+}
+
 .start-page {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2; /* Stellen Sie sicher, dass der Z-Index höher als der des Canvas ist */
-  height: 480px; /* Festlegen der Höhe auf 480px */
-  width: 720px; /* Festlegen der Breite auf 720px */
-  background: url("./img/9_intro_outro_screens/start/startscreen_1.png")
-    no-repeat 0 0 / 100% 100%;
+  height: 100%;
+  width: 100%;
+  background: url(./img/9_intro_outro_screens/start/startscreen_1.png) no-repeat
+    0 0 / 100% 100%;
   object-fit: cover;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
+/* ----------------------------------------- */
 
+/* Stil für die Endseite */
 .end-page {
   height: 100%;
   width: 100%;
@@ -63,6 +166,7 @@ h1 {
   position: absolute;
 }
 
+/* Stil für den Start-Button */
 .start-btn {
   margin-top: 60px;
   position: absolute;
@@ -74,28 +178,188 @@ h1 {
   cursor: pointer;
 }
 
+/* Stil für den Neustart-Button */
 .restart-btn {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
   position: absolute;
   bottom: 0;
   color: #ffd70b;
-  font-size: 48px;
-  transition: transform 0.3s;
+  font-size: 32px;
+  transition: transform 0.9s;
   text-shadow: 5px 2px rgb(191, 0, 0);
+  cursor: pointer;
 }
 
-/* Smartphones--------------------------720px */
+/* Stil für das Canvas-Element */
+canvas {
+  background-color: black;
+  width: 100%;
+}
 
-@media (max-width: 720px) {
-  canvas {
-    width: 100%;
+/* Stil für Hover-Effekte auf den Start- und Neustart-Buttons */
+.restart-btn:hover,
+.start-btn:hover {
+  /* Animation pausieren */
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+/* Stil für die mobilen Steuerungselemente */
+.mobile-control {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  /* Elemente horizontal anordnen  */
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+
+/* Stil für mobile Icons */
+.mobile-icon {
+  /* Hintergrundfarbe mit Transparenz  */
+  background-color: rgb(255 213 0 / 18%);
+  border: 2px solid black;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+  display: flex;
+  /* Elemente horizontal zentrieren */
+  justify-content: center;
+  /* Elemente vertikal zentrieren  */
+  align-items: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40%;
+}
+
+/* Stil für die linken Pfeil-Icons */
+.icon-left {
+  background-image: url("img/left.png"); /*Hintergrundbild für linkes Icon */
+}
+
+/* Stil für die rechten Pfeil-Icons*/
+.icon-right {
+  background-image: url("img/right.png"); /* Hintergrundbild für rechtes Icon */
+}
+
+/* Stil für die Sprung-Icons */
+.icon-jump {
+  background-image: url("img/up.png"); /* Hintergrundbild für Sprung-Icon */
+}
+
+/* Stil für die Flaschen-Icons */
+.icon-bottle {
+  background-image: url("img/bottle.png"); /* Hintergrundbild für Flaschen-Icon */
+}
+
+/* Stil für das Menü */
+.menu {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+/* Stil für das Overlay zum Drehen des Telefons */
+.turn-phone-overlay {
+  display: none; /* Standardmäßig nicht anzeigen */
+  position: absolute; /* Absolute Positionierung */
+  background-color: black; /* Hintergrundfarbe schwarz */
+  color: #e05b00; /* Schriftfarbe orange */
+  text-shadow: 2px 2px #ffd70b; /* Textschatten */
+  font-size: x-large; /* Schriftgröße sehr groß */
+  justify-content: center; /* Elemente horizontal zentrieren */
+  align-items: center; /* Elemente vertikal zentrieren */
+  padding: 0 25px; /* Innenabstände */
+  box-sizing: border-box; /* Box-Modell setzen */
+  text-align: center; /* Text zentrieren */
+  line-height: 60px; /* Zeilenhöhe auf 60px setzen */
+  top: 0; /* Obere Position auf 0 setzen */
+  left: 0; /* Linke Position auf 0 setzen */
+  width: 100vw; /* Breite auf 100% des Viewports setzen */
+  height: 100vh; /* Höhe auf 100% des Viewports setzen */
+}
+
+/* Keyframe-Animation zum Vergrößern und Verkleinern */
+@keyframes resize {
+  0% {
+    transform: scale(1); /* Anfangsgröße */
+  }
+
+  50% {
+    transform: scale(1.02); /* Vergrößern */
+  }
+
+  100% {
+    transform: scale(1); /* Zurück zur Anfangsgröße */
   }
 }
 
-/* @media only screen and (max-width: 480px) {
-  canvas {
-    height: 100vh;
-    margin-bottom: 0px;
+/* Animation für Start- und Neustart-Buttons, wenn sie nicht gehovt oder aktiv sind */
+.start-btn:not(:hover):not(:active),
+.restart-btn:not(:hover):not(:active) {
+  animation: resize 2s infinite; /* Endlos-Animation */
+}
+
+/* Medienabfrage für kleine Höhen */
+@media (max-height: 650px) {
+  h1 {
+    display: none; /* Überschrift ausblenden */
   }
 }
- */
+
+/* Medienabfrage für breite Bildschirme */
+@media only screen and (min-width: 1100px) {
+  .overlay-icon-menu {
+    display: none; /* Overlay-Menü-Icons ausblenden */
+  }
+}
+
+/* Medienabfrage für schmale Bildschirme */
+@media only screen and (max-width: 1100px) {
+  .help-bar {
+    left: 0; /* Linke Position auf 0 setzen */
+    background-color: rgb(
+      248 125 29 / 98%
+    ); /* Hintergrundfarbe mit mehr Transparenz */
+    z-index: 10; /* Stapelreihenfolge erhöhen */
+  }
+}
+
+/* Medienabfrage für sehr kleine Höhen */
+@media only screen and (max-height: 480px) {
+  h1 {
+    display: none; /* Überschrift ausblenden */
+  }
+
+  .help-bar {
+    left: 0; /* Linke Position auf 0 setzen */
+    background-color: rgb(
+      248 125 29 / 98%
+    ); /* Hintergrundfarbe mit mehr Transparenz */
+    z-index: 10; /* Stapelreihenfolge erhöhen */
+  }
+
+  .container,
+  canvas {
+    height: 100vh; /* Höhe auf 100% des Viewports setzen */
+    width: 100%; /* Breite auf 100% setzen */
+  }
+}
+
+/* Medienabfrage für Portrait-Modus auf kleinen Bildschirmen */
+@media (orientation: portrait) and (max-width: 760px) {
+  .turn-phone-overlay {
+    display: flex; /* Overlay anzeigen */
+    z-index: 120; /* Stapelreihenfolge erhöhen */
+  }
+}
+
+/* Medienabfrage für sehr kleine Bildschirme */
+@media (max-width: 750px) and (max-height: 500px) {
+  .container {
+    height: 100vh; /* Höhe auf 100% des Viewports setzen */
+    max-width: unset; /* Maximale Breite entfernen */
+  }
+}

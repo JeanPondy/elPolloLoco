@@ -1,12 +1,16 @@
 // Deklaration der Variablen
-let canvas; // Das Canvas-Element, auf dem das Spiel gezeichnet wird
-let world; // Das Spielwelt-Objekt, das alle Spiel-Elemente enthält
-let keyboard = new Keyboard(); // Neue Instanz der Keyboard-Klasse erstellen, um Tastatureingaben zu verwalten
-let gameEndInterval; // Intervall, das überprüft, ob das Spiel zu Ende ist
+let canvas;
+let world;
+let keyboard = new Keyboard();
+let gameEndInterval;
 let audio = true; // Audio-Status, standardmäßig auf true gesetzt
 let backgroundSound;
+
 // Event-Listener, um das Spiel zu starten, wenn eine Taste gedrückt wird
 window.addEventListener("keydown", startGame);
+
+// Event-Listener, um die Steuerelemente nach dem Laden der Seite anzuzeigen
+document.addEventListener("DOMContentLoaded", updateControlsBox);
 
 // Funktion zum Initialisieren des Spiels
 function initGame() {
@@ -23,20 +27,13 @@ function initGame() {
 
 // Funktion zur Aktualisierung der Steuerungsanzeige
 function updateControlsBox() {
-  let el = document.getElementById("control-icons"); // Element mit den Steuerungssymbolen abrufen
+  let el = document.getElementById("control-icons");
   if (el) {
-    // Überprüfe, ob das Element existiert
-    if (window.matchMedia("(hover: none)").matches) {
-      // Überprüfe, ob kein Hover unterstützt wird (mobile Geräte)
-      el.classList.remove("d-none"); // Entferne die Klasse, um das Element sichtbar zu machen
-    }
+    el.classList.remove("d-none"); // Entferne die Klasse, um das Element sichtbar zu machen
   } else {
-    console.error("Element with ID 'control-icons' not found!"); // Fehler in der Konsole ausgeben, wenn das Element nicht gefunden wird
+    console.error("Element with ID 'control-icons' not found!");
   }
 }
-/* function initLevel() {
-  // Hier kommt der Code zur Initialisierung des Levels
-} */
 
 // Funktion zum Starten des Spiels
 function startGame(event) {
@@ -130,28 +127,27 @@ function toggleMenu(event) {
 
 // Funktion zum Umschalten des Vollbildmodus
 function toggleFullScreen() {
-  let mainContainer = document.getElementById("mainContainer"); // Hauptcontainer-Element abrufen
-  let startpage = document.getElementById("startpage"); // Startseite-Element abrufen
-  let canvas = document.getElementById("canvas"); // Canvas-Element abrufen
-
+  let mainContainer = document.getElementById("mainContainer");
+  let startpage = document.getElementById("startpage");
+  let canvas = document.getElementById("canvas");
   if (!document.fullscreenElement) {
     // Überprüfe, ob kein Element im Vollbildmodus ist
     mainContainer
       .requestFullscreen()
       .then(() => {
-        startpage.classList.add("fullscreen"); // Füge die Klasse "fullscreen" zur Startseite hinzu
-        canvas.classList.add("fullscreen"); // Füge die Klasse "fullscreen" zum Canvas hinzu
+        startpage.classList.add("fullscreen");
+        canvas.classList.add("fullscreen");
       })
       .catch((err) => {
         alert(
           `Error attempting to enable full-screen mode: ${err.message} (${err.name})`
-        ); // Zeige eine Fehlermeldung an, wenn der Vollbildmodus nicht aktiviert werden kann
+        );
       });
   } else {
     if (document.exitFullscreen) {
       document.exitFullscreen().then(() => {
-        startpage.classList.remove("fullscreen"); // Entferne die Klasse "fullscreen" von der Startseite
-        canvas.classList.remove("fullscreen"); // Entferne die Klasse "fullscreen" vom Canvas
+        startpage.classList.remove("fullscreen");
+        canvas.classList.remove("fullscreen");
       });
     }
   }
@@ -186,26 +182,4 @@ function checkGameEnd() {
       document.getElementById("overlay-icons").classList.add("d-none"); // Verstecke die Overlay-Symbole
     }
   }, 1000 / 20); // Überprüfe 20 Mal pro Sekunde, ob das Spiel zu Ende ist
-}
-
-/* ----------------------------------------------- */
-function menu() {
-  const overlay = document.getElementById("overlay");
-  overlay.classList.remove("d-none");
-  overlay.style.display = "flex";
-}
-
-function toggleOverlay() {
-  const overlay = document.getElementById("overlay");
-  overlay.classList.add("d-none");
-  overlay.style.display = "none";
-}
-
-function toggleInfobox(event) {
-  const infobox = document.getElementById("infobox");
-  if (infobox.classList.contains("d-none")) {
-    infobox.classList.remove("d-none");
-  } else {
-    infobox.classList.add("d-none");
-  }
 }

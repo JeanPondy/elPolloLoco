@@ -119,23 +119,20 @@
           <img src="assets/fullscreen.svg" />
         </div>
       </div>
-      <!-- Mobile -->
-      <div class="mobile-control d-none" id="control-icons">
-        <div
-          class="mobile-icon icon-left"
-          onclick=" bindBtsPressEvents()"
-          ontouchstart=" bindBtsPressEvents()"
-          id="left"
-        ></div>
-        <div
-          class="mobile-icon icon-right"
-          ontouchstart="moveRight()"
-          id="right"
-        ></div>
-        <div class="mobile-icon icon-jump" id="space"></div>
-        <div class="mobile-icon icon-bottle" id="d"></div>
-      </div>
-      <!-- Mobile End -->
+  <!-- Mobile -->
+ 
+<div  class="mobile-control" id="control-icons">
+  <div class="direction">
+    <div class="mobile-icon icon-left" id="left"></div>
+    <div class="mobile-icon icon-right" id="right"></div>
+ </div>
+  <div class="option">
+    <div class="mobile-icon icon-jump" id="jump"></div>
+    <div class="mobile-icon icon-bottle" id="throw"></div>
+  </div>
+</div>
+<!-- Mobile End -->
+
       <div id="startpage" class="start-page">
         <div
           class="start-btn"
@@ -157,39 +154,7 @@
       <canvas id="canvas" class="d-none" width="720" height="480"> </canvas>
     </div>
     <div class="turn-phone-overlay">Turn the screen to play the game</div>
-    <!-- <div id="overlay" class="overlay d-none">
-      <div class="close" onclick="toggleOverlay()">X</div>
-      
-      <div class="help">
-        <span class="key-description">Move Left</span>
-        <span class="key">LEFT</span>
-      </div>
-      <div class="help">
-        <span class="key-description">Move Right</span>
-        <span class="key">RIGHT</span>
-      </div>
-      <div class="help">
-        <span class="key-description">Jump</span>
-        <span class="key">SPACE</span>
-      </div>
-      <div class="help">
-        <span class="key-description">Throw</span>
-        <span class="key">D</span>
-      </div>
-      <div id="infobox" class="info-box">
-        <div class="instructions-box">
-          El Pollo Loco is a 2D action game in which a Mexican hero fights
-          chicks, chickens and a giant chicken boss. Jump on chicks and chickens
-          and throw Tabasco bottles at the boss to win. Beat the boss to emerge
-          victorious!
-          
-          El Pollo Loco is a 2D action game where a Mexican hero battles against
-          chicks, chickens, and a giant chicken boss.<br /><br />
-          Jump on chicks and chickens, and hurl Tabasco bottles at the boss to
-          win.<br /><br />
-          Hit the boss to emerge victorious! papapappapap
-        </div>
-      </div> -->
+   
     </div>
   </body>
 </html>

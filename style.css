@@ -202,27 +202,43 @@ h1 {
 /* Stil für die mobilen Steuerungselemente */
 .mobile-control {
   position: absolute;
-  bottom: 20px;
   display: flex;
-  flex-direction: row; /* Elemente horizontal anordnen */
-  justify-content: space-around;
+  bottom: 10px;
   width: 100%;
+  justify-content: space-between;
+  flex-direction: row; /* Elemente horizontal anordnen */
 }
 
 /* Stil für mobile Icons */
 .mobile-icon {
-  background-color: rgb(255 213 0 / 18%); /* Hintergrundfarbe mit Transparenz */
-  border: 2px solid black;
-  border-radius: 50%;
   width: 30px;
   height: 30px;
-  padding: 10px;
+  background-color: rgb(255 213 0 / 18%); /* Hintergrundfarbe mit Transparenz */
+  border-radius: 50%;
   display: flex;
-  justify-content: center; /* Elemente horizontal zentrieren */
   align-items: center; /* Elemente vertikal zentrieren */
+  justify-content: center; /* Elemente horizontal zentrieren */
+
+  padding: 10px;
+  border: 2px solid black;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 40%;
+  cursor: pointer;
+}
+.direction {
+  display: flex;
+  margin: 0 8px;
+}
+.option {
+  display: flex;
+  margin: 0 8px;
+}
+#right {
+  margin-left: 8px;
+}
+#throw {
+  margin-left: 8px;
 }
 
 /* Stil für die linken Pfeil-Icons */
@@ -334,7 +350,7 @@ h1 {
 }
 
 /* Medienabfrage für Portrait-Modus auf kleinen Bildschirmen */
-@media (orientation: portrait) and (max-width: 760px) {
+@media (orientation: portrait) and (max-width: 576px) {
   .turn-phone-overlay {
     display: flex; /* Overlay anzeigen */
     z-index: 120; /* Stapelreihenfolge erhöhen */

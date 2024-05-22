@@ -10,10 +10,11 @@ class World {
   coinsBar = new CoinsBar();
   endbossBar = new EndbossBar();
 
+  keyboard = new Keyboard();
   level = level1;
   canvas;
   ctx;
-  keyboard;
+
   camera_x = 0;
   audioEnabled = true; // Neuer Audio-Status innerhalb der World-Klasse
 
@@ -36,6 +37,7 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.level = level1; // Initialisierung von level
     this.setupEventListeners(); // Event-Listener einrichten
     this.draw();
     this.setWorld();
@@ -152,6 +154,11 @@ class World {
   }
 
   drawBackground() {
+    if (!this.level || !this.level.backgroundObjects) {
+      console.error("Level or backgroundObjects is not defined");
+      return;
+    }
+
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
     this.ctx.translate(-this.camera_x, 0);

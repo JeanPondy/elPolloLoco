@@ -76,14 +76,20 @@ function showEndPage() {
   setTimeout(() => {
     document.getElementById("endPage").classList.remove("d-none"); // Mache die Endseite sichtbar
     document.getElementById("control-icons").classList.add("d-none"); // Verstecke die Steuerungssymbole
-    // Füge den Neustart-Button hinzu
-    const restartButton = document.createElement("div"); // Erstelle ein neues div-Element
-    restartButton.classList.add("restart-btn"); // Füge die Klasse "restart-btn" hinzu
-    restartButton.textContent = "RESTART"; // Setze den Text des Buttons
-    restartButton.onclick = function () {
-      window.location.reload(); // Lade die Seite neu, um das Spiel neu zu starten
-    };
-    document.getElementById("endPage").appendChild(restartButton); // Füge den Button zur Endseite hinzu
+
+    // Überprüfen, ob der Neustart-Button bereits existiert
+    let restartButton = document.getElementById("restart-btn");
+    if (!restartButton) {
+      // Füge den Neustart-Button hinzu, wenn er noch nicht existiert
+      restartButton = document.createElement("div"); // Erstelle ein neues div-Element
+      restartButton.id = "restart-btn"; // Setze die ID des Buttons
+      restartButton.classList.add("restart-btn"); // Füge die Klasse "restart-btn" hinzu
+      restartButton.textContent = "RESTART"; // Setze den Text des Buttons
+      restartButton.onclick = function () {
+        window.location.reload(); // Lade die Seite neu, um das Spiel neu zu starten
+      };
+      document.getElementById("endPage").appendChild(restartButton); // Füge den Button zur Endseite hinzu
+    }
   }, 1000); // Warte 1 Sekunde, bevor die Endseite angezeigt wird
 }
 

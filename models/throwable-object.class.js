@@ -23,7 +23,7 @@ class ThrowableObject extends MovableObject {
   ];
 
   throw_sound = new Audio("audio/hurt4.mp3");
-  splash_sound = new Audio("audio/hurt2.mp3");
+  splash_sound = new Audio("audio/bottleBroke.mp3");
 
   constructor(x, y) {
     super();

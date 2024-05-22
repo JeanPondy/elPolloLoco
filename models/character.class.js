@@ -108,12 +108,13 @@ class Character extends MovableObject {
     // Animation für Bewegungen und Tastensteuerung der Spielfigur
     setInterval(() => {
       this.walking_sound.pause(); // Unterbreche die Audio-Wiedergabe
-      this.characterMoveRight();
-      this.characterMoveLeft();
-      this.characterJump();
-      //this.updateState();
-
-      this.world.camera_x = -this.x + 100; // Kamera-Verfolgung der Spielfigur
+      if (this.world) {
+        // Überprüfen, ob die Welt initialisiert ist
+        this.characterMoveRight();
+        this.characterMoveLeft();
+        this.characterJump();
+        this.world.camera_x = -this.x + 100; // Kamera-Verfolgung der Spielfigur
+      }
     }, 1000 / 60); // Aktualisierungsgeschwindigkeit der Animation
 
     this.characterAnimations = setInterval(() => {
@@ -187,14 +188,4 @@ class Character extends MovableObject {
       }
     }, 1000);
   }
-  /*  updateState() {
-    // Beispielhafte Methode, in der der Fehler auftritt
-    if (this.someObject && this.someObject.setPercentage) {
-      this.someObject.setPercentage(50); // Beispiel für den Aufruf von setPercentage
-    } else {
-      console.log(
-        "Fehler: someObject oder setPercentage nicht korrekt definiert"
-      );
-    }
-  } */
 }

@@ -105,13 +105,7 @@ function toggleInfobox(event) {
   let el = document.getElementById("infobox"); // Info-Box-Element abrufen
   event.preventDefault(); // Standardaktion des Events verhindern
   if (event.type === "click" || event.type === "touchstart") {
-    // Überprüfe, ob das Event ein Klick oder Touchstart ist
-    if (el.classList.contains("d-none")) {
-      el.classList.remove("d-none"); // Mache die Info-Box sichtbar
-    } else {
-      el.classList.add("d-none"); // Verstecke die Info-Box
-      toggleMenu(); // Umschalten des Menüs
-    }
+    el.classList.toggle("d-none"); // Umschalten der Sichtbarkeit der Info-Box
   }
 }
 
@@ -186,4 +180,26 @@ function checkGameEnd() {
       document.getElementById("overlay-icons").classList.add("d-none"); // Verstecke die Overlay-Symbole
     }
   }, 1000 / 20); // Überprüfe 20 Mal pro Sekunde, ob das Spiel zu Ende ist
+}
+
+/* ----------------------------------------------- */
+function menu() {
+  const overlay = document.getElementById("overlay");
+  overlay.classList.remove("d-none");
+  overlay.style.display = "flex";
+}
+
+function toggleOverlay() {
+  const overlay = document.getElementById("overlay");
+  overlay.classList.add("d-none");
+  overlay.style.display = "none";
+}
+
+function toggleInfobox(event) {
+  const infobox = document.getElementById("infobox");
+  if (infobox.classList.contains("d-none")) {
+    infobox.classList.remove("d-none");
+  } else {
+    infobox.classList.add("d-none");
+  }
 }

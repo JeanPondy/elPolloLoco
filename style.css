@@ -4,6 +4,11 @@
   src: url("fonts/zabars.ttf") format("truetype"); /* Pfad zur Schriftart-Datei und ihr Format */
 }
 
+@font-face {
+  font-family: "bangers";
+  src: url("fonts/bangers.ttf") format("truetype");
+}
+
 /* Stil für den gesamten Body-Bereich */
 body {
   font-family: "zabars", Arial, Helvetica, sans-serif; /* Verwende zuerst "zabars", wenn nicht verfügbar, dann Arial, Helvetica, oder eine serifenlose Schrift */
@@ -22,6 +27,8 @@ body {
 /* Stil für das Canvas-Element */
 canvas {
   display: block; /* Canvas als Block-Element darstellen */
+  background-color: black; /* Hintergrundfarbe schwarz */
+  width: 100%; /* Breite auf 100% setzen */
 }
 
 /* Stil für Überschrift 1 (h1) */
@@ -30,6 +37,14 @@ h1 {
   letter-spacing: 3px; /* Buchstabenabstand auf 3px setzen */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Textschatten hinzufügen */
   color: rgb(255, 130, 68); /* Schriftfarbe setzen */
+}
+
+/* Stil für Spielanweisungen */
+.Game-instructions {
+  font-family: "bangers";
+  font-size: 24px;
+  color: rgb(255, 249, 197);
+  padding: 8px;
 }
 
 /* Klasse, um ein Element auszublenden */
@@ -46,21 +61,6 @@ h1 {
   display: flex; /* Flexbox-Layout verwenden */
   justify-content: center; /* Elemente horizontal zentrieren */
   align-items: center; /* Elemente vertikal zentrieren */
-}
-
-/* Stil für die Hilfe-Leiste */
-.help-bar {
-  position: absolute; /* Absolute Positionierung */
-  left: -170px; /* Linke Position auf -170px setzen */
-  top: 0; /* Obere Position auf 0 setzen */
-  height: 100%; /* Höhe auf 100% setzen */
-  display: flex; /* Flexbox-Layout verwenden */
-  flex-direction: column; /* Elemente vertikal anordnen */
-  justify-content: space-around; /* Elemente gleichmäßig verteilen */
-  background-color: rgb(
-    248 125 29 / 56%
-  ); /* Hintergrundfarbe mit Transparenz */
-  padding: 0 10px; /* Innenabstände */
 }
 
 /* Stil für Beschreibungen von Tasten */
@@ -123,7 +123,7 @@ h1 {
 
 /* Stil für die Informationsbox */
 .info-box {
-  background-color: #ffd70b; /* Hintergrundfarbe gelb */
+  background-color: rgb(70, 13, 20); /* Hintergrundfarbe */
   z-index: 10; /* Stapelreihenfolge */
   position: absolute; /* Absolute Positionierung */
   top: 0; /* Obere Position auf 0 setzen */
@@ -134,11 +134,13 @@ h1 {
 
 /* Stil für das Schließen der Informationsbox */
 .close {
+  color: rgb(255, 130, 68);
   width: 100%; /* Breite auf 100% setzen */
   display: flex; /* Flexbox-Layout verwenden */
   justify-content: flex-end; /* Elemente am rechten Rand ausrichten */
-  padding: 40px 80px 0 0; /* Innenabstände */
+  padding: 24px 40px 0 0; /* Innenabstände */
   box-sizing: border-box; /* Box-Modell setzen */
+  margin-bottom: 24px;
 }
 
 /* Stil für das Schließen-Icon beim Hover */
@@ -146,6 +148,7 @@ h1 {
   cursor: pointer; /* Zeiger als Cursor anzeigen */
 }
 
+/* Stil für die Startseite */
 .start-page {
   height: 100%;
   width: 100%;
@@ -155,7 +158,6 @@ h1 {
   display: flex;
   justify-content: center;
 }
-/* ----------------------------------------- */
 
 /* Stil für die Endseite */
 .end-page {
@@ -190,17 +192,10 @@ h1 {
   cursor: pointer;
 }
 
-/* Stil für das Canvas-Element */
-canvas {
-  background-color: black;
-  width: 100%;
-}
-
 /* Stil für Hover-Effekte auf den Start- und Neustart-Buttons */
 .restart-btn:hover,
 .start-btn:hover {
-  /* Animation pausieren */
-  animation-play-state: paused;
+  animation-play-state: paused; /* Animation pausieren */
   cursor: pointer;
 }
 
@@ -209,26 +204,22 @@ canvas {
   position: absolute;
   bottom: 20px;
   display: flex;
-  /* Elemente horizontal anordnen  */
-  flex-direction: row;
+  flex-direction: row; /* Elemente horizontal anordnen */
   justify-content: space-around;
   width: 100%;
 }
 
 /* Stil für mobile Icons */
 .mobile-icon {
-  /* Hintergrundfarbe mit Transparenz  */
-  background-color: rgb(255 213 0 / 18%);
+  background-color: rgb(255 213 0 / 18%); /* Hintergrundfarbe mit Transparenz */
   border: 2px solid black;
   border-radius: 50%;
   width: 30px;
   height: 30px;
   padding: 10px;
   display: flex;
-  /* Elemente horizontal zentrieren */
-  justify-content: center;
-  /* Elemente vertikal zentrieren  */
-  align-items: center;
+  justify-content: center; /* Elemente horizontal zentrieren */
+  align-items: center; /* Elemente vertikal zentrieren */
   background-repeat: no-repeat;
   background-position: center;
   background-size: 40%;
@@ -236,22 +227,22 @@ canvas {
 
 /* Stil für die linken Pfeil-Icons */
 .icon-left {
-  background-image: url("img/left.png"); /*Hintergrundbild für linkes Icon */
+  background-image: url("assets/circle-left.svg"); /* Hintergrundbild für linkes Icon */
 }
 
-/* Stil für die rechten Pfeil-Icons*/
+/* Stil für die rechten Pfeil-Icons */
 .icon-right {
-  background-image: url("img/right.png"); /* Hintergrundbild für rechtes Icon */
+  background-image: url("assets/circle-right.svg"); /* Hintergrundbild für rechtes Icon */
 }
 
 /* Stil für die Sprung-Icons */
 .icon-jump {
-  background-image: url("img/up.png"); /* Hintergrundbild für Sprung-Icon */
+  background-image: url("assets/circle-up.svg"); /* Hintergrundbild für Sprung-Icon */
 }
 
 /* Stil für die Flaschen-Icons */
 .icon-bottle {
-  background-image: url("img/bottle.png"); /* Hintergrundbild für Flaschen-Icon */
+  background-image: url("assets/bottle.svg"); /* Hintergrundbild für Flaschen-Icon */
 }
 
 /* Stil für das Menü */
@@ -265,10 +256,10 @@ canvas {
 .turn-phone-overlay {
   display: none; /* Standardmäßig nicht anzeigen */
   position: absolute; /* Absolute Positionierung */
-  background-color: black; /* Hintergrundfarbe schwarz */
-  color: #e05b00; /* Schriftfarbe orange */
+  background-color: rgb(67, 121, 137); /* Hintergrundfarbe */
+  color: rgb(199, 103, 88); /* Schriftfarbe */
   text-shadow: 2px 2px #ffd70b; /* Textschatten */
-  font-size: x-large; /* Schriftgröße sehr groß */
+  font-size: 72px; /* Schriftgröße sehr groß */
   justify-content: center; /* Elemente horizontal zentrieren */
   align-items: center; /* Elemente vertikal zentrieren */
   padding: 0 25px; /* Innenabstände */
@@ -286,18 +277,19 @@ canvas {
   0% {
     transform: scale(1); /* Anfangsgröße */
   }
-
   50% {
-    transform: scale(1.02); /* Vergrößern */
+    transform: scale(1.03); /* Vergrößern */
   }
-
   100% {
     transform: scale(1); /* Zurück zur Anfangsgröße */
   }
 }
 
 /* Animation für Start- und Neustart-Buttons, wenn sie nicht gehovt oder aktiv sind */
-.start-btn:not(:hover):not(:active),
+.start-btn:not(:hover):not(:active) {
+  animation: resize 1s infinite; /* Endlos-Animation */
+}
+
 .restart-btn:not(:hover):not(:active) {
   animation: resize 2s infinite; /* Endlos-Animation */
 }
@@ -306,13 +298,6 @@ canvas {
 @media (max-height: 650px) {
   h1 {
     display: none; /* Überschrift ausblenden */
-  }
-}
-
-/* Medienabfrage für breite Bildschirme */
-@media only screen and (min-width: 1100px) {
-  .overlay-icon-menu {
-    display: none; /* Overlay-Menü-Icons ausblenden */
   }
 }
 

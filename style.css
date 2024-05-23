@@ -18,7 +18,7 @@ body {
   justify-content: center; /* Elemente vertikal zentrieren */
   align-items: center; /* Elemente horizontal zentrieren */
   margin: 0; /* Standardabstände entfernen */
-  margin-top: -80px;
+
   background-image: url("./assets/sunset-1.jpg"); /* Hintergrundbild festlegen */
   background-size: cover; /* Hintergrundbild auf die gesamte Fläche skalieren */
   background-position: center; /* Hintergrundbild zentrieren */
@@ -36,8 +36,9 @@ canvas {
 h1 {
   font-size: 80px; /* Schriftgröße auf 64px setzen */
   letter-spacing: 3px; /* Buchstabenabstand auf 3px setzen */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Textschatten hinzufügen */
+
   color: rgb(254, 166, 3); /* Schriftfarbe setzen */
+  text-shadow: 5px 2px rgb(191, 0, 0);
 }
 
 /* Stil für Spielanweisungen */
@@ -199,6 +200,14 @@ h1 {
   animation-play-state: paused; /* Animation pausieren */
   cursor: pointer;
 }
+/* Animation für Start- und Neustart-Buttons, wenn sie nicht gehovt oder aktiv sind */
+.start-btn:not(:hover):not(:active) {
+  animation: resize 1s infinite; /* Endlos-Animation */
+}
+
+.restart-btn:not(:hover):not(:active) {
+  animation: resize 2s infinite; /* Endlos-Animation */
+}
 
 /* Stil für die mobilen Steuerungselemente */
 .mobile-control {
@@ -300,15 +309,6 @@ h1 {
   100% {
     transform: scale(1); /* Zurück zur Anfangsgröße */
   }
-}
-
-/* Animation für Start- und Neustart-Buttons, wenn sie nicht gehovt oder aktiv sind */
-.start-btn:not(:hover):not(:active) {
-  animation: resize 1s infinite; /* Endlos-Animation */
-}
-
-.restart-btn:not(:hover):not(:active) {
-  animation: resize 2s infinite; /* Endlos-Animation */
 }
 
 /* Medienabfrage für kleine Höhen */

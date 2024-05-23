@@ -18,6 +18,7 @@ body {
   justify-content: center; /* Elemente vertikal zentrieren */
   align-items: center; /* Elemente horizontal zentrieren */
   margin: 0; /* Standardabstände entfernen */
+  margin-top: -80px;
   background-image: url("./assets/sunset-1.jpg"); /* Hintergrundbild festlegen */
   background-size: cover; /* Hintergrundbild auf die gesamte Fläche skalieren */
   background-position: center; /* Hintergrundbild zentrieren */
@@ -33,10 +34,10 @@ canvas {
 
 /* Stil für Überschrift 1 (h1) */
 h1 {
-  font-size: 64px; /* Schriftgröße auf 64px setzen */
+  font-size: 80px; /* Schriftgröße auf 64px setzen */
   letter-spacing: 3px; /* Buchstabenabstand auf 3px setzen */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Textschatten hinzufügen */
-  color: rgb(255, 130, 68); /* Schriftfarbe setzen */
+  color: rgb(254, 166, 3); /* Schriftfarbe setzen */
 }
 
 /* Stil für Spielanweisungen */

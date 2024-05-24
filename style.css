@@ -11,33 +11,32 @@
 
 /* Stil für den gesamten Body-Bereich */
 body {
-  font-family: "zabars", Arial, Helvetica, sans-serif; /* Verwende zuerst "zabars", wenn nicht verfügbar, dann Arial, Helvetica, oder eine serifenlose Schrift */
-  height: 100vh; /* Höhe des Body auf die gesamte Höhe des Viewports setzen */
-  display: flex; /* Flexbox-Layout verwenden */
-  flex-direction: column; /* Elemente vertikal anordnen */
-  justify-content: center; /* Elemente vertikal zentrieren */
-  align-items: center; /* Elemente horizontal zentrieren */
-  margin: 0; /* Standardabstände entfernen */
-
-  background-image: url("img/5_background/layers/air.png"); /* Hintergrundbild festlegen */
-  background-size: cover; /* Hintergrundbild auf die gesamte Fläche skalieren */
-  background-position: center; /* Hintergrundbild zentrieren */
-  background-repeat: no-repeat; /* Hintergrundbild nicht wiederholen */
+  font-family: "zabars", Arial, Helvetica, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  background-image: url("img/5_background/layers/air.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Stil für das Canvas-Element */
 canvas {
-  display: block; /* Canvas als Block-Element darstellen */
-  background-color: black; /* Hintergrundfarbe schwarz */
-  width: 100%; /* Breite auf 100% setzen */
+  display: block;
+  background-color: black;
+  width: 100%;
 }
 
 /* Stil für Überschrift 1 (h1) */
 h1 {
-  font-size: 80px; /* Schriftgröße auf 64px setzen */
-  letter-spacing: 3px; /* Buchstabenabstand auf 3px setzen */
+  font-size: 80px;
+  letter-spacing: 3px;
   margin-top: -88px;
-  color: rgb(254, 185, 56); /* Schriftfarbe setzen */
+  color: rgb(254, 185, 56);
   text-shadow: 5px 2px rgb(191, 0, 0);
 }
 
@@ -56,98 +55,98 @@ h1 {
 
 /* Stil für Container */
 .container {
-  width: 100%; /* Breite auf 100% setzen */
-  max-width: 720px; /* Maximale Breite auf 720px setzen */
+  width: 100%;
+  max-width: 720px;
   aspect-ratio: 1.5/1; /* Seitenverhältnis 1.5:1 setzen */
-  position: relative; /* Relative Positionierung */
-  display: flex; /* Flexbox-Layout verwenden */
-  justify-content: center; /* Elemente horizontal zentrieren */
-  align-items: center; /* Elemente vertikal zentrieren */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Stil für Beschreibungen von Tasten */
 .key-description {
-  font-size: 12px; /* Schriftgröße auf 12px setzen */
+  font-size: 12px;
 }
 
 /* Stil für die Hilfe-Box */
 .help {
-  display: flex; /* Flexbox-Layout verwenden */
-  flex-direction: column; /* Elemente vertikal anordnen */
-  align-items: center; /* Elemente horizontal zentrieren */
-  gap: 10px; /* Abstand zwischen den Elementen */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 /* Stil für Informationstext */
 .info {
-  color: #fff; /* Schriftfarbe weiß */
-  text-shadow: 2px 2px black; /* Textschatten */
+  color: #fff;
+  text-shadow: 2px 2px black;
 }
 
 /* Stil für Informationstext beim Hover */
 .info:hover {
-  cursor: pointer; /* Zeiger als Cursor anzeigen */
+  cursor: pointer;
 }
 
 /* Stil für Tastenbeschriftung */
 .key {
-  color: #ffd500; /* Schriftfarbe gelb */
+  color: #ffd500;
   text-shadow: 2px 2px black; /* Textschatten */
-  font-size: 18px !important; /* Schriftgröße auf 18px setzen */
+  font-size: 18px !important;
 }
 
 /* Stil für Overlay */
 .overlay {
-  position: absolute; /* Absolute Positionierung */
-  right: 20px; /* Rechte Position auf 20px setzen */
-  top: 60px; /* Obere Position auf 60px setzen */
-  display: flex; /* Flexbox-Layout verwenden */
-  gap: 16px; /* Abstand zwischen den Elementen */
+  position: absolute;
+  right: 20px;
+  top: 60px;
+  display: flex;
+  gap: 16px;
 }
 
 /* Stil für Overlay-Icon beim Hover */
 .overlay-icon:hover {
-  cursor: pointer; /* Zeiger als Cursor anzeigen */
+  cursor: pointer;
 }
 
 /* Stil für Bilder innerhalb von Overlay-Icons */
 .overlay-icon > img {
-  height: 30px; /* Höhe auf 30px setzen */
-  width: 30px; /* Breite auf 30px setzen */
+  height: 30px;
+  width: 30px;
 }
 
 /* Stil für Fullscreen- und Mute-Icons beim Hover */
 .fullscreen:hover,
 .mute:hover {
-  cursor: pointer; /* Zeiger als Cursor anzeigen */
-  color: #ffd500; /* Schriftfarbe gelb */
+  cursor: pointer;
+  color: #ffd500;
 }
 
 /* Stil für die Informationsbox */
 .info-box {
-  background-color: rgb(70, 13, 20); /* Hintergrundfarbe */
+  background-color: rgb(70, 13, 20);
   z-index: 10; /* Stapelreihenfolge */
-  position: absolute; /* Absolute Positionierung */
+  position: absolute;
   top: 0; /* Obere Position auf 0 setzen */
   left: 0; /* Linke Position auf 0 setzen */
-  height: 100%; /* Höhe auf 100% setzen */
-  width: 100%; /* Breite auf 100% setzen */
+  height: 100%;
+  width: 100%;
 }
 
 /* Stil für das Schließen der Informationsbox */
 .close {
   color: rgb(255, 130, 68);
-  width: 100%; /* Breite auf 100% setzen */
-  display: flex; /* Flexbox-Layout verwenden */
-  justify-content: flex-end; /* Elemente am rechten Rand ausrichten */
-  padding: 24px 40px 0 0; /* Innenabstände */
-  box-sizing: border-box; /* Box-Modell setzen */
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 24px 40px 0 0;
+  box-sizing: border-box;
   margin-bottom: 24px;
 }
 
 /* Stil für das Schließen-Icon beim Hover */
 .close:hover {
-  cursor: pointer; /* Zeiger als Cursor anzeigen */
+  cursor: pointer;
 }
 
 /* Stil für die Startseite */
@@ -280,22 +279,22 @@ h1 {
 
 /* Stil für das Overlay zum Drehen des Telefons */
 .turn-phone-overlay {
-  display: none; /* Standardmäßig nicht anzeigen */
-  position: absolute; /* Absolute Positionierung */
-  background-color: rgb(67, 121, 137); /* Hintergrundfarbe */
-  color: rgb(199, 103, 88); /* Schriftfarbe */
+  display: none;
+  position: absolute;
+  background-color: rgb(67, 121, 137);
+  color: rgb(199, 103, 88);
   text-shadow: 2px 2px #ffd70b; /* Textschatten */
-  font-size: 72px; /* Schriftgröße sehr groß */
+  font-size: 72px;
   justify-content: center; /* Elemente horizontal zentrieren */
   align-items: center; /* Elemente vertikal zentrieren */
-  padding: 0 25px; /* Innenabstände */
-  box-sizing: border-box; /* Box-Modell setzen */
-  text-align: center; /* Text zentrieren */
+  padding: 0 25px;
+  box-sizing: border-box;
+  text-align: center;
   line-height: 60px; /* Zeilenhöhe auf 60px setzen */
   top: 0; /* Obere Position auf 0 setzen */
   left: 0; /* Linke Position auf 0 setzen */
-  width: 100vw; /* Breite auf 100% des Viewports setzen */
-  height: 100vh; /* Höhe auf 100% des Viewports setzen */
+  width: 100vw;
+  height: 100vh;
 }
 
 /* Keyframe-Animation zum Vergrößern und Verkleinern */
@@ -314,17 +313,15 @@ h1 {
 /* Medienabfrage für kleine Höhen */
 @media (max-height: 650px) {
   h1 {
-    display: none; /* Überschrift ausblenden */
+    display: none;
   }
 }
 
 /* Medienabfrage für schmale Bildschirme */
 @media only screen and (max-width: 1100px) {
   .help-bar {
-    left: 0; /* Linke Position auf 0 setzen */
-    background-color: rgb(
-      248 125 29 / 98%
-    ); /* Hintergrundfarbe mit mehr Transparenz */
+    left: 0;
+    background-color: rgb(248 125 29 / 98%);
     z-index: 10; /* Stapelreihenfolge erhöhen */
   }
 }
@@ -337,23 +334,21 @@ h1 {
 
   .help-bar {
     left: 0; /* Linke Position auf 0 setzen */
-    background-color: rgb(
-      248 125 29 / 98%
-    ); /* Hintergrundfarbe mit mehr Transparenz */
-    z-index: 10; /* Stapelreihenfolge erhöhen */
+    background-color: rgb(248 125 29 / 98%);
+    z-index: 10;
   }
 
   .container,
   canvas {
-    height: 100vh; /* Höhe auf 100% des Viewports setzen */
-    width: 100%; /* Breite auf 100% setzen */
+    height: 100vh;
+    width: 100%;
   }
 }
 
 /* Medienabfrage für Portrait-Modus auf kleinen Bildschirmen */
 @media (orientation: portrait) and (max-width: 576px) {
   .turn-phone-overlay {
-    display: flex; /* Overlay anzeigen */
+    display: flex;
     z-index: 120; /* Stapelreihenfolge erhöhen */
   }
 }

@@ -4,6 +4,7 @@ let keyboard = new Keyboard();
 let gameEndInterval;
 let audio = true;
 let backgroundSound;
+
 //let backgroundSound = new Audio("audio/backgroundSound.mp3");
 
 // Event-Listener, um das Spiel zu starten, wenn eine Taste gedrückt wird
@@ -167,15 +168,16 @@ function toggleAudio(event) {
   const audioimg = document.getElementById("audioimg"); // Audio-Bild-Element abrufen
   event.preventDefault(); // Standardaktion des Events verhindern
   if (event.type === "touchstart" || event.type === "click") {
-    // Überprüfe, ob das Event ein Klick oder Touchstart ist
-    if (audio) {
+    if (world.audioEnabled) {
       audioimg.style.display = "none"; // Verstecke das Bild "volume-high.svg"
       document.getElementById("audioimg-off").style.display = "block"; // Zeige das Bild "volume-off.svg" an
-      audio = false; // Setze den Audio-Status auf falsch (deaktiviert)
+      world.audioEnabled = false; // Audio-Status deaktivieren
+      world.backgroundSound.pause(); // Hintergrundgeräusch pausieren
     } else {
       audioimg.style.display = "block"; // Zeige das Bild "volume-high.svg" an
       document.getElementById("audioimg-off").style.display = "none"; // Verstecke das Bild "volume-off.svg"
-      audio = true; // Setze den Audio-Status auf wahr (aktiviert)
+      world.audioEnabled = true; // Audio-Status aktivieren
+      world.playBackgroundMusic(); // Hintergrundgeräusch abspielen
     }
   }
 }

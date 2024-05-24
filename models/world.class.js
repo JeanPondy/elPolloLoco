@@ -88,8 +88,9 @@ class World {
     this.mainInterval = setInterval(() => {
       this.collision.checkCollisions();
       if (this.audioEnabled) {
-        // Überprüfe den Audio-Status vor dem Abspielen des Hintergrundsounds
-        this.playBackgroundMusic();
+        this.playBackgroundMusic(); // Überprüfe den Audio-Status vor dem Abspielen des Hintergrundsounds
+      } else {
+        this.backgroundSound.pause();
       }
     }, 200);
   }

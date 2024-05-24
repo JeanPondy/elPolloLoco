@@ -1,10 +1,10 @@
-// Deklaration der Variablen
 let canvas;
 let world;
 let keyboard = new Keyboard();
 let gameEndInterval;
-let audio = true; // Audio-Status, standardmäßig auf true gesetzt
+let audio = true;
 let backgroundSound;
+//let backgroundSound = new Audio("audio/backgroundSound.mp3");
 
 // Event-Listener, um das Spiel zu starten, wenn eine Taste gedrückt wird
 window.addEventListener("keydown", startGame);
@@ -14,14 +14,13 @@ document.addEventListener("DOMContentLoaded", updateControlsBox);
 
 // Funktion zum Initialisieren des Spiels
 function initGame() {
-  canvas = document.getElementById("canvas"); // Das Canvas-Element mit der ID "canvas" aus dem DOM abrufen
-  world = new World(canvas, keyboard); // Neue Instanz der World-Klasse erstellen und das Canvas-Element sowie das Keyboard-Objekt übergeben
+  canvas = document.getElementById("canvas");
+  world = new World(canvas, keyboard);
   world.playBackgroundMusic();
   // Konsolenausgaben zur Überprüfung
-  console.log("My Character is", world.character); // Zeige den Charakter in der Konsole an
-  console.log("My enemies are", world.level.enemies); // Zeige die Feinde in der Konsole an
+  console.log("My Character is", world.character);
+  console.log("My enemies are", world.level.enemies);
   updateControlsBox(); // Aktualisiere die Anzeige der Steuerungselemente
-
   checkGameEnd(); // Überprüfe regelmäßig, ob das Spiel zu Ende ist
 }
 
@@ -47,6 +46,12 @@ function startGame(event) {
   initLevel(); // Initialisiere das Level
   initGame(); // Initialisiere das Spiel
   checkGameEnd(); // Überprüfe regelmäßig, ob das Spiel zu Ende ist
+
+  // Hintergrundsound abspielen
+  backgroundSound.loop = true; // Endlosschleife aktivieren
+  backgroundSound.play().catch((error) => {
+    console.error("Audio playback failed:", error);
+  });
 }
 
 // Funktion zum Anzeigen des Spielbildschirms
@@ -73,6 +78,10 @@ function showEndPage() {
   setTimeout(() => {
     document.getElementById("endPage").classList.remove("d-none"); // Mache die Endseite sichtbar
     document.getElementById("control-icons").classList.add("d-none"); // Verstecke die Steuerungssymbole
+
+    // Hintergrundsound stoppen
+    backgroundSound.pause();
+    backgroundSound.currentTime = 0;
 
     // Überprüfen, ob der Neustart-Button bereits existiert
     let restartButton = document.getElementById("restart-btn");

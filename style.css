@@ -19,7 +19,7 @@ body {
   align-items: center; /* Elemente horizontal zentrieren */
   margin: 0; /* Standardabstände entfernen */
 
-  background-image: url("./assets/sunset-1.jpg"); /* Hintergrundbild festlegen */
+  background-image: url("img/5_background/layers/air.png"); /* Hintergrundbild festlegen */
   background-size: cover; /* Hintergrundbild auf die gesamte Fläche skalieren */
   background-position: center; /* Hintergrundbild zentrieren */
   background-repeat: no-repeat; /* Hintergrundbild nicht wiederholen */
@@ -36,8 +36,8 @@ canvas {
 h1 {
   font-size: 80px; /* Schriftgröße auf 64px setzen */
   letter-spacing: 3px; /* Buchstabenabstand auf 3px setzen */
-
-  color: rgb(254, 166, 3); /* Schriftfarbe setzen */
+  margin-top: -88px;
+  color: rgb(254, 185, 56); /* Schriftfarbe setzen */
   text-shadow: 5px 2px rgb(191, 0, 0);
 }
 

@@ -88,15 +88,16 @@
       </div>
       <!-- -------------------------------------------------------- -->
       <div id="overlay-icons" class="overlay">
+        <!-- menu description -->
         <div
           class="overlay-icon overlay-icon-menu"
           id="menu"
           onclick="toggleInfobox(event)"
           ontouchstart="toggleMenu(event)"
         >
-          <!-- ---------- -->
           <img src="assets/menu.svg" />
         </div>
+        <!-- Audio -->
         <div
           class="overlay-icon mute"
           id="audiobtn"
@@ -104,13 +105,15 @@
           ontouchstart="toggleAudio(event)"
         >
           <img id="audioimg" src="assets/volume-high.svg" />
+           <!-- Bild für ausgeschaltetes Audio, standardmäßig ausgeblendet -->
           <img
             id="audioimg-off"
             src="assets/volume-off.svg"
             style="display: none"
           />
-          <!-- Neu hinzugefügtes Bild für ausgeschaltetes Audio, standardmäßig ausgeblendet -->
+         
         </div>
+        <!-- fullscreen  -->
         <div
           class="overlay-icon fullscreen"
           onclick="toggleFullScreen(event)"

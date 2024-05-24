@@ -114,13 +114,15 @@ class World {
       this.playThrowSound(); // Sound für das Werfen der Flasche abspielen
     }
   }
-
   playBackgroundMusic() {
-    let self = this;
-    this.backgroundSound.addEventListener("canplaythrough", function () {
-      self.backgroundSound.play();
-      self.backgroundSound.volume = 0.1;
-    });
+    if (!this.backgroundSound.playing) {
+      let self = this;
+      this.backgroundSound.addEventListener("canplaythrough", function () {
+        self.backgroundSound.play();
+        self.backgroundSound.volume = 0.1;
+      });
+      this.backgroundSound.playing = true;
+    }
   }
 
   playThrowSound() {

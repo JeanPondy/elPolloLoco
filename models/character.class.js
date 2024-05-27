@@ -1,9 +1,9 @@
 class Character extends MovableObject {
   // Definiere die Eigenschaften der Spielfigur
-  width = 160; // Breite der Spielfigur
-  height = 290; // Höhe der Spielfigur
-  x = 120; // Start-X-Position der Spielfigur
-  y = 43; // Start-Y-Position der Spielfigur (angepasst auf 43px)
+  width = 160;
+  height = 290;
+  x = 120;
+  y = 43;
   offset = {
     top: 150,
     left: 40,
@@ -17,7 +17,7 @@ class Character extends MovableObject {
   world = null; // Referenz auf die Spielwelt, in der sich die Spielfigur befindet
   hurtPlayed = false;
   walking_sound = new Audio("audio/running2.mp3"); // Audio-Objekt für Laufgeräusche
-  jumping_sound = new Audio("audio/hurt2.mp3");
+  jumping_sound = new Audio("audio/jump.mp3");
   hurt_sound = new Audio("audio/hurt2.mp3");
   dead_sound = new Audio("audio/hurt2.mp3");
 

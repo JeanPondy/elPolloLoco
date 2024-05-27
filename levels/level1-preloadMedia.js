@@ -1,7 +1,9 @@
 const imageUrls = [
   //gewon
-  "img/9_intro_outro_screens/game_over/game_won.png",
-  "img/9_intro_outro_screens/game_over/game_over.png",
+
+  "img/9_intro_outro_screens/game_over/gameover.png",
+  // game lost
+  "img/9_intro_outro_screens/game_over/youlosto.png",
   //BottlesBar
   "./img/7_statusbars/1_statusbar/3_statusbar_bottle/green/0.png",
   "./img/7_statusbars/1_statusbar/3_statusbar_bottle/green/20.png",
@@ -125,9 +127,6 @@ const imageUrls = [
   "img/4_enemie_boss_chicken/2_alert/G11.png",
   "img/4_enemie_boss_chicken/2_alert/G12.png",
 
-  // Start and End Screen
-  "img/9_intro_outro_screens/game_over/game won.png",
-  "img/9_intro_outro_screens/game_over/game over!.png",
   //bottle splash
   "img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
   "img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
@@ -147,9 +146,23 @@ const audioUrls = [
   //jumping
   "audio/hurt2.mp3",
   //hurt
-  "audio/hurt2.mp3",
+  "audio/hurt3.mp3",
   //dead
   "audio/hurt2.mp3",
+  //Hintergrund
+  "audio/backgroundSound.mp3",
+  // shot Bottle
+  "audio/shot_bottle.mp3",
+  // bottle broke
+  "audio/bottleBroke.mp3",
+  //power
+  "audio/power.mp3",
+  //coins
+  "audio/coins.mp3",
+  // jumpp
+  "audio/jump.mp3",
+  // dying
+  "audio/dyingChicken.mp3",
 ];
 
 function preloadMedia() {

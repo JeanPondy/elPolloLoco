@@ -105,6 +105,70 @@ function checkGameEnd() {
   }, 1000 / 20); // Überprüfe 20 Mal pro Sekunde, ob das Spiel zu Ende ist
 }
 
+/*  */
+
+// Funktion zur Aktualisierung der Hilfe-Box
+function updateHelpbox() {
+  let el = document.getElementById("help-box"); // Hilfe-Box-Element abrufen
+  if (smallDevice.matches) {
+    // Überprüfe, ob das Gerät klein ist (mobile Geräte)
+    el.classList.add("d-none"); // Verstecke die Hilfe-Box
+    menuOpen = false; // Setze das Menü auf geschlossen
+  } else {
+    el.classList.remove("d-none"); // Mache die Hilfe-Box sichtbar
+    menuOpen = true; // Setze das Menü auf geöffnet
+  }
+}
+
+// Funktion zum Umschalten der Info-Box
+function toggleInfobox(event) {
+  let el = document.getElementById("infobox"); // Info-Box-Element abrufen
+  event.preventDefault(); // Standardaktion des Events verhindern
+  if (event.type === "click" || event.type === "touchstart") {
+    el.classList.toggle("d-none"); // Umschalten der Sichtbarkeit der Info-Box
+  }
+}
+// Funktion zum Umschalten des Menüs
+function toggleMenu(event) {
+  let el = document.getElementById("help-box"); // Hilfe-Box-Element abrufen
+  if (event) {
+    event.preventDefault(); // Standardaktion des Events verhindern
+  }
+  if (el.classList.contains("d-none")) {
+    el.classList.remove("d-none"); // Mache die Hilfe-Box sichtbar
+  } else {
+    el.classList.add("d-none"); // Verstecke die Hilfe-Box
+  }
+}
+
+// Funktion zum Umschalten des Vollbildmodus
+function toggleFullScreen() {
+  let mainContainer = document.getElementById("mainContainer");
+  let startpage = document.getElementById("startpage");
+  let canvas = document.getElementById("canvas");
+  if (!document.fullscreenElement) {
+    // Überprüfe, ob kein Element im Vollbildmodus ist
+    mainContainer
+      .requestFullscreen()
+      .then(() => {
+        startpage.classList.add("fullscreen");
+        canvas.classList.add("fullscreen");
+      })
+      .catch((err) => {
+        alert(
+          `Error attempting to enable full-screen mode: ${err.message} (${err.name})`
+        );
+      });
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen().then(() => {
+        startpage.classList.remove("fullscreen");
+        canvas.classList.remove("fullscreen");
+      });
+    }
+  }
+}
+/*  */
 // Funktion zum Umschalten des Audio-Status
 function toggleAudio(event) {
   const audioimg = document.getElementById("audioimg"); // Audio-Bild-Element abrufen

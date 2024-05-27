@@ -28,7 +28,7 @@ class World {
   hurt_sound = new Audio("audio/hurt3.mp3");
   backgroundSound = new Audio("audio/backgroundSound.mp3");
   coin_sound = new Audio("audio/coins.mp3");
-  bottle_sound = new Audio("audio/power.mp3"); //collision
+  bottle_sound = new Audio("audio/power.mp3"); // collision
   throw_sound = new Audio("audio/shot_bottle.mp3"); // Neuer Sound für das Werfen der Flasche
   mainInterval;
   throwObjectsInterval;
@@ -55,6 +55,7 @@ class World {
       { once: true }
     ); // Nur einmalig ausführen
   }
+
   enableAudio() {
     this.playAndResetSound(this.hurt_sound);
     this.playAndResetSound(this.backgroundSound);
@@ -64,19 +65,15 @@ class World {
   }
 
   playAndResetSound(sound) {
+    sound.pause();
+    sound.currentTime = 0;
     this.playSound(sound);
-    this.resetSound(sound);
   }
 
   playSound(sound) {
     sound.play().catch((error) => {
       console.error("Audio playback failed:", error);
     });
-  }
-
-  resetSound(sound) {
-    sound.pause();
-    sound.currentTime = 0;
   }
 
   setWorld() {
@@ -115,14 +112,13 @@ class World {
       this.playThrowSound(); // Sound für das Werfen der Flasche abspielen
     }
   }
+
   playBackgroundMusic() {
-    if (!this.backgroundSound.playing) {
-      let self = this;
-      this.backgroundSound.addEventListener("canplaythrough", function () {
-        self.backgroundSound.play();
-        self.backgroundSound.volume = 0.1;
+    if (this.backgroundSound.paused) {
+      this.backgroundSound.volume = 0.1;
+      this.backgroundSound.play().catch((error) => {
+        console.error("Audio playback failed:", error);
       });
-      this.backgroundSound.playing = true;
     }
   }
 

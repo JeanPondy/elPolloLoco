@@ -1,10 +1,12 @@
 let game;
 let canvas;
 let world;
-let keyboard = new Keyboard();
+//let keyboard = new Keyboard();
 let gameEndInterval;
 let audio = true;
 let backgroundSound = new Audio("audio/backgroundSound.mp3");
+let smallDevice = window.matchMedia("(max-width: 1100px)");
+let touchDevice = window.matchMedia("(Pointer: coarse)").matches;
 
 // Event-Listener, um das Spiel zu starten, wenn eine Taste gedrückt wird
 window.addEventListener("keydown", startGame);
@@ -105,8 +107,6 @@ function checkGameEnd() {
   }, 1000 / 20); // Überprüfe 20 Mal pro Sekunde, ob das Spiel zu Ende ist
 }
 
-/*  */
-
 // Funktion zur Aktualisierung der Hilfe-Box
 function updateHelpbox() {
   let el = document.getElementById("help-box"); // Hilfe-Box-Element abrufen
@@ -168,7 +168,7 @@ function toggleFullScreen() {
     }
   }
 }
-/*  */
+
 // Funktion zum Umschalten des Audio-Status
 function toggleAudio(event) {
   const audioimg = document.getElementById("audioimg"); // Audio-Bild-Element abrufen

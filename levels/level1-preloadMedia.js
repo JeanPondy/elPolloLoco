@@ -149,6 +149,8 @@ const audioUrls = [
   "audio/hurt3.mp3",
   //dead
   "audio/hurt2.mp3",
+  //dead man
+  "audio/man_dying.mp3",
   //Hintergrund
   "audio/backgroundSound.mp3",
   // shot Bottle

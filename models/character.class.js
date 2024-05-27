@@ -19,7 +19,7 @@ class Character extends MovableObject {
   walking_sound = new Audio("audio/running2.mp3"); // Audio-Objekt für Laufgeräusche
   jumping_sound = new Audio("audio/jump.mp3");
   hurt_sound = new Audio("audio/hurt2.mp3");
-  dead_sound = new Audio("audio/hurt2.mp3");
+  dead_sound = new Audio("audio/man_dying.mp3");
 
   // Array mit Bildpfaden für verschiedene Animationen der Spielfigur
   IMAGES_WALKING = [

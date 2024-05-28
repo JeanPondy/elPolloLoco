@@ -29,10 +29,19 @@ function startGame(event) {
   backgroundSound.play().catch((error) => {
     console.error("Audio playback failed:", error);
   });
+
   // Audio-Button sichtbar machen
   document.getElementById("audiobtn").classList.remove("d-none");
-  //mobile Steuerung sichtbar machen
-  //document.getElementById("control-icons").classList.remove("d-none");
+
+  // Überprüfen, ob die Bildschirmbreite kleiner oder gleich 768px ist
+  if (window.innerWidth <= 768) {
+    document
+      .querySelectorAll("#control-icons .direction, #control-icons .option")
+      .forEach((element) => element.classList.remove("d-none"));
+  }
+
+  // Weitere mobile Steuerungen sichtbar machen
+  // document.getElementById("control-icons").classList.remove("d-none");
 }
 
 // Funktion zum Initialisieren des Spiels

@@ -16,19 +16,23 @@ document.addEventListener("DOMContentLoaded", updateControlsBox);
 
 // Funktion zum Starten des Spiels
 function startGame(event) {
-  window.removeEventListener("keydown", startGame); // Entferne den Event-Listener, um Mehrfachstarts zu verhindern
+  window.removeEventListener("keydown", startGame);
   document.getElementById("startpage").style.display = "none";
   event.preventDefault(); // Standardaktion des Events verhindern
-  showGameScreen(); // Zeige den Spielbildschirm an
-  initLevel(); // Initialisiere das Level
-  initGame(); // Initialisiere das Spiel
-  checkGameEnd(); // Überprüfe regelmäßig, ob das Spiel zu Ende ist
+  showGameScreen();
+  initLevel();
+  initGame();
+  checkGameEnd();
 
   // Hintergrundsound abspielen
   backgroundSound.loop = true; // Endlosschleife aktivieren
   backgroundSound.play().catch((error) => {
     console.error("Audio playback failed:", error);
   });
+  // Audio-Button sichtbar machen
+  document.getElementById("audiobtn").classList.remove("d-none");
+  //mobile Steuerung sichtbar machen
+  //document.getElementById("control-icons").classList.remove("d-none");
 }
 
 // Funktion zum Initialisieren des Spiels
@@ -55,17 +59,16 @@ function updateControlsBox() {
 
 // Funktion zum Anzeigen des Spielbildschirms
 function showGameScreen() {
-  canvas = document.getElementById("canvas"); // Canvas-Element abrufen
-  startpage = document.getElementById("startpage"); // Startseite-Element abrufen
-  endpage = document.getElementById("endPage"); // Endseite-Element abrufen
-  helpbox = document.getElementById("help-box"); // Hilfe-Box-Element abrufen
-
+  canvas = document.getElementById("canvas");
+  startpage = document.getElementById("startpage");
+  endpage = document.getElementById("endPage");
+  helpbox = document.getElementById("help-box");
   if (helpbox) {
-    updateControlsBox(); // Aktualisiere die Steuerungsanzeige
-    canvas.classList.remove("d-none"); // Mache das Canvas-Element sichtbar
-    startpage.classList.add("d-none"); // Verstecke die Startseite
-    endpage.classList.add("d-none"); // Verstecke die Endseite
-    helpbox.classList.add("d-none"); // Verstecke die Hilfe-Box
+    updateControlsBox();
+    canvas.classList.remove("d-none");
+    startpage.classList.add("d-none");
+    endpage.classList.add("d-none");
+    helpbox.classList.add("d-none");
   } else {
     console.error("Element with ID 'help-box' not found!");
   }

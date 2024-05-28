@@ -114,6 +114,10 @@ h1 {
   height: 30px;
   width: 30px;
 }
+.fullscreen {
+  height: 30px;
+  width: 30px;
+}
 
 /* Stil für Fullscreen- und Mute-Icons beim Hover */
 .fullscreen:hover,
@@ -331,6 +335,13 @@ h1 {
   .turn-phone-overlay {
     display: flex;
     z-index: 120; /* Stapelreihenfolge erhöhen */
+  }
+}
+/* Standardmäßig menu, audiobtn und fullscreen ausblenden, wenn Bildschirmbreite <= 768px */
+@media (max-width: 768px) {
+  #menu,
+  #fullscreen {
+    display: none;
   }
 }
 

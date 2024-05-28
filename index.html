@@ -30,10 +30,6 @@
     <script src="./models/coin.class.js"></script>
     <script src="./levels/level1.js"></script>
     <script src="./js/game.js"></script>
-
-    <!-- <audio id="backgroundAudio" controls="controls" autoplay>
-      <source src="audio/backgroundSound.mp3" type="audio/mp3" />
-    </audio> -->
   </head>
   <body onload="preloadMedia() ">
     <h1 class="h1">El Pollo Loco</h1>
@@ -115,10 +111,11 @@
       
         <!-- fullscreen  -->
         <div
-          class="overlay-icon fullscreen"
-          onclick="toggleFullScreen(event)"
-          ontouchstart="toggleFullScreen(event)"
-        >
+        class="overlay-icon fullscreen"
+        id="fullscreen"
+        onclick="toggleFullScreen(event)"
+        ontouchstart="toggleFullScreen(event)"
+      >
           <img src="assets/fullscreen.svg" />
         </div>
       </div>

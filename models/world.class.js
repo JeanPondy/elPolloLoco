@@ -38,6 +38,8 @@ class World {
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.level = level1; // Initialisierung von level
+    //this.character = new Character();
+    //this.collision = new Collision(this); // Hier wird 'this' übergeben
     this.setupEventListeners(); // Event-Listener einrichten
     this.draw();
     this.setWorld();

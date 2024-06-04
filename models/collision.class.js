@@ -118,14 +118,18 @@ class Collision {
         if (character.isAboveGround()) {
           if (enemy instanceof Endboss) {
             character.jump(30);
+            enemy.energy = 0; // Setze die Energie des Endbosses auf 0
+            this.world.endbossBar.setPercentage(0); // Setze die Lebensleiste des Endbosses auf 0
+          } else {
+            enemy.energy = 0;
           }
-          enemy.energy = 0;
           clearInterval(enemy.walkingAnimations);
           clearInterval(enemy.movingAnimations);
         }
       }
     });
   }
+
   characterHitEndbossWithBottle() {
     const val = 25; // Festlegen des Werts für die Flaschenkraft
 

@@ -1,6 +1,11 @@
 class Collision {
   constructor(world) {
     this.world = world; // Die Welt der Kollision initialisieren
+
+    // Interval zum regelmäßigen Überprüfen von Kollisionen
+    setInterval(() => {
+      this.checkCollisions();
+    }, 100);
   }
 
   // Methode zum Überprüfen von Kollisionen und Aufnehmen von Flaschen

@@ -30,7 +30,20 @@ class MovableObject extends DrawableObject {
       }
     }, 1000 / 25);
   }
-
+  /* applyGravity() {
+    this.gravityAnimation = setInterval(() => {
+      if (this.isAboveGround() || this.speedY > 0) {
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
+      }
+    }, 1000 / 25);
+  } */
+  offset = {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  };
   isIdle() {
     const idleTime = (new Date().getTime() - this.lastAction) / 1000; // Zeitunterschied in Sekunden
     return idleTime < 5;
@@ -59,12 +72,11 @@ class MovableObject extends DrawableObject {
       this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
     );
   }
-
   isCollidingWith(mo) {
     return (
       this.x + this.width > mo.x &&
       this.y + this.height > mo.y &&
-      this.x < mo.x &&
+      this.x < mo.x + mo.width &&
       this.y < mo.y + mo.height
     );
   }
@@ -104,7 +116,7 @@ class MovableObject extends DrawableObject {
   }
 
   isDead() {
-    return this.energy === 0;
+    return this.energy == 0;
   }
 
   moveRight() {

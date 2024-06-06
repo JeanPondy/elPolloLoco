@@ -154,29 +154,18 @@ function toggleMenu(event) {
 }
 
 // Funktion zum Umschalten des Vollbildmodus
-function toggleFullScreen() {
-  let mainContainer = document.getElementById("mainContainer");
-  let startpage = document.getElementById("startpage");
-  let canvas = document.getElementById("canvas");
-  if (!document.fullscreenElement) {
-    // Überprüfe, ob kein Element im Vollbildmodus ist
-    mainContainer
-      .requestFullscreen()
-      .then(() => {
-        startpage.classList.add("fullscreen");
-        canvas.classList.add("fullscreen");
-      })
-      .catch((err) => {
+function toggleFullScreen(event) {
+  let elem = document.getElementById("mainContainer");
+  event.preventDefault();
+  if (event.type === "click" || event.type === "touchstart") {
+    if (!document.fullscreenElement) {
+      elem.requestFullscreen().catch((err) => {
         alert(
-          `Error attempting to enable full-screen mode: ${err.message} (${err.name})`
+          `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`
         );
       });
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen().then(() => {
-        startpage.classList.remove("fullscreen");
-        canvas.classList.remove("fullscreen");
-      });
+    } else {
+      document.exitFullscreen();
     }
   }
 }

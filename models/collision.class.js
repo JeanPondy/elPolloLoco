@@ -76,7 +76,7 @@ class Collision {
     });
   }
 
-  enemiesHitCharacter(val = 5) {
+  enemiesHitCharacter(val = 15) {
     this.world.level.enemies.forEach((enemy) => {
       if (this.world.character.isColliding(enemy)) {
         this.world.character.hit(val); // Charakter wird getroffen mit dem angegebenen Wert 'val'
@@ -108,8 +108,43 @@ class Collision {
         }
       });
   }
+  /* -------------------------------------------------------------------------------- */
+  /* 
+characterHitEnemies() {
+  this.world.level.enemies.forEach((enemy) => {
+    // Überprüfen, ob der Charakter mit dem Feind kollidiert und der Feind aktiv ist
+    if (
+      (enemy instanceof ChickenSmall ||
+        enemy instanceof Chicken ||
+        enemy instanceof Endboss) &&
+      enemy.active
+    ) {
+      const character = this.world.character;
+      const enemyCenterX = enemy.x + enemy.width / 2; // X-Position des Zentrums des Gegners
+      const characterCenterX = character.x + character.width / 2; // X-Position des Zentrums des Charakters
 
-  characterHitEnemies() {
+      // Überprüfen, ob der Charakter genau über dem Feind ist und sich nach unten bewegt
+      if (
+        character.isFalling() &&
+        character.isCollidingWith(enemy) &&
+        Math.abs(enemyCenterX - characterCenterX) < character.width / 2
+      ) {
+        if (enemy instanceof Endboss) {
+          character.jump(30);
+          enemy.energy = 0; // Setze die Energie des Endbosses auf 0
+          this.world.endbossBar.setPercentage(0); // Setze die Lebensleiste des Endbosses auf 0
+        } else {
+          enemy.energy = 0;
+        }
+        clearInterval(enemy.walkingAnimations);
+        clearInterval(enemy.movingAnimations);
+      }
+    }
+  });
+} */
+
+  /* --------------------------------------------------------------------------------- */
+  /*  characterHitEnemies() {
     this.world.level.enemies.forEach((enemy) => {
       // Überprüfen, ob der Charakter mit dem Feind kollidiert und der Feind aktiv ist
       if (
@@ -131,6 +166,32 @@ class Collision {
           clearInterval(enemy.walkingAnimations);
           clearInterval(enemy.movingAnimations);
         }
+      }
+    });
+  } */
+  /* -----------------------------------------------------------------------------  */
+
+  characterHitEnemies() {
+    const character = this.world.character; // Charakter-Referenz einmal speichern
+    this.world.level.enemies.forEach((enemy) => {
+      // Überprüfen, ob der Charakter mit dem Feind kollidiert und der Feind aktiv ist
+      if (
+        (enemy instanceof ChickenSmall ||
+          enemy instanceof Chicken ||
+          enemy instanceof Endboss) &&
+        character.isCollidingWith(enemy) &&
+        enemy.active &&
+        character.isFalling() // Überprüfen, ob der Charakter fällt
+      ) {
+        if (enemy instanceof Endboss) {
+          character.jump(30);
+          enemy.energy = 0; // Setze die Energie des Endbosses auf 0
+          this.world.endbossBar.setPercentage(0); // Setze die Lebensleiste des Endbosses auf 0
+        } else {
+          enemy.energy = 0;
+        }
+        clearInterval(enemy.walkingAnimations);
+        clearInterval(enemy.movingAnimations);
       }
     });
   }

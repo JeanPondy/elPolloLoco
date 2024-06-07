@@ -173,19 +173,16 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_IDLE); // Spielfigur ist in Ruhe
     }
   }
-
   animateDead() {
     this.deadShown = true;
-    if (typeof audio !== "undefined" && audio) {
+    if (audio) {
       this.dead_sound.play();
     }
     setTimeout(() => {
       clearInterval(this.characterAnimations);
       clearInterval(this.movingAnimations);
-      this.loadImage(this.IMAGES_DEAD[0]); // Lade das erste Bild der Todesanimation
-      if (this.world.level.enemies.length > 6) {
-        clearInterval(this.world.level.enemies[6].movingAnimations);
-      }
+      this.loadImage(this.IMAGES_DEAD[3]);
+      clearInterval(this.world.level.enemies[6].movingAnimations);
     }, 1000);
   }
 }

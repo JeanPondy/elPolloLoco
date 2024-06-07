@@ -5,7 +5,7 @@ class Collision {
     // Interval zum regelmäßigen Überprüfen von Kollisionen
     setInterval(() => {
       this.checkCollisions();
-    }, 100);
+    }, 50);
   }
 
   // Methode zum Überprüfen von Kollisionen und Aufnehmen von Flaschen
@@ -109,7 +109,7 @@ class Collision {
       });
   }
   /* -------------------------------------------------------------------------------- */
-  /* 
+  /*
 characterHitEnemies() {
   this.world.level.enemies.forEach((enemy) => {
     // Überprüfen, ob der Charakter mit dem Feind kollidiert und der Feind aktiv ist
@@ -122,7 +122,7 @@ characterHitEnemies() {
       const character = this.world.character;
       const enemyCenterX = enemy.x + enemy.width / 2; // X-Position des Zentrums des Gegners
       const characterCenterX = character.x + character.width / 2; // X-Position des Zentrums des Charakters
-
+ 
       // Überprüfen, ob der Charakter genau über dem Feind ist und sich nach unten bewegt
       if (
         character.isFalling() &&
@@ -142,7 +142,6 @@ characterHitEnemies() {
     }
   });
 } */
-
   /* --------------------------------------------------------------------------------- */
   /*  characterHitEnemies() {
     this.world.level.enemies.forEach((enemy) => {
@@ -170,7 +169,6 @@ characterHitEnemies() {
     });
   } */
   /* -----------------------------------------------------------------------------  */
-
   characterHitEnemies() {
     const character = this.world.character; // Charakter-Referenz einmal speichern
     this.world.level.enemies.forEach((enemy) => {

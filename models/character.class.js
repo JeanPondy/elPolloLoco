@@ -101,6 +101,7 @@ class Character extends MovableObject {
 
     this.applyGravity(); // Wende die Schwerkraft auf die Spielfigur an
     this.startAnimations(); // Starte die Animation der Spielfigur
+    this.lastHitFromAbove = false;
   }
 
   // Animationen der Spielfigur
@@ -125,6 +126,13 @@ class Character extends MovableObject {
   // Methode zum Überprüfen, ob der Charakter fällt (sich nach unten bewegt)
   isFalling() {
     return this.speedY > 0; // true, wenn der Charakter sich nach unten bewegt
+  }
+  isAboveEnemy(enemy) {
+    // Überprüfen, ob der Charakter über dem Feind ist
+    const characterBottomY = this.y + this.height;
+    const enemyTopY = enemy.y;
+
+    return characterBottomY < enemyTopY;
   }
 
   characterMoveRight() {
@@ -184,5 +192,11 @@ class Character extends MovableObject {
       this.loadImage(this.IMAGES_DEAD[3]);
       clearInterval(this.world.level.enemies[6].movingAnimations);
     }, 1000);
+  }
+  hitFromAbove() {
+    this.lastHitFromAbove = true;
+    setTimeout(() => {
+      this.lastHitFromAbove = false;
+    }, 1000); // Zurücksetzen nach 1 Sekunde oder einer angemessenen Dauer
   }
 }

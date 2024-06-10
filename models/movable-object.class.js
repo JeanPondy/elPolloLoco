@@ -22,22 +22,22 @@ class MovableObject extends DrawableObject {
   deadAnimations;
   gravityAnimation;
 
-  applyGravity() {
+  /*  applyGravity() {
     setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
       }
     }, 1000 / 25);
-  }
-  /* applyGravity() {
+  } */
+  applyGravity() {
     this.gravityAnimation = setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
       }
     }, 1000 / 25);
-  } */
+  }
   offset = {
     top: 0,
     left: 0,
@@ -72,7 +72,7 @@ class MovableObject extends DrawableObject {
       this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
     );
   }
-  isCollidingWith(mo) {
+  isCollidingHarsch(mo) {
     return (
       this.x + this.width > mo.x &&
       this.y + this.height > mo.y &&

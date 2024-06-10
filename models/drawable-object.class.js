@@ -1,31 +1,39 @@
 class DrawableObject {
   // Eigenschaften der Zeichenobjekte
-  img; // Referenz auf das Bildobjekt
-  imageCache = {}; // Cache für geladene Bilder
-  currentImage = 0; // Index des aktuellen Bildes im Cache
-  x = 120; // X-Position (horizontale Position) des Objekts
-  y = 270; // Y-Position (vertikale Position) des Objekts
-  height = 150; // Höhe des Objekts
-  width = 100; // Breite des Objekts
+  audio;
+  img;
+  imageCache = {};
+  currentImage = 0;
+  x = 120;
+  y = 270;
+  height = 150;
+  width = 100;
 
   // Methode zum Laden eines Bildes
   loadImage(path) {
-    this.img = new Image(); // Neues Image-Objekt erstellen
-    this.img.src = path; // Bildpfad zuweisen
+    this.img = new Image();
+    this.img.src = path;
   }
 
   loadImages(arr) {
     arr.forEach((path) => {
       // Für jeden Bildpfad im Array
-      let img = new Image(); // Neues Image-Objekt erstellen
-      img.src = path; // Bildpfad zuweisen
-      this.imageCache[path] = img; // Bild im Cache speichern
+      let img = new Image();
+      img.src = path;
+      this.imageCache[path] = img;
     });
   }
 
   // Methode zum Zeichnen des Objekts auf dem Canvas
   draw(ctx) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height); // Bild auf dem Canvas zeichnen
+    if (this.img) {
+      try {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+      } catch (e) {
+        console.warn("Error when rendering the image ", e);
+        console.log(this.img.src);
+      }
+    }
   }
 
   // Methode zum Zeichnen des Rahmens des Objekts (z. B. für Debugging-Zwecke)
@@ -39,11 +47,11 @@ class DrawableObject {
       this instanceof Coin
     ) {
       // Prüfen, ob das Objekt eine Spielfigur oder ein Huhn ist
-      ctx.beginPath(); // Neuen Pfad beginnen
-      ctx.lineWidth = "2"; // Linienbreite für den Rahmen festlegen
-      ctx.strokeStyle = "blue"; // Rahmenfarbe festlegen
-      ctx.rect(this.x, this.y, this.width, this.height); // Rechteck um das Objekt zeichnen
-      ctx.stroke(); // Rahmen zeichnen
+      ctx.beginPath();
+      ctx.lineWidth = "2";
+      ctx.strokeStyle = "blue";
+      ctx.rect(this.x, this.y, this.width, this.height);
+      ctx.stroke();
     }
   }
 }

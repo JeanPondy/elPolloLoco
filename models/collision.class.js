@@ -56,7 +56,13 @@ class Collision {
 
   enemiesHitCharacter(val = 15) {
     this.world.level.enemies.forEach((enemy) => {
-      if (this.world.character.isColliding(enemy)) {
+      if (
+        this.world.character.isColliding(enemy) &&
+        enemy.active &&
+        !this.world.character.isHurt() &&
+        //!this.world.character.isAboveGround() && // Charakter ist nicht über dem Boden
+        enemy.energy > 0
+      ) {
         this.world.character.hit(val); // Charakter wird getroffen mit dem angegebenen Wert 'val'
         this.world.statusBar.setPercentage(this.world.character.energy); // Aktualisieren des Energiebalkens
         this.world.playHurtSound(); // Abspielen des Verletzungssounds
@@ -65,23 +71,25 @@ class Collision {
   }
   chickenSmallHitCharacter() {
     this.world.level.enemies
-      .filter(
-        (enemy) =>
-          enemy instanceof ChickenSmall &&
-          enemy.active &&
-          !this.world.character.isHurt()
-      )
+      .filter((enemy) => enemy instanceof ChickenSmall)
       .forEach((enemy) => {
-        if (this.world.character.isColliding(enemy)) {
+        if (
+          this.world.character.isColliding(enemy) &&
+          enemy.active &&
+          !this.world.character.isHurt() &&
+          //!this.world.character.isAboveGround() && // Charakter ist nicht über dem Boden
+          enemy.energy > 0
+        ) {
           this.world.character.hit(10);
-          this.world.character.lastAction = Date.now();
-          if (
-            this.world.statusBarBar &&
-            typeof this.world.statusBarBar.setPercentage === "function"
-          ) {
-            this.world.statusBarBar.setPercentage(this.world.character.energy);
-          }
+          this.world.character.lastAction = new Date().getTime();
+          this.world.statusBar.setPercentage(this.world.character.energy);
         }
+        /*   if (
+          enemy.x - this.world.character.x + this.world.character.width <
+          450
+        ) {
+          enemy.attack = true;
+        } */
       });
   }
 
@@ -94,7 +102,7 @@ class Collision {
           this.world.character.isColliding(enemy) &&
           enemy.active &&
           !this.world.character.isHurt() &&
-          !this.world.character.isAboveGround() && // Charakter ist nicht über dem Boden
+          //!this.world.character.isAboveGround() && // Charakter ist nicht über dem Boden
           enemy.energy > 0
         ) {
           this.world.character.hit(40);
@@ -109,15 +117,15 @@ class Collision {
         }
       });
   }
-
-  endbossHitCharacter(val = 100) {
+  endbossHitCharacter() {
     this.world.level.enemies
       .filter((enemy) => enemy instanceof Endboss)
-      .forEach((endboss) => {
-        if (this.world.character.isColliding(endboss) && endboss.active) {
-          this.world.character.hit(val); // Charakter wird vom Endboss getroffen mit dem angegebenen Wert 'val'
-          this.world.statusBar.setPercentage(this.world.character.energy); // Aktualisieren des Energiebalkens
-          this.world.playHurtSound(); // Abspielen des Verletzungssounds
+      .forEach((enemy) => {
+        if (this.world.character.isColliding(enemy) && enemy.active) {
+          this.world.character.energy = 0;
+          this.world.character.lastAction = new Date().getTime();
+          this.world.statusBar.setPercentage(this.world.character.energy);
+          this.world.playHurtSound();
         }
       });
   }
@@ -131,20 +139,22 @@ class Collision {
   }
 
   characterHitEnemies() {
-    this.world.level.enemies.forEach((enemy) => {
-      // Überprüfen, ob der Charakter mit dem Feind kollidiert und der Feind aktiv ist
-      if (
-        (enemy instanceof ChickenSmall ||
+    this.world.level.enemies
+      .filter(
+        (enemy) =>
+          enemy instanceof ChickenSmall ||
           enemy instanceof Chicken ||
-          enemy instanceof Endboss) &&
-        this.world.character.isCollidingWith(enemy) &&
-        enemy.active
-      ) {
-        const character = this.world.character;
-        // isAboveEnemy(enemy)
-        if (character.isAboveGround()) {
+          enemy instanceof Endboss
+      )
+      .forEach((enemy) => {
+        if (
+          this.world.character.isCollidingHarsch(enemy) &&
+          this.world.character.speedY < 0 &&
+          this.world.character.isAboveGround() &&
+          enemy.active
+        ) {
           if (enemy instanceof Endboss) {
-            character.jump(30);
+            this.world.character.jump(30);
             enemy.energy = 0; // Setze die Energie des Endbosses auf 0
             this.world.endbossBar.setPercentage(0); // Setze die Lebensleiste des Endbosses auf 0
           } else {
@@ -153,8 +163,7 @@ class Collision {
           clearInterval(enemy.walkingAnimations);
           clearInterval(enemy.movingAnimations);
         }
-      }
-    });
+      });
   }
 
   characterHitEndbossWithBottle() {

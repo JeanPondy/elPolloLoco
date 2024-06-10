@@ -53,7 +53,7 @@ class ChickenSmall extends MovableObject {
 
   chickenSmallAttack() {
     if (this.attack) {
-      this.speed = 2.5;
+      this.speed = 1.5;
     }
   }
   chickenSmallDead() {

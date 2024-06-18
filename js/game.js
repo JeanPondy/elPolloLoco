@@ -37,7 +37,7 @@ function startGame(event) {
   }
 }
 
-function reset() {
+function restart() {
   startGame(event);
 }
 

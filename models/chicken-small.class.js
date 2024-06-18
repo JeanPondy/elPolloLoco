@@ -22,32 +22,28 @@ class ChickenSmall extends MovableObject {
   constructor() {
     super(); // Aufruf des Konstruktors der Elternklasse (MovableObject)
 
-    // Laden des Standard-Bilds für das Hühnchen
     this.loadImage("./img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
-    // Laden der Bilder für die Laufanimation des Hühnchens
+
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_DEAD);
     this.y = 390;
-    // Zufällige X-Position für das Hühnchen innerhalb eines bestimmten Bereichs
+
     this.x = 400 + Math.random() * 1700;
-    // Zufällige Bewegungsgeschwindigkeit des Hühnchens
+
     this.speed = 0.15 + Math.random() * 0.5;
     // Animationen starten
     this.startAnimations();
   }
 
-  // Animation des Hühnchens (Bewegung nach links und laufende Animation)
   startAnimations() {
-    // Periodische Bewegung des Hühnchens nach links
     this.chickenSmallAnimations = setInterval(() => {
       this.chickenSmallAttack();
       if (this.isDead()) {
         this.chickenSmallDead();
       }
-      // Abspielen des Laufgeräusches, wenn das Huhn zu laufen beginnt
       //this.chicken_sound.play();
-    }, 1000 / 20); // Aktualisierungsgeschwindigkeit der Bewegung (60 Frames pro Sekunde)
-    this.chickenSmallMoveLeft(); // Bewegung des Hühnchens nach links
+    }, 1000 / 20);
+    this.chickenSmallMoveLeft();
     this.chickenSmallWalk();
   }
 
@@ -66,11 +62,10 @@ class ChickenSmall extends MovableObject {
     }, 1500);
   }
 
-  // Periodisches Abspielen der Laufanimation des Hühnchens
   chickenSmallWalk() {
     this.walkingAnimations = setInterval(() => {
-      this.playAnimation(this.IMAGES_WALKING); // Abspielen der Laufanimation
-    }, 1000 / 8); // Geschwindigkeit der Laufanimation (5 Bilder pro Sekunde)
+      this.playAnimation(this.IMAGES_WALKING);
+    }, 1000 / 8);
   }
   chickenSmallMoveLeft() {
     this.movingAnimations = setInterval(() => {

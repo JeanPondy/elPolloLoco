@@ -5,6 +5,7 @@ class Collision {
     // Interval zum regelmäßigen Überprüfen von Kollisionen
     setInterval(() => {
       this.checkCollisions();
+      this.checkGameEndConditions();
     }, 100);
   }
 
@@ -21,6 +22,17 @@ class Collision {
     this.endbossHitCharacter();
   }
 
+  checkGameEndConditions() {
+    if (this.world.character.energy <= 0 || this.isEndbossDefeated()) {
+      this.world.gameEnd = true;
+    }
+  }
+
+  isEndbossDefeated() {
+    return this.world.level.enemies.some(
+      (enemy) => enemy instanceof Endboss && enemy.energy <= 0
+    );
+  }
   // Methode zum Aufnehmen von Flaschen durch den Charakter
   collectBottles() {
     this.world.level.bottles.forEach((bottle) => {

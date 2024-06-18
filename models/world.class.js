@@ -3,13 +3,13 @@ class World {
   gameEnd = false;
   gameLost = false;
   gameWon = false;
-  collision = new Collision(this); // Hier wird 'this' übergeben
+  collision = new Collision(); // Hier wird 'this' übergeben
   character = new Character();
   statusBar = new StatusBar();
   bottlesBar = new BottlesBar();
   coinsBar = new CoinsBar();
   endbossBar = new EndbossBar();
-
+  interval = new Interval();
   keyboard = new Keyboard();
   level = level1;
   canvas;
@@ -30,7 +30,7 @@ class World {
   coin_sound = new Audio("audio/coins.mp3");
   bottle_sound = new Audio("audio/power.mp3"); // collision
   throw_sound = new Audio("audio/shot_bottle.mp3"); // Neuer Sound für das Werfen der Flasche
-  mainInterval;
+
   throwObjectsInterval;
 
   constructor(canvas, keyboard) {
@@ -46,7 +46,7 @@ class World {
     this.run();
     this.throwObject();
   }
-
+  mainInterval;
   setupEventListeners() {
     // Beispiel: Audio-Wiedergabe beim Drücken einer Taste erlauben
     document.addEventListener(
@@ -81,17 +81,19 @@ class World {
   setWorld() {
     this.character.world = this;
     this.collision.world = this;
+    this.interval.world = this;
   }
 
   run() {
     this.mainInterval = setInterval(() => {
       this.collision.checkCollisions();
+      // this.checkCharacterAndEndbossStatus();
       if (this.audioEnabled) {
         this.playBackgroundMusic(); // Überprüfe den Audio-Status vor dem Abspielen des Hintergrundsounds
       } else {
         this.backgroundSound.pause();
       }
-    }, 200);
+    }, 1000 / 100);
   }
 
   throwObject() {
@@ -183,24 +185,36 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
   }
 
+  /*   checkCharacterAndEndbossStatus() {
+    if (this.character.isDead() || this.level.endboss.isDead()) {
+      this.gameEnd = true;
+      this.gameWon = !this.character.isDead();
+      this.gameLost = this.character.isDead();
+      this.checkGameEnd();
+    }
+  } */
+
   checkGameEnd() {
     if (this.gameEnd) {
-      // Audio-Wiedergabe stoppen
-      this.hurt_sound.pause();
-      this.backgroundSound.pause();
-      this.coin_sound.pause();
-      this.bottle_sound.pause();
-
+      audio = false;
       if (this.gameWon) {
         this.addToMap(new Endscreen(true));
+        setTimeout(() => {
+          this.drawEnd();
+        }, 1500);
       } else {
         this.addToMap(new Endscreen(false));
+        setTimeout(() => {
+          this.drawEnd();
+        }, 1500);
       }
-
-      setTimeout(() => {
-        this.stopAllAnimations();
-      }, 1500);
     }
+  }
+  drawEnd() {
+    setTimeout(() => {
+      this.interval.clearAllIntervals();
+      cancelAnimationFrame(this.requestframeid);
+    }, 1000);
   }
 
   scheduleNextFrame() {
@@ -208,14 +222,6 @@ class World {
     requestAnimationFrame(function () {
       self.draw();
     });
-  }
-
-  stopAllAnimations() {
-    this.gameOver = true; // Setzt das Spiel auf beendet
-    setTimeout(() => {
-      clearInterval(this.mainInterval);
-      clearInterval(this.throwObjectsInterval);
-    }, 1000);
   }
 
   addObjectsToMap(objects) {

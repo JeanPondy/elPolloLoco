@@ -33,44 +33,43 @@ class Chicken extends MovableObject {
   }
 
   startAnimations() {
-    // Intervalle für die Animationen
     this.chickenAnimations = setInterval(() => {
-      this.updateState(); // Zustand überprüfen (Angriff, Tod)
+      this.updateState();
     }, 1000 / 20);
 
     this.walkingAnimations = setInterval(() => {
-      this.playAnimation(this.IMAGES_WALKING); // Laufanimation abspielen
+      this.playAnimation(this.IMAGES_WALKING);
     }, 1000 / 8);
 
     this.movingAnimations = setInterval(() => {
-      this.moveLeft(); // Nach links bewegen
+      this.moveLeft();
     }, 1000 / 60);
   }
 
   updateState() {
     if (this.isDead()) {
-      this.handleDeath(); // Aktionen ausführen, wenn das Huhn tot ist
+      this.handleDeath();
     }
 
     if (this.attack && !this.attackSoundPlayed) {
-      this.speed = 1.5; // Geschwindigkeit erhöhen, wenn das Huhn angreift
+      this.speed = 1.5;
     }
   }
 
   handleDeath() {
-    this.active = false; // Deaktivieren, damit es nicht mehr in der Spielwelt angezeigt wird
-    this.playAnimation(this.IMAGES_DEAD); // Todesanimation abspielen
+    this.active = false;
+    this.playAnimation(this.IMAGES_DEAD);
 
-    clearInterval(this.walkingAnimations); // Laufanimation stoppen
-    clearInterval(this.movingAnimations); // Bewegungsanimation stoppen
+    clearInterval(this.walkingAnimations);
+    clearInterval(this.movingAnimations);
 
     setTimeout(() => {
-      this.removeObject(); // Nach einer Verzögerung das Huhn aus der Spielwelt entfernen
+      this.removeObject();
     }, 1500);
 
     if (!this.crushPlayed) {
-      this.crush_sound.play(); // Sound abspielen, wenn das Huhn stirbt
-      this.crushPlayed = true; // Markieren, dass der Sound abgespielt wurde
+      this.crush_sound.play();
+      this.crushPlayed = true;
     }
   }
 }

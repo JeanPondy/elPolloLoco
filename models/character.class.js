@@ -86,7 +86,7 @@ class Character extends MovableObject {
   ];
 
   constructor() {
-    super(); // Aufruf des Konstruktors der Elternklasse (MovableObject)
+    super();
 
     // Lade die Standard-Bildressource für die Spielfigur
     this.loadImage(this.IMAGES_WALKING[0]);
@@ -99,36 +99,32 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_LONGIDLE);
 
-    this.applyGravity(); // Wende die Schwerkraft auf die Spielfigur an
-    this.startAnimations(); // Starte die Animation der Spielfigur
+    this.applyGravity();
+    this.startAnimations();
     this.lastHitFromAbove = false;
   }
 
   // Animationen der Spielfigur
   startAnimations() {
-    // Animation für Bewegungen und Tastensteuerung der Spielfigur
-    setInterval(() => {
-      this.walking_sound.pause(); // Unterbreche die Audio-Wiedergabe
+    this.movingAnimations = setInterval(() => {
+      this.walking_sound.pause();
       if (this.world) {
-        // Überprüfen, ob die Welt initialisiert ist
         this.characterMoveRight();
         this.characterMoveLeft();
         this.characterJump();
-        this.world.camera_x = -this.x + 100; // Kamera-Verfolgung der Spielfigur
+        this.world.camera_x = -this.x + 100;
       }
-    }, 1000 / 60); // Aktualisierungsgeschwindigkeit der Animation
+    }, 1000 / 60);
 
     this.characterAnimations = setInterval(() => {
       this.characterStates();
-    }, 1000 / 20); // Animation für Status und Aktivitäten der Spielfigur
+    }, 1000 / 20);
   }
 
-  // Methode zum Überprüfen, ob der Charakter fällt (sich nach unten bewegt)
   isFalling() {
-    return this.speedY > 0; // true, wenn der Charakter sich nach unten bewegt
+    return this.speedY > 0;
   }
   isAboveEnemy(enemy) {
-    // Überprüfen, ob der Charakter über dem Feind ist
     const characterBottomY = this.y + this.height;
     const enemyTopY = enemy.y;
 
@@ -164,11 +160,8 @@ class Character extends MovableObject {
   }
 
   characterStates() {
-    if (this.isDead()) {
-      this.world.gameEnd = true;
-      this.world.gameLost = true;
-      this.playAnimation(this.IMAGES_DEAD); // Spielfigur ist gestorben
-      this.animateDead();
+    if (this.isDead() && !this.deadShown) {
+      this.gameOverState();
     } else if (this.isHurt()) {
       this.playAnimation(this.IMAGES_HURT); // Spielfigur ist verletzt
     } else if (this.isLongIdle()) {
@@ -180,6 +173,12 @@ class Character extends MovableObject {
     } else {
       this.playAnimation(this.IMAGES_IDLE); // Spielfigur ist in Ruhe
     }
+  }
+  gameOverState() {
+    world.gameEnd = true;
+    world.gameLost = true;
+    this.playAnimation(this.IMAGES_DEAD);
+    this.animateDead();
   }
   animateDead() {
     this.deadShown = true;

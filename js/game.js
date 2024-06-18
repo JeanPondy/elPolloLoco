@@ -37,6 +37,10 @@ function startGame(event) {
   }
 }
 
+function reset() {
+  startGame(event);
+}
+
 // Funktion zum Initialisieren des Spiels
 function initGame() {
   canvas = document.getElementById("canvas");

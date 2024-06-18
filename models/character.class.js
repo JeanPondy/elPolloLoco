@@ -1,13 +1,13 @@
 class Character extends MovableObject {
   // Definiere die Eigenschaften der Spielfigur
-  width = 160;
+  width = 100;
   height = 290;
   x = 120;
   y = 43;
   offset = {
     top: 150,
     left: 40,
-    right: 40,
+    right: 10,
     bottom: 30,
   };
   lastAction = 0;

@@ -38,26 +38,22 @@ class MovableObject extends DrawableObject {
       }
     }, 1000 / 25);
   }
-  offset = {
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  };
+
   isIdle() {
-    const idleTime = (new Date().getTime() - this.lastAction) / 1000; // Zeitunterschied in Sekunden
-    return idleTime < 5;
+    let idletime = new Date().getTime() - this.lastAction; // diff in ms
+    idletime = idletime / 1000; //in seconds
+    return idletime < 5;
   }
 
   isLongIdle() {
-    const idleTime = (new Date().getTime() - this.lastAction) / 1000; // Zeitunterschied in Sekunden
-    return idleTime > 5;
+    let idletime = new Date().getTime() - this.lastAction; // diff in ms
+    idletime = idletime / 1000; //in seconds
+    return idletime > 5;
   }
 
   isAboveGround() {
     // Werfbare Objekte sollten immer zum Boden fallen
     if (this instanceof ThrowableObject) {
-      //Throwable Objects should always fall to bottom
       return true;
     } else {
       return this.y <= this.groundY;
@@ -111,8 +107,9 @@ class MovableObject extends DrawableObject {
   }
 
   isHurt() {
-    const timePassed = (new Date().getTime() - this.lastHit) / 1000; // Zeitunterschied in Sekunden
-    return timePassed < 0.4;
+    let timepassed = new Date().getTime() - this.lastHit; // diff in ms
+    timepassed = timepassed / 1000; //in seconds
+    return timepassed < 0.4;
   }
 
   isDead() {
@@ -133,11 +130,9 @@ class MovableObject extends DrawableObject {
 
   playAnimation(images) {
     if (Array.isArray(images) && images.length > 0) {
-      // Überprüfen, ob images ein Array ist und mindestens ein Element enthält
       let i = this.currentImage % images.length;
       let path = images[i];
       if (this.imageCache && this.imageCache[path]) {
-        // Überprüfen, ob das Bild im imageCache vorhanden ist
         this.img = this.imageCache[path];
         this.currentImage++;
       } else {

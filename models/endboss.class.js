@@ -7,9 +7,9 @@ class Endboss extends MovableObject {
     this.height = 400;
     this.offset = {
       top: 80,
-      left: 50,
-      right: 50,
-      bottom: 90,
+      left: 30,
+      right: 30,
+      bottom: 20,
     };
     this.speed = 4;
     this.alerted = false;

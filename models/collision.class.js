@@ -72,7 +72,7 @@ class Collision {
         this.world.character.isColliding(enemy) &&
         enemy.active &&
         !this.world.character.isHurt() &&
-        //!this.world.character.isAboveGround() && // Charakter ist nicht über dem Boden
+        !this.world.character.isAboveGround() && // Charakter ist nicht über dem Boden
         enemy.energy > 0
       ) {
         this.world.character.hit(val); // Charakter wird getroffen mit dem angegebenen Wert 'val'
@@ -89,7 +89,7 @@ class Collision {
           this.world.character.isColliding(enemy) &&
           enemy.active &&
           !this.world.character.isHurt() &&
-          //!this.world.character.isAboveGround() && // Charakter ist nicht über dem Boden
+          !this.world.character.isAboveGround() && // Charakter ist nicht über dem Boden
           enemy.energy > 0
         ) {
           this.world.character.hit(10);
@@ -108,16 +108,16 @@ class Collision {
   chickenHitCharacter() {
     // Durchlaufe alle Feinde (Enemies) in der aktuellen Spielwelt
     this.world.level.enemies
-      .filter((enemy) => enemy instanceof Chicken) // Filtere nur nach Chicken-Feinden
+      .filter((enemy) => enemy instanceof Chicken)
       .forEach((enemy) => {
         if (
           this.world.character.isColliding(enemy) &&
           enemy.active &&
           !this.world.character.isHurt() &&
-          //!this.world.character.isAboveGround() && // Charakter ist nicht über dem Boden
+          !this.world.character.isAboveGround() && // Charakter ist nicht über dem Boden
           enemy.energy > 0
         ) {
-          this.world.character.hit(40);
+          this.world.character.hit(20);
           this.world.character.lastAction = new Date().getTime();
           this.world.statusBar.setPercentage(this.world.character.energy);
         }
@@ -133,7 +133,11 @@ class Collision {
     this.world.level.enemies
       .filter((enemy) => enemy instanceof Endboss)
       .forEach((enemy) => {
-        if (this.world.character.isColliding(enemy) && enemy.active) {
+        if (
+          this.world.character.isColliding(enemy) &&
+          enemy.active &&
+          !this.world.character.isAboveGround()
+        ) {
           this.world.character.energy = 0;
           this.world.character.lastAction = new Date().getTime();
           this.world.statusBar.setPercentage(this.world.character.energy);
@@ -160,7 +164,7 @@ class Collision {
       )
       .forEach((enemy) => {
         if (
-          this.world.character.isCollidingHarsch(enemy) &&
+          this.world.character.isColliding(enemy) &&
           this.world.character.speedY < 0 &&
           this.world.character.isAboveGround() &&
           enemy.active
@@ -179,7 +183,7 @@ class Collision {
   }
 
   characterHitEndbossWithBottle() {
-    const val = 25; // Festlegen des Werts für die Flaschenkraft
+    const val = 35; // Festlegen des Werts für die Flaschenkraft
 
     this.world.throwableObjects.forEach((bottle) => {
       let endboss = this.world.level.enemies.find(
@@ -198,3 +202,19 @@ class Collision {
     });
   }
 }
+/* 
+if (
+  this instanceof Character ||
+  this instanceof ChickenSmall ||
+  this instanceof Chicken ||
+  this instanceof Endboss ||
+  this instanceof Bottle ||
+  this instanceof Coin
+) {
+  // Prüfen, ob das Objekt eine Spielfigur oder ein Huhn ist
+  ctx.beginPath();
+  ctx.lineWidth = '5';
+  ctx.strokeStyle = 'red';
+  ctx.rect(this.x + this.offset.left, this.y + this.offset.top,(this.x + this.width - this.offset.right) - (this.x + this.offset.left),(this.y + this.height - this.offset.bottom) - (this.y + this.offset.top));
+  ctx.stroke();
+} */

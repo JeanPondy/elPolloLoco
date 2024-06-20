@@ -60,7 +60,7 @@ class Collision {
         coin.isToCollect = false; // Markiere die Münze als aufgenommen
         this.world.coinscore += 1; // Erhöhe den Münzzähler
         this.world.coinsBar.setPercentage(this.world.coinscore * 20); // Aktualisiere die Münzanzeige
-        coin.removeObject(); // Entferne die Münze aus der Spielwelt
+        coin.removeBoss(); // Entferne die Münze aus der Spielwelt
         this.world.coin_sound.play(); // Spiele den Sound für das Aufnehmen der Münze ab
       }
     });

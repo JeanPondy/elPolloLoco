@@ -300,6 +300,24 @@ h1 {
   width: 100vw;
   height: 100vh;
 }
+/* ----------------------------------------------------------------------- */
+.link-section {
+  font-family: "bangers";
+  font-weight: 300;
+  font-size: 12px;
+  display: flex;
+  margin-right: 560px;
+  gap: 20px;
+  color: rgb(161, 60, 57);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link-section:hover {
+  color: rgb(21, 162, 202);
+  text-decoration: dashed;
+}
+/* ----------------------------------------------------------------------- */
 
 /* Keyframe-Animation zum Vergrößern und Verkleinern */
 @keyframes resize {

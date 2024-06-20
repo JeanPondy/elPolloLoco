@@ -140,6 +140,15 @@ function toggleFullScreen(event) {
     }
   }
 }
+/*  */
+function openImpressum() {
+  window.open("impressum.html", "_blank");
+}
+
+function openDatenschutz() {
+  window.open("copyright.html", "_blank");
+}
+/*  */
 
 function toggleAudio(event) {
   const audioimg = document.getElementById("audioimg");

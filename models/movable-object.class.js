@@ -77,13 +77,21 @@ class MovableObject extends DrawableObject {
     );
   }
 
-  removeObject() {
+  removeBoss() {
     this.speedY = 10;
     this.applyGravity();
     setInterval(() => {
       this.x += 5;
       this.y += 10;
     }, 25);
+  }
+
+  removeObject() {
+    this.speedY = 10;
+    //this.applyGravity();
+    setTimeout(() => {
+      this.x = -100; //hiermit fliegen die toten Hühner aus dem Bild
+    }, 300);
   }
 
   hit(val) {

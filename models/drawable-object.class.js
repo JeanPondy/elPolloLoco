@@ -36,7 +36,7 @@ class DrawableObject {
     }
   }
 
-  // Methode zum Zeichnen des Rahmens des Objekts (z. B. für Debugging-Zwecke)
+  /* // Methode zum Zeichnen des Rahmens des Objekts (z. B. für Debugging-Zwecke)
   drawFrame(ctx) {
     if (
       this instanceof Character ||
@@ -58,12 +58,12 @@ class DrawableObject {
       );
       ctx.stroke();
     }
-    /*  {
+     {
       ctx.beginPath();
       ctx.lineWidth = "5";
       ctx.strokeStyle = "blue";
       ctx.rect(this.x, this.y, this.width, this.height);
       ctx.stroke();
-    } */
-  }
+    } 
+  } */
 }

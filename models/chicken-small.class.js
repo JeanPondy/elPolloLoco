@@ -58,8 +58,8 @@ class ChickenSmall extends MovableObject {
     clearInterval(this.walkInt);
     clearInterval(this.moveInt);
     setTimeout(() => {
-      this.removeObject();
-    }, 1500);
+      this.x = -100; //hiermit fliegen die toten Hühner aus dem Bild
+    }, 300);
   }
 
   chickenSmallWalk() {

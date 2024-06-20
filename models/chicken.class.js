@@ -2,7 +2,7 @@ class Chicken extends MovableObject {
   constructor() {
     super();
     this.x = 400 + Math.random() * 1500;
-    this.y = 360;
+    this.y = 365;
     this.height = 70;
     this.width = 70;
     this.offset = {
@@ -57,19 +57,10 @@ class Chicken extends MovableObject {
   }
 
   handleDeath() {
-    this.active = false;
+    clearInterval(this.walkingAnimationImages);
     this.playAnimation(this.IMAGES_DEAD);
-
-    clearInterval(this.walkingAnimations);
-    clearInterval(this.movingAnimations);
-
     setTimeout(() => {
-      this.removeObject();
-    }, 1500);
-
-    if (!this.crushPlayed) {
-      this.crush_sound.play();
-      this.crushPlayed = true;
-    }
+      this.x = -100; //hiermit fliegen die toten Hühner aus dem Bild
+    }, 300);
   }
 }

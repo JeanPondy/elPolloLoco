@@ -2,7 +2,7 @@ class Endboss extends MovableObject {
   constructor() {
     super();
     this.x = 2500;
-    this.y = 60;
+    this.y = 55;
     this.width = 250;
     this.height = 400;
     this.offset = {
@@ -97,7 +97,7 @@ class Endboss extends MovableObject {
     world.gameEnd = true;
     world.gameWon = true;
     this.playAnimation(this.IMAGES_DEAD);
-    this.removeObject();
+    this.removeBoss();
     // END OF THE GAME
     world.gameWon = true;
   }

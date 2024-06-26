@@ -155,6 +155,7 @@ const audioUrls = [
   "audio/backgroundSound.mp3",
   // shot Bottle
   "audio/shot_bottle.mp3",
+  "audio/collision-bottle.mp3",
   // bottle broke
   "audio/bottleBroke.mp3",
   //power

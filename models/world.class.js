@@ -28,7 +28,7 @@ class World {
   hurt_sound = new Audio("audio/hurt3.mp3");
   backgroundSound = new Audio("audio/backgroundSound.mp3");
   coin_sound = new Audio("audio/coins.mp3");
-  bottle_sound = new Audio("audio/power.mp3"); // collision
+  bottle_sound = new Audio("audio/collision-bottle.mp3"); // collision
   throw_sound = new Audio("audio/shot_bottle.mp3"); // Neuer Sound für das Werfen der Flasche
 
   throwObjectsInterval;

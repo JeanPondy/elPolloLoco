@@ -112,7 +112,7 @@ class Character extends MovableObject {
         this.characterMoveRight();
         this.characterMoveLeft();
         this.characterJump();
-        this.world.camera_x = -this.x + 100;
+        this.world.camera_x = -this.x + 30;
       }
     }, 1000 / 60);
 

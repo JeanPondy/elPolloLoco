@@ -149,7 +149,6 @@ function openDatenschutz() {
   window.open("copyright.html", "_blank");
 }
 
-/* --------------- */
 function playSound(sound) {
   if (!isMuted) {
     sound.loop = false;

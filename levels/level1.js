@@ -1,7 +1,6 @@
 let level1;
 function initLevel() {
   level1 = new Level(
-    // Array mit Feinden und dem Endboss
     [
       new Chicken(),
       new Chicken(),
@@ -14,9 +13,8 @@ function initLevel() {
       new ChickenSmall(),
       new Endboss(),
     ],
-    // Array mit Wolken-Objekten
-    [new Cloud()], // Neues Cloud-Objekt
-    // Array mit Hintergrundobjekten (BackgroundObjects)
+
+    [new Cloud()],
     [
       new BackgroundObject("./img/5_background/layers/air.png", -719),
       new BackgroundObject(

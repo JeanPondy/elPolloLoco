@@ -33,9 +33,10 @@ function startGame(event) {
   initGame();
   checkGameEnd();
   backgroundSound.play();
-
+  showSmallScreen();
+}
+function showSmallScreen() {
   document.getElementById("audiobtn").classList.remove("d-none");
-
   if (window.innerWidth <= 768) {
     document
       .querySelectorAll("#control-icons .direction, #control-icons .option")
@@ -69,7 +70,6 @@ function showGameScreen() {
   startpage = document.getElementById("startpage");
   endpage = document.getElementById("endPage");
   helpbox = document.getElementById("help-box");
-
   updateControlsBox();
   canvas.classList.remove("d-none");
   startpage.classList.add("d-none");
@@ -160,7 +160,6 @@ function toggleMute(event) {
   const audioimg = document.getElementById("audioimg");
   const audioimgOff = document.getElementById("audioimg-off");
   event.preventDefault();
-
   isMuted = !isMuted;
   if (isMuted) {
     audioimg.style.display = "none";
@@ -169,15 +168,24 @@ function toggleMute(event) {
     game_over_sound.pause();
     winning_sound.pause();
   } else {
-    audioimg.style.display = "block";
-    audioimgOff.style.display = "none";
-    backgroundSound.play().catch((error) => {
-      console.error("Audio playback failed:", error);
-    });
+    unmuteAudio(event);
   }
 }
 
-function toggleAudio(event) {
+function unmuteAudio(event) {
+  const audioimg = document.getElementById("audioimg");
+  const audioimgOff = document.getElementById("audioimg-off");
+  event.preventDefault();
+
+  isMuted = false;
+  audioimg.style.display = "block";
+  audioimgOff.style.display = "none";
+  backgroundSound.play().catch((error) => {
+    console.error("Audio playback failed:", error);
+  });
+}
+
+/* function toggleAudio(event) {
   const audioimg = document.getElementById("audioimg");
   event.preventDefault();
   if (event.type === "touchstart" || event.type === "click") {
@@ -197,4 +205,4 @@ function toggleAudio(event) {
       });
     }
   }
-}
+} */

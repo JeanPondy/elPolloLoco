@@ -110,7 +110,10 @@ class Character extends MovableObject {
         this.world.camera_x = -this.x + 30;
       }
     }, 1000 / 60);
+    this.startCharacterAnimations();
+  }
 
+  startCharacterAnimations() {
     this.characterAnimations = setInterval(() => {
       this.characterStates();
     }, 1000 / 20);

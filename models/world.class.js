@@ -25,11 +25,16 @@ class World {
   coinTotal = 5;
   coinscore = 0;
   bottle;
+
   hurt_sound = new Audio("audio/hurt3.mp3");
+  collisionCharacterEnemies_sound = new Audio("audio/public-jump.mp3");
   backgroundSound = new Audio("audio/backgroundSound.mp3");
   coin_sound = new Audio("audio/coins.mp3");
   bottle_sound = new Audio("audio/collision-bottle.mp3"); // collision
   throw_sound = new Audio("audio/shot_bottle.mp3"); // Neuer Sound für das Werfen der Flasche
+  splash_sound = new Audio("audio/bottleBroke.mp3");
+  sleeping_sound = new Audio("audio/sleepingSound.mp3");
+  walking_sound = new Audio("audio/running2.mp3");
 
   throwObjectsInterval;
 
@@ -46,25 +51,19 @@ class World {
     this.run();
     this.throwObject();
   }
-  mainInterval;
+  //mainInterval;
   setupEventListeners() {
     // Beispiel: Audio-Wiedergabe beim Drücken einer Taste erlauben
     document.addEventListener(
       "keydown",
       () => {
-        this.enableAudio();
+        //this.enableAudio();
       },
       { once: true }
     ); // Nur einmalig ausführen
   }
-
-  enableAudio() {
-    this.playAndResetSound(this.hurt_sound);
-    this.playAndResetSound(this.backgroundSound);
-    this.playAndResetSound(this.coin_sound);
-    this.playAndResetSound(this.bottle_sound);
-    this.playAndResetSound(this.throw_sound);
-  }
+  /* 
+  
 
   playAndResetSound(sound) {
     sound.pause();
@@ -76,7 +75,7 @@ class World {
     sound.play().catch((error) => {
       console.error("Audio playback failed:", error);
     });
-  }
+  } */
 
   setWorld() {
     this.character.world = this;
@@ -85,15 +84,9 @@ class World {
   }
 
   run() {
-    this.mainInterval = setInterval(() => {
+    setInterval(() => {
       this.collision.checkCollisions();
-      // this.checkCharacterAndEndbossStatus();
-      if (this.audioEnabled) {
-        this.playBackgroundMusic(); // Überprüfe den Audio-Status vor dem Abspielen des Hintergrundsounds
-      } else {
-        this.backgroundSound.pause();
-      }
-    }, 1000 / 100);
+    }, 50);
   }
 
   throwObject() {
@@ -113,18 +106,21 @@ class World {
       this.bottlesBar.setPercentage(
         this.bottlescore * (100 / this.totalBottles)
       );
-      this.playThrowSound(); // Sound für das Werfen der Flasche abspielen
+      if (!isMuted) {
+        this.playThrowSound();
+      }
+      // Sound für das Werfen der Flasche abspielen
     }
   }
 
-  playBackgroundMusic() {
+  /*  playBackgroundMusic() {
     if (this.backgroundSound.paused) {
       this.backgroundSound.volume = 0.1;
       this.backgroundSound.play().catch((error) => {
         console.error("Audio playback failed:", error);
       });
     }
-  }
+  } */
 
   playThrowSound() {
     this.throw_sound.currentTime = 0; // Setzt den Sound auf den Anfang zurück
@@ -184,15 +180,6 @@ class World {
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);
   }
-
-  /*   checkCharacterAndEndbossStatus() {
-    if (this.character.isDead() || this.level.endboss.isDead()) {
-      this.gameEnd = true;
-      this.gameWon = !this.character.isDead();
-      this.gameLost = this.character.isDead();
-      this.checkGameEnd();
-    }
-  } */
 
   checkGameEnd() {
     if (this.gameEnd) {

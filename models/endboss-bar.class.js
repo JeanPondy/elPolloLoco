@@ -16,7 +16,7 @@ class EndbossBar extends DrawableObject {
   constructor() {
     super();
     this.loadImages(this.IMAGES_ENDBOSS);
-    this.setPercentage(100); // Startwert für die Endboss-Lebensleiste
+    this.setPercentage(100);
   }
 
   setPercentage(percentage) {

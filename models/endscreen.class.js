@@ -7,10 +7,10 @@ class Endscreen {
   loadImage() {
     if (this.gameWon) {
       this.img = new Image();
-      this.img.src = "img/9_intro_outro_screens/game_over/you_won_bold.png"; // Pfad zum "win" Bild
+      this.img.src = "img/9_intro_outro_screens/game_over/you_won_bold.png";
     } else {
       this.img = new Image();
-      this.img.src = "img/9_intro_outro_screens/game_over/youlosto.png"; // Pfad zum "game_over" Bild
+      this.img.src = "img/9_intro_outro_screens/game_over/youlosto.png";
     }
   }
 

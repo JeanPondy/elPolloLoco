@@ -1,10 +1,22 @@
 let game;
 let canvas;
 let world;
-//let keyboard = new Keyboard();
+
 let gameEndInterval;
 let audio = true;
-let backgroundSound = new Audio("audio/backgroundSound.mp3");
+
+game_over_sound = new Audio("audio/gameOver.mp3");
+winning_sound = new Audio("audio/win.mp3");
+backgroundSound = new Audio("audio/backgroundSound.mp3");
+backgroundSound.volume = 0.05;
+backgroundSound.loop = true;
+
+let isMuted = false;
+let isStopped = false;
+let isRestarted = false;
+let gameOverSoundPlayed = false;
+let winningSoundPlayed = false;
+
 let smallDevice = window.matchMedia("(max-width: 1100px)");
 let touchDevice = window.matchMedia("(Pointer: coarse)").matches;
 
@@ -20,16 +32,10 @@ function startGame(event) {
   initLevel();
   initGame();
   checkGameEnd();
+  backgroundSound.play();
 
-  backgroundSound.loop = true;
-  backgroundSound.play().catch((error) => {
-    console.error("Audio playback failed:", error);
-  });
-
-  // Audio-Button sichtbar machen
   document.getElementById("audiobtn").classList.remove("d-none");
 
-  // Überprüfen, ob die Bildschirmbreite kleiner oder gleich 768px ist
   if (window.innerWidth <= 768) {
     document
       .querySelectorAll("#control-icons .direction, #control-icons .option")
@@ -41,16 +47,12 @@ function restart() {
   startGame(event);
 }
 
-// Funktion zum Initialisieren des Spiels
 function initGame() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
-  // world.playBackgroundMusic(); // Kann entfernt oder angepasst werden
+
   console.log("My Character is", world.character);
   console.log("My enemies are", world.level.enemies);
-
-  //updateControlsBox();
-  //checkGameEnd();
 }
 
 function updateControlsBox() {
@@ -75,7 +77,6 @@ function showGameScreen() {
   helpbox.classList.add("d-none");
 }
 
-// Funktion zur Überprüfung, ob das Spiel zu Ende ist
 function checkGameEnd() {
   gameEndInterval = setInterval(() => {
     if (world.gameEnd) {
@@ -86,7 +87,6 @@ function checkGameEnd() {
   }, 1000 / 20);
 }
 
-// Funktion zum Anzeigen der Endseite
 function showEndPage() {
   setTimeout(() => {
     document.getElementById("endPage").classList.remove("d-none");
@@ -140,7 +140,7 @@ function toggleFullScreen(event) {
     }
   }
 }
-/*  */
+
 function openImpressum() {
   window.open("impressum.html", "_blank");
 }
@@ -148,7 +148,35 @@ function openImpressum() {
 function openDatenschutz() {
   window.open("copyright.html", "_blank");
 }
-/*  */
+
+/* --------------- */
+function playSound(sound) {
+  if (!isMuted) {
+    sound.loop = false;
+    sound.play();
+  }
+}
+
+function toggleMute(event) {
+  const audioimg = document.getElementById("audioimg");
+  const audioimgOff = document.getElementById("audioimg-off");
+  event.preventDefault();
+
+  isMuted = !isMuted;
+  if (isMuted) {
+    audioimg.style.display = "none";
+    audioimgOff.style.display = "block";
+    backgroundSound.pause();
+    game_over_sound.pause();
+    winning_sound.pause();
+  } else {
+    audioimg.style.display = "block";
+    audioimgOff.style.display = "none";
+    backgroundSound.play().catch((error) => {
+      console.error("Audio playback failed:", error);
+    });
+  }
+}
 
 function toggleAudio(event) {
   const audioimg = document.getElementById("audioimg");
@@ -159,10 +187,12 @@ function toggleAudio(event) {
       document.getElementById("audioimg-off").style.display = "block";
       world.audioEnabled = false;
       backgroundSound.pause();
+      world.hurt_sound.pause();
     } else {
       audioimg.style.display = "block";
       document.getElementById("audioimg-off").style.display = "none";
       world.audioEnabled = true;
+      world.hurt_sound.play();
       backgroundSound.play().catch((error) => {
         console.error("Audio playback failed:", error);
       });

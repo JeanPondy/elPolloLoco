@@ -1,5 +1,4 @@
 class DrawableObject {
-  // Eigenschaften der Zeichenobjekte
   audio;
   img;
   imageCache = {};
@@ -9,7 +8,6 @@ class DrawableObject {
   height = 150;
   width = 100;
 
-  // Methode zum Laden eines Bildes
   loadImage(path) {
     this.img = new Image();
     this.img.src = path;
@@ -17,14 +15,12 @@ class DrawableObject {
 
   loadImages(arr) {
     arr.forEach((path) => {
-      // Für jeden Bildpfad im Array
       let img = new Image();
       img.src = path;
       this.imageCache[path] = img;
     });
   }
 
-  // Methode zum Zeichnen des Objekts auf dem Canvas
   draw(ctx) {
     if (this.img) {
       try {

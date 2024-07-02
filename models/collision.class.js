@@ -1,15 +1,13 @@
 class Collision {
   constructor(world) {
-    this.world = world; // Die Welt der Kollision initialisieren
+    this.world = world;
 
-    // Interval zum regelmäßigen Überprüfen von Kollisionen
     setInterval(() => {
       this.checkCollisions();
       this.checkGameEndConditions();
     }, 100);
   }
 
-  // Methode zum Überprüfen von Kollisionen und Aufnehmen von Flaschen
   checkCollisions() {
     this.chickenSmallHitCharacter();
     this.collectBottles();
@@ -33,7 +31,7 @@ class Collision {
       (enemy) => enemy instanceof Endboss && enemy.energy <= 0
     );
   }
-  // Methode zum Aufnehmen von Flaschen durch den Charakter
+
   collectBottles() {
     this.world.level.bottles.forEach((bottle) => {
       if (
@@ -41,11 +39,13 @@ class Collision {
         this.world.bottlescore < 5 &&
         bottle.isToCollect
       ) {
-        bottle.isToCollect = false; // Markiere die Flasche als aufgenommen
-        this.world.bottlescore += 1; // Erhöhe den Flaschenzähler
-        this.world.bottlesBar.setPercentage(this.world.bottlescore * 20); // Aktualisiere die Flaschenanzeige
-        bottle.removeObject(); // Entferne die Flasche aus der Spielwelt
-        this.world.bottle_sound.play(); // Spiele den Sound für das Aufnehmen der Flasche ab
+        bottle.isToCollect = false;
+        this.world.bottlescore += 1;
+        this.world.bottlesBar.setPercentage(this.world.bottlescore * 20);
+        bottle.removeObject();
+        if (!isMuted) {
+          this.world.bottle_sound.play();
+        }
       }
     });
   }
@@ -57,11 +57,13 @@ class Collision {
         this.world.coinscore < 5 &&
         coin.isToCollect
       ) {
-        coin.isToCollect = false; // Markiere die Münze als aufgenommen
-        this.world.coinscore += 1; // Erhöhe den Münzzähler
-        this.world.coinsBar.setPercentage(this.world.coinscore * 20); // Aktualisiere die Münzanzeige
-        coin.removeBoss(); // Entferne die Münze aus der Spielwelt
-        this.world.coin_sound.play(); // Spiele den Sound für das Aufnehmen der Münze ab
+        coin.isToCollect = false;
+        this.world.coinscore += 1;
+        this.world.coinsBar.setPercentage(this.world.coinscore * 20);
+        coin.removeBoss();
+        if (!isMuted) {
+          this.world.coin_sound.play();
+        }
       }
     });
   }
@@ -72,15 +74,18 @@ class Collision {
         this.world.character.isColliding(enemy) &&
         enemy.active &&
         !this.world.character.isHurt() &&
-        !this.world.character.isAboveGround() && // Charakter ist nicht über dem Boden
+        !this.world.character.isAboveGround() &&
         enemy.energy > 0
       ) {
-        this.world.character.hit(val); // Charakter wird getroffen mit dem angegebenen Wert 'val'
-        this.world.statusBar.setPercentage(this.world.character.energy); // Aktualisieren des Energiebalkens
-        this.world.playHurtSound(); // Abspielen des Verletzungssounds
+        this.world.character.hit(val);
+        this.world.statusBar.setPercentage(this.world.character.energy);
+        if (!isMuted) {
+          this.world.playHurtSound();
+        }
       }
     });
   }
+
   chickenSmallHitCharacter() {
     this.world.level.enemies
       .filter((enemy) => enemy instanceof ChickenSmall)
@@ -89,16 +94,19 @@ class Collision {
           this.world.character.isColliding(enemy) &&
           enemy.active &&
           !this.world.character.isHurt() &&
-          !this.world.character.isAboveGround() && // Charakter ist nicht über dem Boden
+          !this.world.character.isAboveGround() &&
           enemy.energy > 0
         ) {
+          if (!isMuted) {
+            this.world.hurt_sound.play();
+          }
           this.world.character.hit(10);
           this.world.character.lastAction = new Date().getTime();
           this.world.statusBar.setPercentage(this.world.character.energy);
         }
-        /*   if (
+        /*  if (
           enemy.x - this.world.character.x + this.world.character.width <
-          450
+          550
         ) {
           enemy.attack = true;
         } */
@@ -141,7 +149,9 @@ class Collision {
           this.world.character.energy = 0;
           this.world.character.lastAction = new Date().getTime();
           this.world.statusBar.setPercentage(this.world.character.energy);
-          this.world.playHurtSound();
+          if (!isMuted) {
+            this.world.playHurtSound();
+          }
         }
       });
   }
@@ -169,10 +179,13 @@ class Collision {
           this.world.character.isAboveGround() &&
           enemy.active
         ) {
+          if (!isMuted) {
+            this.world.collisionCharacterEnemies_sound.play();
+          }
           if (enemy instanceof Endboss) {
             this.world.character.jump(30);
-            enemy.energy = 0; // Setze die Energie des Endbosses auf 0
-            this.world.endbossBar.setPercentage(0); // Setze die Lebensleiste des Endbosses auf 0
+            enemy.energy = 0;
+            this.world.endbossBar.setPercentage(0);
           } else {
             enemy.energy = 0;
           }
@@ -195,26 +208,12 @@ class Collision {
 
         bottle.splash();
         bottle.removeObject();
-
+        if (!isMuted) {
+          this.world.splash_sound.play();
+        }
         this.world.endbossBar.setPercentage(endboss.energy); // Aktualisiere die Endboss-Lebensleiste
         bottle.active = false;
       }
     });
   }
 }
-/* 
-if (
-  this instanceof Character ||
-  this instanceof ChickenSmall ||
-  this instanceof Chicken ||
-  this instanceof Endboss ||
-  this instanceof Bottle ||
-  this instanceof Coin
-) {
-  // Prüfen, ob das Objekt eine Spielfigur oder ein Huhn ist
-  ctx.beginPath();
-  ctx.lineWidth = '5';
-  ctx.strokeStyle = 'red';
-  ctx.rect(this.x + this.offset.left, this.y + this.offset.top,(this.x + this.width - this.offset.right) - (this.x + this.offset.left),(this.y + this.height - this.offset.bottom) - (this.y + this.offset.top));
-  ctx.stroke();
-} */

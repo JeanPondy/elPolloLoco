@@ -149,6 +149,7 @@ const audioUrls = [
   "audio/hurt3.mp3",
   //dead
   "audio/hurt2.mp3",
+  "audio/chicken-dead.mp3",
   //dead man
   "audio/man_dying.mp3",
   //Hintergrund
@@ -164,8 +165,15 @@ const audioUrls = [
   "audio/coins.mp3",
   // jumpp
   "audio/jump.mp3",
+  "audio/public-jump.mp3",
   // dying
   "audio/dyingChicken.mp3",
+  // sleeping_sound
+  "audio/sleepingSound.mp3",
+  //game over
+  "audio/gameOver.mp3",
+  // win_sound
+  "audio/win.mp3",
 ];
 
 function preloadMedia() {

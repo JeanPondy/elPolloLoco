@@ -1,5 +1,4 @@
 class Character extends MovableObject {
-  // Definiere die Eigenschaften der Spielfigur
   width = 140;
   height = 290;
   x = 120;
@@ -13,15 +12,14 @@ class Character extends MovableObject {
   lastAction = 0;
   lastHit = 0;
   deadShown = false;
-  speed = 10; // Bewegungsgeschwindigkeit der Spielfigur
-  world = null; // Referenz auf die Spielwelt, in der sich die Spielfigur befindet
+  speed = 10;
+  world = null;
   hurtPlayed = false;
-  walking_sound = new Audio("audio/running2.mp3"); // Audio-Objekt für Laufgeräusche
+  walking_sound = new Audio("audio/running2.mp3");
   jumping_sound = new Audio("audio/jump.mp3");
-  hurt_sound = new Audio("audio/hurt2.mp3");
+  //hurt_sound = new Audio("audio/hurt2.mp3");
   dead_sound = new Audio("audio/man_dying.mp3");
 
-  // Array mit Bildpfaden für verschiedene Animationen der Spielfigur
   IMAGES_WALKING = [
     "img/2_character_pepe/2_walk/W-21.png",
     "img/2_character_pepe/2_walk/W-22.png",
@@ -88,10 +86,8 @@ class Character extends MovableObject {
   constructor() {
     super();
 
-    // Lade die Standard-Bildressource für die Spielfigur
     this.loadImage(this.IMAGES_WALKING[0]);
 
-    // Lade alle Bilder für die verschiedenen Animationen der Spielfigur
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_JUMPING);
     this.loadImages(this.IMAGES_DEAD);
@@ -104,7 +100,6 @@ class Character extends MovableObject {
     this.lastHitFromAbove = false;
   }
 
-  // Animationen der Spielfigur
   startAnimations() {
     this.movingAnimations = setInterval(() => {
       this.walking_sound.pause();
@@ -124,6 +119,7 @@ class Character extends MovableObject {
   isFalling() {
     return this.speedY > 0;
   }
+
   isAboveEnemy(enemy) {
     const characterBottomY = this.y + this.height;
     const enemyTopY = enemy.y;
@@ -132,12 +128,13 @@ class Character extends MovableObject {
   }
 
   characterMoveRight() {
-    // Bewegungssteuerung basierend auf der Tastaturbedienung
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.lastAction = Date.now();
       this.moveRight();
-      this.otherDirection = false; // Spielfigur schaut nach rechts
-      this.walking_sound.play(); // Spiele Laufgeräusche ab
+      this.otherDirection = false;
+      if (!isMuted) {
+        this.walking_sound.play();
+      }
     }
   }
 
@@ -145,17 +142,20 @@ class Character extends MovableObject {
     if (this.world.keyboard.LEFT && this.x > 0) {
       this.lastAction = Date.now();
       this.moveLeft();
-      this.otherDirection = true; // Spielfigur schaut nach links
-      this.walking_sound.play(); // Spiele Laufgeräusche ab
+      this.otherDirection = true;
+      if (!isMuted) {
+        this.walking_sound.play();
+      }
     }
   }
 
   characterJump() {
-    // Springen der Spielfigur bei Betätigung der Leertaste
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
       this.lastAction = Date.now();
-      this.jump(); // Funktion für das Springen aufrufen
-      this.jumping_sound.play();
+      this.jump();
+      if (!isMuted) {
+        this.jumping_sound.play();
+      }
     }
   }
 
@@ -163,26 +163,28 @@ class Character extends MovableObject {
     if (this.isDead() && !this.deadShown) {
       this.gameOverState();
     } else if (this.isHurt()) {
-      this.playAnimation(this.IMAGES_HURT); // Spielfigur ist verletzt
+      this.playAnimation(this.IMAGES_HURT);
     } else if (this.isLongIdle()) {
       this.playAnimation(this.IMAGES_LONGIDLE);
     } else if (this.isAboveGround()) {
-      this.playAnimation(this.IMAGES_JUMPING); // Spielfigur springt
+      this.playAnimation(this.IMAGES_JUMPING);
     } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-      this.playAnimation(this.IMAGES_WALKING); // Spielfigur läuft
+      this.playAnimation(this.IMAGES_WALKING);
     } else {
-      this.playAnimation(this.IMAGES_IDLE); // Spielfigur ist in Ruhe
+      this.playAnimation(this.IMAGES_IDLE);
     }
   }
+
   gameOverState() {
-    world.gameEnd = true;
-    world.gameLost = true;
+    this.world.gameEnd = true;
+    this.world.gameLost = true;
     this.playAnimation(this.IMAGES_DEAD);
     this.animateDead();
   }
+
   animateDead() {
     this.deadShown = true;
-    if (audio) {
+    if (!isMuted) {
       this.dead_sound.play();
     }
     setTimeout(() => {
@@ -192,10 +194,11 @@ class Character extends MovableObject {
       clearInterval(this.world.level.enemies[6].movingAnimations);
     }, 1000);
   }
+
   hitFromAbove() {
     this.lastHitFromAbove = true;
     setTimeout(() => {
       this.lastHitFromAbove = false;
-    }, 1000); // Zurücksetzen nach 1 Sekunde oder einer angemessenen Dauer
+    }, 1000);
   }
 }

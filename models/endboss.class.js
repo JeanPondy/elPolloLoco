@@ -15,7 +15,7 @@ class Endboss extends MovableObject {
     this.alerted = false;
     this.angry = false;
     this.energy = 100;
-    this.active = true; // Der Endboss ist aktiv
+    this.active = true;
 
     this.IMAGES_WALKING = [
       "img/4_enemie_boss_chicken/1_walk/G1.png",
@@ -91,7 +91,7 @@ class Endboss extends MovableObject {
   }
 
   endbossDead() {
-    if (audio) {
+    if (!isMuted) {
       this.gamewon_sound.play();
     }
     world.gameEnd = true;

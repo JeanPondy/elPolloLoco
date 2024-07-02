@@ -19,13 +19,10 @@ class Bottle extends MovableObject {
     let randomIndex = Math.floor(Math.random() * this.IMAGES_BOTTLES.length);
     let randomImage = this.IMAGES_BOTTLES[randomIndex];
 
-    // Laden des ausgewählten Bildes
     this.loadImage(randomImage);
 
-    // Setzen der x-Position des Objekts
     this.x = x;
 
-    // Festlegen der Höhe und Breite des Objekts
     this.height = 60;
     this.width = 70;
   }

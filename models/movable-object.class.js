@@ -7,12 +7,11 @@ class MovableObject extends DrawableObject {
     this.acceleration = 3;
     this.energy = 100;
     this.isToCollect = true;
-    this.groundY = 143; // Höhe des Charakterbodens auf dem Bild (nicht die tatsächliche Bodenhöhe)
+    this.groundY = 143;
     this.active = true;
     this.lastHit = 0;
   }
 
-  // Variables for Intervals
   chickenAnimations;
   walkingAnimations;
   characterAnimations;
@@ -22,14 +21,6 @@ class MovableObject extends DrawableObject {
   deadAnimations;
   gravityAnimation;
 
-  /*  applyGravity() {
-    setInterval(() => {
-      if (this.isAboveGround() || this.speedY > 0) {
-        this.y -= this.speedY;
-        this.speedY -= this.acceleration;
-      }
-    }, 1000 / 25);
-  } */
   applyGravity() {
     this.gravityAnimation = setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
@@ -46,13 +37,12 @@ class MovableObject extends DrawableObject {
   }
 
   isLongIdle() {
-    let idletime = new Date().getTime() - this.lastAction; // diff in ms
-    idletime = idletime / 1000; //in seconds
+    let idletime = new Date().getTime() - this.lastAction;
+    idletime = idletime / 1000;
     return idletime > 5;
   }
 
   isAboveGround() {
-    // Werfbare Objekte sollten immer zum Boden fallen
     if (this instanceof ThrowableObject) {
       return true;
     } else {
@@ -88,9 +78,9 @@ class MovableObject extends DrawableObject {
 
   removeObject() {
     this.speedY = 10;
-    //this.applyGravity();
+
     setTimeout(() => {
-      this.x = -100; //hiermit fliegen die toten Hühner aus dem Bild
+      this.x = -100;
     }, 300);
   }
 
@@ -115,8 +105,8 @@ class MovableObject extends DrawableObject {
   }
 
   isHurt() {
-    let timepassed = new Date().getTime() - this.lastHit; // diff in ms
-    timepassed = timepassed / 1000; //in seconds
+    let timepassed = new Date().getTime() - this.lastHit;
+    timepassed = timepassed / 1000;
     return timepassed < 0.4;
   }
 
@@ -158,6 +148,7 @@ class MovableObject extends DrawableObject {
   calculateDistance(x1, y1, x2, y2) {
     return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
   }
+
   checkDistance(character, endboss) {
     return this.calculateDistance(
       character.x,

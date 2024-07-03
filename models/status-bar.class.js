@@ -9,25 +9,24 @@ class StatusBar extends DrawableObject {
   ];
 
   constructor() {
-    super(); // Aufruf des Konstruktors der Elternklasse (DrawableObject)
+    super();
     this.loadImage(this.IMAGES_HEALTH[0]);
-    // Laden aller Bilder für die Statusleiste
+
     this.loadImages(this.IMAGES_HEALTH);
-    // Festlegen der Position und Größe der Statusleiste
+
     this.x = 10;
     this.y = 0;
     this.width = 200;
     this.height = 60;
-    this.setPercentage(100); // Standardmäßige Anzeige der Statusleiste mit vollem Prozentwert
+    this.setPercentage(100);
   }
 
-  // Methode zum Setzen des Prozentsatzes der Statusleiste
   setPercentage(percentage) {
     this.percentage = percentage;
     let path = this.IMAGES_HEALTH[this.resolveImageIndex()];
     this.img = this.imageCache[path];
   }
-  // Methode zur Bestimmung des Index des Anzeigebildes basierend auf dem Prozentsatz
+
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;

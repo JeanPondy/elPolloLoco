@@ -31,8 +31,8 @@ class MovableObject extends DrawableObject {
   }
 
   isIdle() {
-    let idletime = new Date().getTime() - this.lastAction; // diff in ms
-    idletime = idletime / 1000; //in seconds
+    let idletime = new Date().getTime() - this.lastAction;
+    idletime = idletime / 1000;
     return idletime < 5;
   }
 

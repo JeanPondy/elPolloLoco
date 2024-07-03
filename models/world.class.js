@@ -3,7 +3,7 @@ class World {
   gameEnd = false;
   gameLost = false;
   gameWon = false;
-  collision = new Collision(); // Hier wird 'this' übergeben
+  collision = new Collision();
   character = new Character();
   statusBar = new StatusBar();
   bottlesBar = new BottlesBar();
@@ -16,7 +16,7 @@ class World {
   ctx;
 
   camera_x = 0;
-  audioEnabled = true; // Neuer Audio-Status innerhalb der World-Klasse
+  audioEnabled = true;
 
   throwableObjects = [];
   totalBottles = 5;
@@ -30,8 +30,8 @@ class World {
   collisionCharacterEnemies_sound = new Audio("audio/public-jump.mp3");
   backgroundSound = new Audio("audio/backgroundSound.mp3");
   coin_sound = new Audio("audio/coins.mp3");
-  bottle_sound = new Audio("audio/collision-bottle.mp3"); // collision
-  throw_sound = new Audio("audio/shot_bottle.mp3"); // Neuer Sound für das Werfen der Flasche
+  bottle_sound = new Audio("audio/collision-bottle.mp3");
+  throw_sound = new Audio("audio/shot_bottle.mp3");
   splash_sound = new Audio("audio/bottleBroke.mp3");
   sleeping_sound = new Audio("audio/sleepingSound.mp3");
   walking_sound = new Audio("audio/running2.mp3");
@@ -42,10 +42,9 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.level = level1; // Initialisierung von level
-    //this.character = new Character();
-    //this.collision = new Collision(this); // Hier wird 'this' übergeben
-    this.setupEventListeners(); // Event-Listener einrichten
+    this.level = level1;
+
+    this.setupEventListeners();
     this.draw();
     this.setWorld();
     this.run();
@@ -53,29 +52,8 @@ class World {
   }
   //mainInterval;
   setupEventListeners() {
-    // Beispiel: Audio-Wiedergabe beim Drücken einer Taste erlauben
-    document.addEventListener(
-      "keydown",
-      () => {
-        //this.enableAudio();
-      },
-      { once: true }
-    ); // Nur einmalig ausführen
+    document.addEventListener("keydown", () => {}, { once: true });
   }
-  /* 
-  
-
-  playAndResetSound(sound) {
-    sound.pause();
-    sound.currentTime = 0;
-    this.playSound(sound);
-  }
-
-  playSound(sound) {
-    sound.play().catch((error) => {
-      console.error("Audio playback failed:", error);
-    });
-  } */
 
   setWorld() {
     this.character.world = this;
@@ -109,21 +87,11 @@ class World {
       if (!isMuted) {
         this.playThrowSound();
       }
-      // Sound für das Werfen der Flasche abspielen
     }
   }
 
-  /*  playBackgroundMusic() {
-    if (this.backgroundSound.paused) {
-      this.backgroundSound.volume = 0.1;
-      this.backgroundSound.play().catch((error) => {
-        console.error("Audio playback failed:", error);
-      });
-    }
-  } */
-
   playThrowSound() {
-    this.throw_sound.currentTime = 0; // Setzt den Sound auf den Anfang zurück
+    this.throw_sound.currentTime = 0;
     this.throw_sound.play().catch((error) => {
       console.error("Audio playback failed:", error);
     });

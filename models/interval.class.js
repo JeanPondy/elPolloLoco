@@ -31,6 +31,7 @@ class Interval {
         clearInterval(enemy.movingAnimations);
       });
   }
+
   clearChickenSmallIntervals() {
     this.world.level.enemies
       .filter((enemy) => enemy instanceof ChickenSmall)

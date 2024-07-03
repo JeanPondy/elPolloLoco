@@ -35,6 +35,7 @@ function startGame(event) {
   backgroundSound.play();
   showSmallScreen();
 }
+
 function showSmallScreen() {
   document.getElementById("audiobtn").classList.remove("d-none");
   if (window.innerWidth <= 768) {
@@ -92,6 +93,7 @@ function showEndPage() {
     document.getElementById("endPage").classList.remove("d-none");
     document.getElementById("control-icons").classList.add("d-none");
   }, 1000);
+  backgroundSound.pause();
 }
 
 function updateHelpbox() {

@@ -1,15 +1,15 @@
 class Level {
-  enemies; // Array von Gegnerobjekten im Level
-  clouds; // Array von Wolkenobjekten im Level
+  enemies;
+  clouds;
   backgroundObjects;
   bottles;
   coins;
-  level_end_x = 2600; // X-Position, die das Ende des Levels definiert
+  level_end_x = 2600;
 
   constructor(enemies, clouds, backgroundObjects, bottles, coins) {
-    this.enemies = enemies; // Initialisiere das Array der Gegner
+    this.enemies = enemies;
     this.clouds = clouds;
-    this.backgroundObjects = backgroundObjects; // Initialisiere das Array der Hintergrundobjekte
+    this.backgroundObjects = backgroundObjects;
     this.bottles = bottles;
     this.coins = coins;
   }

@@ -114,7 +114,6 @@ class Collision {
   }
 
   chickenHitCharacter() {
-    // Durchlaufe alle Feinde (Enemies) in der aktuellen Spielwelt
     this.world.level.enemies
       .filter((enemy) => enemy instanceof Chicken)
       .forEach((enemy) => {
@@ -122,7 +121,7 @@ class Collision {
           this.world.character.isColliding(enemy) &&
           enemy.active &&
           !this.world.character.isHurt() &&
-          !this.world.character.isAboveGround() && // Charakter ist nicht über dem Boden
+          !this.world.character.isAboveGround() &&
           enemy.energy > 0
         ) {
           this.world.character.hit(20);
@@ -137,6 +136,7 @@ class Collision {
         }
       });
   }
+
   endbossHitCharacter() {
     this.world.level.enemies
       .filter((enemy) => enemy instanceof Endboss)
@@ -196,22 +196,19 @@ class Collision {
   }
 
   characterHitEndbossWithBottle() {
-    const val = 35; // Festlegen des Werts für die Flaschenkraft
-
+    const val = 35;
     this.world.throwableObjects.forEach((bottle) => {
       let endboss = this.world.level.enemies.find(
         (enemy) => enemy instanceof Endboss && enemy.active
       );
-
       if (endboss && endboss.isColliding(bottle) && bottle.active) {
         endboss.endbossHit(val);
-
         bottle.splash();
         bottle.removeObject();
         if (!isMuted) {
           this.world.splash_sound.play();
         }
-        this.world.endbossBar.setPercentage(endboss.energy); // Aktualisiere die Endboss-Lebensleiste
+        this.world.endbossBar.setPercentage(endboss.energy);
         bottle.active = false;
       }
     });

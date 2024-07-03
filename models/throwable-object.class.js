@@ -36,8 +36,12 @@ class ThrowableObject extends MovableObject {
     this.throw();
   }
 
+  /**
+   * Sets the initial speed and animation for throwing the object.
+   * Starts moving the object horizontally and applies gravity.
+   */
   throw() {
-    this.speedY = 15;
+    this.speedY = 15; // Set vertical speed
     this.applyGravity();
     this.movingAnimations = setInterval(() => {
       this.x += 20;
@@ -45,6 +49,10 @@ class ThrowableObject extends MovableObject {
     }, 25);
   }
 
+  /**
+   * Stops the throwing animation and plays the splash animation.
+   * Removes the object from the screen after a delay.
+   */
   splash() {
     clearInterval(this.movingAnimations);
     this.playAnimation(this.IMAGES_SPLASH);

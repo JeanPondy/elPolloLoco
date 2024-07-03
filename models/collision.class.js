@@ -7,7 +7,9 @@ class Collision {
       this.checkGameEndConditions();
     }, 100);
   }
-
+  /**
+   * Checks for various collisions and interactions in the game.
+   */
   checkCollisions() {
     this.chickenSmallHitCharacter();
     this.collectBottles();
@@ -20,18 +22,28 @@ class Collision {
     this.endbossHitCharacter();
   }
 
+  /**
+   * Checks if the game end conditions are met.
+   */
   checkGameEndConditions() {
     if (this.world.character.energy <= 0 || this.isEndbossDefeated()) {
       this.world.gameEnd = true;
     }
   }
 
+  /**
+   * Checks if the endboss is defeated.
+   * @returns {boolean} - True if the endboss is defeated, false otherwise.
+   */
   isEndbossDefeated() {
     return this.world.level.enemies.some(
       (enemy) => enemy instanceof Endboss && enemy.energy <= 0
     );
   }
 
+  /**
+   * Collects bottles if the character collides with them.
+   */
   collectBottles() {
     this.world.level.bottles.forEach((bottle) => {
       if (
@@ -50,6 +62,9 @@ class Collision {
     });
   }
 
+  /**
+   * Collects coins if the character collides with them.
+   */
   collectCoins() {
     this.world.level.coins.forEach((coin) => {
       if (
@@ -68,6 +83,10 @@ class Collision {
     });
   }
 
+  /**
+   * Handles collisions between enemies and the character.
+   * @param {number} [val=15] - The damage value to apply.
+   */
   enemiesHitCharacter(val = 15) {
     this.world.level.enemies.forEach((enemy) => {
       if (
@@ -86,6 +105,9 @@ class Collision {
     });
   }
 
+  /**
+   * Handles collisions between small chickens and the character.
+   */
   chickenSmallHitCharacter() {
     this.world.level.enemies
       .filter((enemy) => enemy instanceof ChickenSmall)
@@ -104,15 +126,12 @@ class Collision {
           this.world.character.lastAction = new Date().getTime();
           this.world.statusBar.setPercentage(this.world.character.energy);
         }
-        /*  if (
-          enemy.x - this.world.character.x + this.world.character.width <
-          550
-        ) {
-          enemy.attack = true;
-        } */
       });
   }
 
+  /**
+   * Handles collisions between regular chickens and the character.
+   */
   chickenHitCharacter() {
     this.world.level.enemies
       .filter((enemy) => enemy instanceof Chicken)
@@ -137,6 +156,9 @@ class Collision {
       });
   }
 
+  /**
+   * Handles collisions between the endboss and the character.
+   */
   endbossHitCharacter() {
     this.world.level.enemies
       .filter((enemy) => enemy instanceof Endboss)
@@ -156,6 +178,9 @@ class Collision {
       });
   }
 
+  /**
+   * Checks if the character is close to the endboss to alert it.
+   */
   checkEndbossProximity() {
     const endboss =
       this.world.level.enemies[this.world.level.enemies.length - 1];
@@ -164,6 +189,9 @@ class Collision {
     }
   }
 
+  /**
+   * Handles collisions between the character and enemies.
+   */
   characterHitEnemies() {
     this.world.level.enemies
       .filter(
@@ -195,6 +223,9 @@ class Collision {
       });
   }
 
+  /**
+   * Handles collisions between throwable objects and the endboss.
+   */
   characterHitEndbossWithBottle() {
     const val = 35;
     this.world.throwableObjects.forEach((bottle) => {

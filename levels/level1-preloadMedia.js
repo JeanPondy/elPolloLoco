@@ -176,11 +176,20 @@ const audioUrls = [
   "audio/win.mp3",
 ];
 
-function preloadMedia() {
+/**
+ * Preloads images and audio from provided URLs.
+ * @param {string[]} imageUrls - Array of image URLs to preload.
+ * @param {string[]} audioUrls - Array of audio URLs to preload.
+ */
+function preloadMedia(imageUrls, audioUrls) {
   preloadImages(imageUrls);
   preloadAudio(audioUrls);
 }
 
+/**
+ * Preloads images from provided URLs.
+ * @param {string[]} urls - Array of image URLs to preload.
+ */
 function preloadImages(urls) {
   if (urls) {
     urls.forEach((url) => {
@@ -190,6 +199,10 @@ function preloadImages(urls) {
   }
 }
 
+/**
+ * Preloads audio from provided URLs.
+ * @param {string[]} urls - Array of audio URLs to preload.
+ */
 function preloadAudio(urls) {
   if (urls) {
     urls.forEach((url) => {

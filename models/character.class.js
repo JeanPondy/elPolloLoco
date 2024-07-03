@@ -112,17 +112,44 @@ class Character extends MovableObject {
     }, 1000 / 60);
     this.startCharacterAnimations();
   }
+  /**
+   * Starts the character's animations including movement and state checks.
+   */
+  startAnimations() {
+    this.movingAnimations = setInterval(() => {
+      this.walking_sound.pause();
+      if (this.world) {
+        this.characterMoveRight();
+        this.characterMoveLeft();
+        this.characterJump();
+        this.world.camera_x = -this.x + 30;
+      }
+    }, 1000 / 60);
+    this.startCharacterAnimations();
+  }
 
+  /**
+   * Starts the character's state animations.
+   */
   startCharacterAnimations() {
     this.characterAnimations = setInterval(() => {
       this.characterStates();
     }, 1000 / 20);
   }
 
+  /**
+   * Checks if the character is falling.
+   * @returns {boolean} True if the character is falling, false otherwise.
+   */
   isFalling() {
     return this.speedY > 0;
   }
 
+  /**
+   * Checks if the character is above an enemy.
+   * @param {Object} enemy - The enemy object.
+   * @returns {boolean} True if the character is above the enemy, false otherwise.
+   */
   isAboveEnemy(enemy) {
     const characterBottomY = this.y + this.height;
     const enemyTopY = enemy.y;
@@ -130,6 +157,9 @@ class Character extends MovableObject {
     return characterBottomY < enemyTopY;
   }
 
+  /**
+   * Moves the character to the right if the right key is pressed.
+   */
   characterMoveRight() {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.lastAction = Date.now();
@@ -141,6 +171,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Moves the character to the left if the left key is pressed.
+   */
   characterMoveLeft() {
     if (this.world.keyboard.LEFT && this.x > 0) {
       this.lastAction = Date.now();
@@ -152,6 +185,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Makes the character jump if the space key is pressed and the character is on the ground.
+   */
   characterJump() {
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
       this.lastAction = Date.now();
@@ -162,6 +198,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Updates the character's state based on its current status.
+   */
   characterStates() {
     if (this.isDead() && !this.deadShown) {
       this.gameOverState();
@@ -178,6 +217,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Sets the game to the game over state and animates the character's death.
+   */
   gameOverState() {
     this.world.gameEnd = true;
     this.world.gameLost = true;
@@ -185,6 +227,9 @@ class Character extends MovableObject {
     this.animateDead();
   }
 
+  /**
+   * Animates the character's death by stopping animations and playing the dead sound.
+   */
   animateDead() {
     this.deadShown = true;
     if (!isMuted) {
@@ -198,6 +243,9 @@ class Character extends MovableObject {
     }, 1000);
   }
 
+  /**
+   * Marks the character as hit from above for a short duration.
+   */
   hitFromAbove() {
     this.lastHitFromAbove = true;
     setTimeout(() => {

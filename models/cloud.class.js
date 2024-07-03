@@ -8,7 +8,9 @@ class Cloud extends MovableObject {
     this.x = 0 + Math.random() * 500;
     this.animate();
   }
-
+  /**
+   * Animates the object by moving it to the left at a set interval.
+   */
   animate() {
     this.movingAnimations = setInterval(() => {
       this.moveLeft();

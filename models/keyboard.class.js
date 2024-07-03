@@ -10,7 +10,10 @@ class Keyboard {
 }
 
 const keyboard = new Keyboard();
-
+/**
+ * Event listener for touch start events to handle keyboard key states based on target ID.
+ * @param {Event} e The touch start event object.
+ */
 window.addEventListener("touchstart", (e) => {
   switch (e.target.id) {
     case "right":
@@ -28,6 +31,10 @@ window.addEventListener("touchstart", (e) => {
   }
 });
 
+/**
+ * Event listener for touch end events to handle keyboard key states based on target ID.
+ * @param {Event} e The touch end event object.
+ */
 window.addEventListener("touchend", (e) => {
   switch (e.target.id) {
     case "right":
@@ -45,6 +52,10 @@ window.addEventListener("touchend", (e) => {
   }
 });
 
+/**
+ * Event listener for key down events to handle keyboard key states based on key code.
+ * @param {KeyboardEvent} e The key down event object.
+ */
 window.addEventListener("keydown", (e) => {
   switch (e.code) {
     case "ArrowRight":
@@ -68,6 +79,10 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+/**
+ * Event listener for key up events to handle keyboard key states based on key code.
+ * @param {KeyboardEvent} e The key up event object.
+ */
 window.addEventListener("keyup", (e) => {
   switch (e.code) {
     case "ArrowRight":

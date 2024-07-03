@@ -59,12 +59,18 @@ class Endboss extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Initiates the end boss animations including walking, being hurt, and checking for death.
+   */
   animate() {
     this.endbossWalk();
     this.endbossHurt();
     this.endbossDeadCheck();
   }
 
+  /**
+   * Animates the end boss walking and moves it to the left.
+   */
   endbossWalk() {
     this.movingAnimations = setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
@@ -72,6 +78,9 @@ class Endboss extends MovableObject {
     }, 1000 / 10);
   }
 
+  /**
+   * Animates the end boss being hurt if it is in a hurt state.
+   */
   endbossHurt() {
     this.hurtAnimations = setInterval(() => {
       if (this.isHurt()) {
@@ -80,6 +89,9 @@ class Endboss extends MovableObject {
     }, 1000 / 10);
   }
 
+  /**
+   * Checks if the end boss is dead or should become angry, and animates accordingly.
+   */
   endbossDeadCheck() {
     this.deadAnimations = setInterval(() => {
       if (this.isDead()) {
@@ -90,6 +102,9 @@ class Endboss extends MovableObject {
     }, 1000 / 25);
   }
 
+  /**
+   * Handles the end boss death animation and game end sequence.
+   */
   endbossDead() {
     if (!isMuted) {
       this.gamewon_sound.play();
@@ -102,6 +117,9 @@ class Endboss extends MovableObject {
     world.gameWon = true;
   }
 
+  /**
+   * Animates the end boss becoming angry and increases its speed.
+   */
   endbossAngry() {
     setTimeout(() => {
       this.playAnimation(this.IMAGES_ALERTED);

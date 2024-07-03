@@ -29,7 +29,9 @@ class ChickenSmall extends MovableObject {
     this.speed = 0.15 + Math.random() * 0.5;
     this.startAnimations();
   }
-
+  /**
+   * Starts the animations for the small chicken including attack, death check, moving, and walking.
+   */
   startAnimations() {
     this.chickenSmallAnimations = setInterval(() => {
       this.chickenSmallAttack();
@@ -41,12 +43,18 @@ class ChickenSmall extends MovableObject {
     this.chickenSmallWalk();
   }
 
+  /**
+   * Handles the small chicken's attack state by increasing its speed.
+   */
   chickenSmallAttack() {
     if (this.attack) {
       this.speed = 1.5;
     }
   }
 
+  /**
+   * Handles the death of the small chicken by stopping animations and moving it off screen.
+   */
   chickenSmallDead() {
     this.active = false;
     this.playAnimation(this.IMAGES_DEAD);
@@ -57,12 +65,18 @@ class ChickenSmall extends MovableObject {
     }, 300);
   }
 
+  /**
+   * Plays the walking animation for the small chicken at a set interval.
+   */
   chickenSmallWalk() {
     this.walkingAnimations = setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 1000 / 8);
   }
 
+  /**
+   * Moves the small chicken to the left at a set interval.
+   */
   chickenSmallMoveLeft() {
     this.movingAnimations = setInterval(() => {
       this.moveLeft();

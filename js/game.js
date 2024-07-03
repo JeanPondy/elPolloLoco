@@ -23,7 +23,10 @@ let touchDevice = window.matchMedia("(Pointer: coarse)").matches;
 window.addEventListener("keydown", startGame);
 
 document.addEventListener("DOMContentLoaded", updateControlsBox);
-
+/**
+ * Starts the game, hides start page, initializes game elements, and begins background music.
+ * @param {Event} event - The event object triggering the game start.
+ */
 function startGame(event) {
   window.removeEventListener("keydown", startGame);
   document.getElementById("startpage").style.display = "none";
@@ -36,6 +39,9 @@ function startGame(event) {
   showSmallScreen();
 }
 
+/**
+ * Shows additional controls on small screens.
+ */
 function showSmallScreen() {
   document.getElementById("audiobtn").classList.remove("d-none");
   if (window.innerWidth <= 768) {
@@ -45,10 +51,17 @@ function showSmallScreen() {
   }
 }
 
-function restart() {
+/**
+ * Restarts the game.
+ * @param {Event} event - The event object triggering the game restart.
+ */
+function restart(event) {
   startGame(event);
 }
 
+/**
+ * Initializes the game canvas and world.
+ */
 function initGame() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
@@ -57,6 +70,9 @@ function initGame() {
   console.log("My enemies are", world.level.enemies);
 }
 
+/**
+ * Updates the visibility of the control icons box.
+ */
 function updateControlsBox() {
   let el = document.getElementById("control-icons");
   if (el) {
@@ -66,6 +82,9 @@ function updateControlsBox() {
   }
 }
 
+/**
+ * Shows the game screen by hiding start and end pages, and showing controls.
+ */
 function showGameScreen() {
   canvas = document.getElementById("canvas");
   startpage = document.getElementById("startpage");
@@ -78,6 +97,9 @@ function showGameScreen() {
   helpbox.classList.add("d-none");
 }
 
+/**
+ * Checks if the game has ended and displays the end page accordingly.
+ */
 function checkGameEnd() {
   gameEndInterval = setInterval(() => {
     if (world.gameEnd) {
@@ -88,6 +110,9 @@ function checkGameEnd() {
   }, 1000 / 20);
 }
 
+/**
+ * Shows the end page after a delay and pauses background music.
+ */
 function showEndPage() {
   setTimeout(() => {
     document.getElementById("endPage").classList.remove("d-none");
@@ -96,6 +121,9 @@ function showEndPage() {
   backgroundSound.pause();
 }
 
+/**
+ * Updates the visibility of the help box based on the screen size.
+ */
 function updateHelpbox() {
   let el = document.getElementById("help-box");
   if (smallDevice.matches) {
@@ -107,6 +135,10 @@ function updateHelpbox() {
   }
 }
 
+/**
+ * Toggles the visibility of the information box.
+ * @param {Event} event - The event object triggering the toggle.
+ */
 function toggleInfobox(event) {
   let el = document.getElementById("infobox");
   event.preventDefault();
@@ -115,6 +147,10 @@ function toggleInfobox(event) {
   }
 }
 
+/**
+ * Toggles the visibility of the help box.
+ * @param {Event} event - The event object triggering the toggle.
+ */
 function toggleMenu(event) {
   let el = document.getElementById("help-box");
   if (event) {
@@ -127,6 +163,10 @@ function toggleMenu(event) {
   }
 }
 
+/**
+ * Toggles full screen mode for the game.
+ * @param {Event} event - The event object triggering the toggle.
+ */
 function toggleFullScreen(event) {
   let elem = document.getElementById("mainContainer");
   event.preventDefault();
@@ -143,14 +183,24 @@ function toggleFullScreen(event) {
   }
 }
 
+/**
+ * Opens the impressum page in a new tab.
+ */
 function openImpressum() {
   window.open("impressum.html", "_blank");
 }
 
+/**
+ * Opens the datenschutz page in a new tab.
+ */
 function openDatenschutz() {
   window.open("copyright.html", "_blank");
 }
 
+/**
+ * Plays a sound if the game is not muted.
+ * @param {HTMLAudioElement} sound - The audio element to play.
+ */
 function playSound(sound) {
   if (!isMuted) {
     sound.loop = false;
@@ -158,6 +208,10 @@ function playSound(sound) {
   }
 }
 
+/**
+ * Toggles the mute state of the game audio.
+ * @param {Event} event - The event object triggering the toggle.
+ */
 function toggleMute(event) {
   const audioimg = document.getElementById("audioimg");
   const audioimgOff = document.getElementById("audioimg-off");
@@ -174,6 +228,10 @@ function toggleMute(event) {
   }
 }
 
+/**
+ * Unmutes the game audio.
+ * @param {Event} event - The event object triggering the unmute.
+ */
 function unmuteAudio(event) {
   const audioimg = document.getElementById("audioimg");
   const audioimgOff = document.getElementById("audioimg-off");
@@ -186,25 +244,3 @@ function unmuteAudio(event) {
     console.error("Audio playback failed:", error);
   });
 }
-
-/* function toggleAudio(event) {
-  const audioimg = document.getElementById("audioimg");
-  event.preventDefault();
-  if (event.type === "touchstart" || event.type === "click") {
-    if (world.audioEnabled) {
-      audioimg.style.display = "none";
-      document.getElementById("audioimg-off").style.display = "block";
-      world.audioEnabled = false;
-      backgroundSound.pause();
-      world.hurt_sound.pause();
-    } else {
-      audioimg.style.display = "block";
-      document.getElementById("audioimg-off").style.display = "none";
-      world.audioEnabled = true;
-      world.hurt_sound.play();
-      backgroundSound.play().catch((error) => {
-        console.error("Audio playback failed:", error);
-      });
-    }
-  }
-} */

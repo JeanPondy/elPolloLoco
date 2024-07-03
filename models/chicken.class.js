@@ -27,30 +27,45 @@ class Chicken extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.startAnimations();
   }
-
+  /**
+   * Starts the animations for the chicken including actions, walking, and moving.
+   */
   startAnimations() {
     this.chickenActions();
     this.chickenWalkingAnimations();
     this.chickenMovingAnimations();
   }
 
+  /**
+   * Updates the chicken's state at a set interval.
+   */
   chickenActions() {
     this.chickenAnimations = setInterval(() => {
       this.updateState();
     }, 1000 / 20);
   }
+
+  /**
+   * Plays the walking animation for the chicken at a set interval.
+   */
   chickenWalkingAnimations() {
     this.walkingAnimations = setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 1000 / 8);
   }
 
+  /**
+   * Moves the chicken to the left at a set interval.
+   */
   chickenMovingAnimations() {
     this.movingAnimations = setInterval(() => {
       this.moveLeft();
     }, 1000 / 60);
   }
 
+  /**
+   * Updates the chicken's state, handling death and attack state.
+   */
   updateState() {
     if (this.isDead()) {
       this.handleDeath();
@@ -60,6 +75,10 @@ class Chicken extends MovableObject {
     }
   }
 
+  /**
+   * Handles the death of the chicken by stopping the walking animation
+   * and playing the death animation.
+   */
   handleDeath() {
     clearInterval(this.walkingAnimationImages);
     this.playAnimation(this.IMAGES_DEAD);

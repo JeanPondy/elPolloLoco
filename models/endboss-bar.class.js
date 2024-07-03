@@ -19,12 +19,20 @@ class EndbossBar extends DrawableObject {
     this.setPercentage(100);
   }
 
+  /**
+   * Sets the percentage for the end boss's health bar and updates the corresponding image.
+   * @param {number} percentage - The current health percentage of the end boss.
+   */
   setPercentage(percentage) {
     this.percentage = percentage;
     let path = this.IMAGES_ENDBOSS[this.resolveImageIndex()];
     this.img = this.imageCache[path];
   }
 
+  /**
+   * Resolves the image index based on the current health percentage.
+   * @returns {number} The index of the image corresponding to the current health percentage.
+   */
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;

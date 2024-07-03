@@ -1,7 +1,6 @@
-/* Definiere eine benutzerdefinierte Schriftart "zabars" */
 @font-face {
-  font-family: "zabars"; /* Name der Schriftart */
-  src: url("fonts/zabars.ttf") format("truetype"); /* Pfad zur Schriftart-Datei und ihr Format */
+  font-family: "zabars";
+  src: url("fonts/zabars.ttf") format("truetype");
 }
 
 @font-face {
@@ -50,14 +49,14 @@ h1 {
 
 /* Klasse, um ein Element auszublenden */
 .d-none {
-  display: none !important; /* Element ausblenden */
+  display: none !important;
 }
 
 /* Stil für Container */
 .container {
   width: 100%;
   max-width: 720px;
-  aspect-ratio: 1.5/1; /* Seitenverhältnis 1.5:1 setzen */
+  aspect-ratio: 1.5/1;
   position: relative;
   display: flex;
   justify-content: center;
@@ -129,15 +128,14 @@ h1 {
 /* Stil für die Informationsbox */
 .info-box {
   background-color: rgb(70, 13, 20);
-  z-index: 10; /* Stapelreihenfolge */
+  z-index: 10;
   position: absolute;
-  top: 0; /* Obere Position auf 0 setzen */
-  left: 0; /* Linke Position auf 0 setzen */
+  top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
 }
 
-/* Stil für das Schließen der Informationsbox */
 .close {
   color: rgb(255, 130, 68);
   width: 100%;
@@ -197,19 +195,18 @@ h1 {
   cursor: pointer;
 }
 
-/* Stil für Hover-Effekte auf den Start- und Neustart-Buttons */
 .restart-btn:hover,
 .start-btn:hover {
-  animation-play-state: paused; /* Animation pausieren */
+  animation-play-state: paused;
   cursor: pointer;
 }
-/* Animation für Start- und Neustart-Buttons, wenn sie nicht gehovt oder aktiv sind */
+
 .start-btn:not(:hover):not(:active) {
-  animation: resize 1s infinite; /* Endlos-Animation */
+  animation: resize 1s infinite;
 }
 
 .restart-btn:not(:hover):not(:active) {
-  animation: resize 2s infinite; /* Endlos-Animation */
+  animation: resize 2s infinite;
 }
 
 /* Stil für die mobilen Steuerungselemente */
@@ -219,19 +216,18 @@ h1 {
   bottom: 10px;
   width: 100%;
   justify-content: space-between;
-  flex-direction: row; /* Elemente horizontal anordnen */
+  flex-direction: row;
 }
 
 /* Stil für mobile Icons */
 .mobile-icon {
   width: 30px;
   height: 30px;
-  background-color: rgb(255 213 0 / 18%); /* Hintergrundfarbe mit Transparenz */
+  background-color: rgb(255 213 0 / 18%);
   border-radius: 50%;
   display: flex;
-  align-items: center; /* Elemente vertikal zentrieren */
-  justify-content: center; /* Elemente horizontal zentrieren */
-
+  align-items: center;
+  justify-content: center;
   padding: 10px;
   border: 2px solid black;
   background-repeat: no-repeat;
@@ -254,24 +250,23 @@ h1 {
   margin-left: 8px;
 }
 
-/* Stil für die linken Pfeil-Icons */
 .icon-left {
-  background-image: url("assets/circle-left.svg"); /* Hintergrundbild für linkes Icon */
+  background-image: url("assets/circle-left.svg");
 }
 
 /* Stil für die rechten Pfeil-Icons */
 .icon-right {
-  background-image: url("assets/circle-right.svg"); /* Hintergrundbild für rechtes Icon */
+  background-image: url("assets/circle-right.svg");
 }
 
 /* Stil für die Sprung-Icons */
 .icon-jump {
-  background-image: url("assets/circle-up.svg"); /* Hintergrundbild für Sprung-Icon */
+  background-image: url("assets/circle-up.svg");
 }
 
 /* Stil für die Flaschen-Icons */
 .icon-bottle {
-  background-image: url("assets/bottle.svg"); /* Hintergrundbild für Flaschen-Icon */
+  background-image: url("assets/bottle.svg");
 }
 
 /* Stil für das Menü */
@@ -287,16 +282,16 @@ h1 {
   position: absolute;
   background-color: rgb(67, 121, 137);
   color: rgb(199, 103, 88);
-  text-shadow: 2px 2px #ffd70b; /* Textschatten */
+  text-shadow: 2px 2px #ffd70b;
   font-size: 72px;
-  justify-content: center; /* Elemente horizontal zentrieren */
-  align-items: center; /* Elemente vertikal zentrieren */
+  justify-content: center;
+  align-items: center;
   padding: 0 25px;
   box-sizing: border-box;
   text-align: center;
-  line-height: 60px; /* Zeilenhöhe auf 60px setzen */
-  top: 0; /* Obere Position auf 0 setzen */
-  left: 0; /* Linke Position auf 0 setzen */
+  line-height: 60px;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
 }

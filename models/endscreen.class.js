@@ -16,7 +16,9 @@ class Endscreen {
       if (!Endscreen.winningSoundPlayed) {
         Endscreen.winningSoundPlayed = true;
         setTimeout(() => {
-          winning_sound.play();
+          if (!isMuted) {
+            winning_sound.play();
+          }
         }, 3000);
       }
     } else {
@@ -32,7 +34,9 @@ class Endscreen {
     if (!Endscreen.gameOverSoundPlayed) {
       Endscreen.gameOverSoundPlayed = true;
       setTimeout(() => {
-        game_over_sound.play();
+        if (!isMuted) {
+          game_over_sound.play();
+        }
       }, 2500);
     }
   }

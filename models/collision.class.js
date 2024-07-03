@@ -201,26 +201,73 @@ class Collision {
           enemy instanceof Endboss
       )
       .forEach((enemy) => {
-        if (
-          this.world.character.isColliding(enemy) &&
-          this.world.character.speedY < 0 &&
-          this.world.character.isAboveGround() &&
-          enemy.active
-        ) {
-          if (!isMuted) {
-            this.world.collisionCharacterEnemies_sound.play();
-          }
-          if (enemy instanceof Endboss) {
-            this.world.character.jump(30);
-            enemy.energy = 0;
-            this.world.endbossBar.setPercentage(0);
-          } else {
-            enemy.energy = 0;
-          }
-          clearInterval(enemy.walkingAnimations);
-          clearInterval(enemy.movingAnimations);
+        if (this.isCharacterCollidingWithEnemy(enemy)) {
+          this.handleEnemyCollision(enemy);
         }
       });
+  }
+
+  /**
+   * Checks whether a character is colliding with an enemy.
+   *
+   * @param {Enemy} enemy - The enemy to check for collision with.
+   * @returns {boolean} Returns true if the character is colliding with the enemy and certain conditions are met, otherwise false.
+   */
+  isCharacterCollidingWithEnemy(enemy) {
+    return (
+      this.world.character.isColliding(enemy) &&
+      this.world.character.speedY < 0 &&
+      this.world.character.isAboveGround() &&
+      enemy.active
+    );
+  }
+
+  /**
+   * Handles collision with an enemy.
+   *
+   * @param {Enemy} enemy - The enemy involved in the collision.
+   */
+  handleEnemyCollision(enemy) {
+    if (!isMuted) {
+      this.world.collisionCharacterEnemies_sound.play();
+    }
+
+    if (enemy instanceof Endboss) {
+      this.handleEndbossCollision(enemy);
+    } else {
+      this.handleRegularEnemyCollision(enemy);
+    }
+  }
+
+  /**
+   * Handles collision with an end boss.
+   *
+   * @param {Endboss} endboss - The end boss involved in the collision.
+   */
+  handleEndbossCollision(endboss) {
+    this.world.character.jump(30);
+    endboss.energy = 0;
+    this.world.endbossBar.setPercentage(0);
+    this.stopEnemyAnimations(endboss);
+  }
+  /**
+   * Handles collision with a regular enemy.
+   *
+   * @param {Enemy} enemy - The regular enemy involved in the collision.
+   */
+  handleRegularEnemyCollision(enemy) {
+    enemy.energy = 0;
+    this.stopEnemyAnimations(enemy);
+  }
+
+  /**
+   * Stops animations for an enemy.
+   *
+   * @param {Enemy} enemy - The enemy for which animations should be stopped.
+   */
+  stopEnemyAnimations(enemy) {
+    clearInterval(enemy.walkingAnimations);
+    clearInterval(enemy.movingAnimations);
   }
 
   /**

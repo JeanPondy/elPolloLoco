@@ -113,7 +113,7 @@ class MovableObject extends DrawableObject {
 
     setTimeout(() => {
       this.x = -100;
-    }, 300);
+    }, 30);
   }
 
   /**

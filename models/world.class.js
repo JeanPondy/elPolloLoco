@@ -37,7 +37,11 @@ class World {
   walking_sound = new Audio("audio/running2.mp3");
 
   throwObjectsInterval;
-
+  /**
+   * Creates a new instance of World.
+   * @param {HTMLCanvasElement} canvas The HTML canvas element for rendering.
+   * @param {Keyboard} keyboard The keyboard input manager.
+   */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -50,29 +54,44 @@ class World {
     this.run();
     this.throwObject();
   }
-  //mainInterval;
+
+  /**
+   * Sets up event listeners.
+   */
   setupEventListeners() {
     document.addEventListener("keydown", () => {}, { once: true });
   }
 
+  /**
+   * Sets references to world in various game components.
+   */
   setWorld() {
     this.character.world = this;
     this.collision.world = this;
     this.interval.world = this;
   }
 
+  /**
+   * Starts the game loop.
+   */
   run() {
     setInterval(() => {
       this.collision.checkCollisions();
     }, 50);
   }
 
+  /**
+   * Sets interval for throwing objects.
+   */
   throwObject() {
     this.throwObjectsInterval = setInterval(() => {
       this.throwObjects();
     }, 1000 / 10);
   }
 
+  /**
+   * Throws objects based on keyboard input and remaining bottle score.
+   */
   throwObjects() {
     if (this.keyboard.D == true && this.bottlescore > 0) {
       this.bottle = new ThrowableObject(
@@ -90,6 +109,9 @@ class World {
     }
   }
 
+  /**
+   * Plays the sound effect for throwing bottles.
+   */
   playThrowSound() {
     this.throw_sound.currentTime = 0;
     this.throw_sound.play().catch((error) => {
@@ -97,6 +119,9 @@ class World {
     });
   }
 
+  /**
+   * Plays the sound effect for character being hurt.
+   */
   playHurtSound() {
     if (this.hurt_sound.paused) {
       this.hurt_sound.play().catch((error) => {
@@ -110,6 +135,9 @@ class World {
     }
   }
 
+  /**
+   * Clears the canvas and redraws game elements.
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.drawBackground();
@@ -120,6 +148,9 @@ class World {
     this.checkGameEnd();
   }
 
+  /**
+   * Draws the game background.
+   */
   drawBackground() {
     if (!this.level || !this.level.backgroundObjects) {
       console.error("Level or backgroundObjects is not defined");
@@ -131,6 +162,9 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
   }
 
+  /**
+   * Draws the status bars (e.g., health, bottles, coins).
+   */
   drawStatusBars() {
     this.addToMap(this.statusBar);
     this.addToMap(this.bottlesBar);
@@ -138,6 +172,9 @@ class World {
     this.addToMap(this.endbossBar);
   }
 
+  /**
+   * Draws all game objects (e.g., character, enemies, collectibles).
+   */
   drawGameObjects() {
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
@@ -149,6 +186,9 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
   }
 
+  /**
+   * Checks if the game has ended and handles end game logic.
+   */
   checkGameEnd() {
     if (this.gameEnd) {
       audio = false;
@@ -165,6 +205,10 @@ class World {
       }
     }
   }
+
+  /**
+   * Cleans up intervals and animation frames when game ends.
+   */
   drawEnd() {
     setTimeout(() => {
       this.interval.clearAllIntervals();
@@ -172,6 +216,9 @@ class World {
     }, 1000);
   }
 
+  /**
+   * Schedules the next animation frame for drawing.
+   */
   scheduleNextFrame() {
     let self = this;
     requestAnimationFrame(function () {
@@ -179,12 +226,20 @@ class World {
     });
   }
 
+  /**
+   * Adds multiple game objects to be drawn.
+   * @param {Array} objects The array of game objects to be added.
+   */
   addObjectsToMap(objects) {
     objects.forEach((object) => {
       this.addToMap(object);
     });
   }
 
+  /**
+   * Adds a single game object to be drawn.
+   * @param {Object} mo The game object to be added.
+   */
   addToMap(mo) {
     if (mo.otherDirection) {
       this.flipImage(mo);
@@ -198,6 +253,10 @@ class World {
     }
   }
 
+  /**
+   * Flips the image horizontally for the given game object.
+   * @param {Object} mo The game object whose image should be flipped.
+   */
   flipImage(mo) {
     this.ctx.save();
     this.ctx.translate(mo.width, 0);
@@ -205,6 +264,10 @@ class World {
     mo.x = mo.x * -1;
   }
 
+  /**
+   * Restores the image to its original orientation after flipping.
+   * @param {Object} mo The game object whose image should be restored.
+   */
   flipImageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();

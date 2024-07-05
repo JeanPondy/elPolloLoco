@@ -33,6 +33,10 @@
   </head>
   <body onload="preloadMedia() ">
     <h1 class="h1">El Pollo Loco</h1>
+    <div class="link-section" id="linksection">
+      <span class="link" onclick="openImpressum()">Impressum</span>
+      <span class="link" onclick="openDatenschutz()">Datenschutz</span>
+  </div>
 
     <!-- ---------------------  -->
     <div id="mainContainer" class="container">
@@ -144,27 +148,26 @@
       
         
       </div>
+      
       <div id="endPage" class="end-page d-none">
     
         <div
           class="restart-btn"
-          onclick="window.location.reload()"
-          ontouchstart="window.location.reload()"
+          onclick="restartGame()"
+          ontouchstart="restartGame()"
         >
        
           <p>RESTART</p>
         </div>
       </div>
+      
       <canvas id="canvas" class="d-none" width="720" height="480"> </canvas>
     </div>
     <div class="turn-phone-overlay">Turn the screen to play the game</div>
    
     </div>
     <footer>
-      <div class="link-section" id="linksection">
-        <span class="link" onclick="openImpressum()">Impressum</span>
-        <span class="link" onclick="openDatenschutz()">Datenschutz</span>
-    </div>
+    
     </footer>
   </body>
 </html>

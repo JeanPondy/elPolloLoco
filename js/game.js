@@ -5,9 +5,9 @@ let world;
 let gameEndInterval;
 let audio = true;
 
-game_over_sound = new Audio("audio/gameOver.mp3");
-winning_sound = new Audio("audio/win.mp3");
-backgroundSound = new Audio("audio/backgroundSound.mp3");
+let game_over_sound = new Audio("audio/gameOver.mp3");
+let winning_sound = new Audio("audio/win.mp3");
+let backgroundSound = new Audio("audio/backgroundSound.mp3");
 backgroundSound.volume = 0.05;
 backgroundSound.loop = true;
 
@@ -18,11 +18,12 @@ let gameOverSoundPlayed = false;
 let winningSoundPlayed = false;
 
 let smallDevice = window.matchMedia("(max-width: 1100px)");
-let touchDevice = window.matchMedia("(Pointer: coarse)").matches;
+let touchDevice = window.matchMedia("(pointer: coarse)").matches;
 
 window.addEventListener("keydown", startGame);
 
 document.addEventListener("DOMContentLoaded", updateControlsBox);
+
 /**
  * Starts the game, hides start page, initializes game elements, and begins background music.
  * @param {Event} event - The event object triggering the game start.
@@ -53,10 +54,13 @@ function showSmallScreen() {
 
 /**
  * Restarts the game.
- * @param {Event} event - The event object triggering the game restart.
  */
-function restart(event) {
+function restartGame() {
+  backgroundSound.pause();
+  backgroundSound.currentTime = 0;
   startGame(event);
+  document.getElementById("overlay-icons").classList.remove("d-none");
+  backgroundSound.play();
 }
 
 /**
@@ -87,9 +91,9 @@ function updateControlsBox() {
  */
 function showGameScreen() {
   canvas = document.getElementById("canvas");
-  startpage = document.getElementById("startpage");
-  endpage = document.getElementById("endPage");
-  helpbox = document.getElementById("help-box");
+  let startpage = document.getElementById("startpage");
+  let endpage = document.getElementById("endPage");
+  let helpbox = document.getElementById("help-box");
   updateControlsBox();
   canvas.classList.remove("d-none");
   startpage.classList.add("d-none");

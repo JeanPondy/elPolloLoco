@@ -43,35 +43,4 @@ class DrawableObject {
       }
     }
   }
-
-  /* // Methode zum Zeichnen des Rahmens des Objekts (z. B. für Debugging-Zwecke)
-  drawFrame(ctx) {
-    if (
-      this instanceof Character ||
-      this instanceof ChickenSmall ||
-      this instanceof Chicken ||
-      this instanceof Endboss ||
-      this instanceof Bottle ||
-      this instanceof Coin
-    ) {
-      // Prüfen, ob das Objekt eine Spielfigur oder ein Huhn ist
-      ctx.beginPath();
-      ctx.lineWidth = "5";
-      ctx.strokeStyle = "red";
-      ctx.rect(
-        this.x + this.offset.left,
-        this.y + this.offset.top,
-        this.x + this.width - this.offset.right - (this.x + this.offset.left),
-        this.y + this.height - this.offset.bottom - (this.y + this.offset.top)
-      );
-      ctx.stroke();
-    }
-     {
-      ctx.beginPath();
-      ctx.lineWidth = "5";
-      ctx.strokeStyle = "blue";
-      ctx.rect(this.x, this.y, this.width, this.height);
-      ctx.stroke();
-    } 
-  } */
 }

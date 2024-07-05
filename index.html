@@ -125,7 +125,7 @@
       </div>
   <!-- Mobile -->
  
-<div  class="mobile-control " id="control-icons">
+<div  class="mobile-control" id="control-icons">
   <div class="direction d-none" id="direction">
     <div class="mobile-icon icon-left" id="left"></div>
     <div class="mobile-icon icon-right" id="right"></div>
@@ -135,8 +135,6 @@
     <div class="mobile-icon icon-bottle" id="throw"></div>
   </div>
 </div>
-<!-- Mobile End -->
-
       <div id="startpage" class="start-page">
         <div
           class="start-btn"
@@ -145,29 +143,18 @@
         >
           Start Game
         </div>
-      
-        
       </div>
-      
       <div id="endPage" class="end-page d-none">
-    
         <div
           class="restart-btn"
-          onclick="restartGame()"
-          ontouchstart="restartGame()"
-        >
-       
+          onclick="restartGame(event)"
+          ontouchstart="restartGame(event)" >
           <p>RESTART</p>
         </div>
       </div>
-      
       <canvas id="canvas" class="d-none" width="720" height="480"> </canvas>
     </div>
     <div class="turn-phone-overlay">Turn the screen to play the game</div>
-   
     </div>
-    <footer>
-    
-    </footer>
   </body>
 </html>

@@ -89,26 +89,23 @@ img {
   margin-bottom: 50px;
 }
 
-/* ---------------------------------------- Media Queries ---------------------------------------- */
+/* ------------------- Media Queries ------------------ */
 
 @media (max-width: 455px) {
   .impressum p {
     text-align: center;
   }
 }
-
 @media (max-width: 1024px) {
   .datenschutzerklärung {
     padding: 0 90px;
   }
 }
-
 @media (max-width: 768px) {
   .datenschutzerklärung {
     padding: 0 45px;
   }
 }
-
 @media (max-width: 425px) {
   .datenschutzerklärung {
     padding: 0 22.5px;

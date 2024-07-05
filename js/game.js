@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", updateControlsBox);
 function startGame(event) {
   window.removeEventListener("keydown", startGame);
   document.getElementById("startpage").style.display = "none";
+  document.getElementById("linksection").style.display = "none";
   event.preventDefault();
   showGameScreen();
   initLevel();
@@ -55,7 +56,7 @@ function showSmallScreen() {
 /**
  * Restarts the game.
  */
-function restartGame() {
+function restartGame(event) {
   backgroundSound.pause();
   backgroundSound.currentTime = 0;
   startGame(event);

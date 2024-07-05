@@ -105,3 +105,65 @@ window.addEventListener("keyup", (e) => {
       break;
   }
 });
+
+// Adding touch event listeners to the control buttons
+document.addEventListener("DOMContentLoaded", addControlEventListeners);
+
+/**
+ * Adds event listeners to control buttons for touch events.
+ */
+function addControlEventListeners() {
+  const controlButtons = document.querySelectorAll(
+    "#control-icons .direction, #control-icons .option"
+  );
+  controlButtons.forEach((button) => {
+    button.addEventListener("touchstart", handleTouchStart);
+    button.addEventListener("touchend", handleTouchEnd);
+  });
+}
+
+/**
+ * Handles the touchstart event, updating the game state to reflect the button press.
+ * @param {TouchEvent} event - The touchstart event.
+ */
+function handleTouchStart(event) {
+  const button = event.target;
+  switch (button.id) {
+    case "right":
+      keyboard.RIGHT = true;
+      break;
+    case "left":
+      keyboard.LEFT = true;
+      break;
+    case "jump":
+      keyboard.SPACE = true;
+      break;
+    case "throw":
+      keyboard.D = true;
+      break;
+  }
+  event.preventDefault();
+}
+
+/**
+ * Handles the touchend event, updating the game state to reflect the button release.
+ * @param {TouchEvent} event - The touchend event.
+ */
+function handleTouchEnd(event) {
+  const button = event.target;
+  switch (button.id) {
+    case "right":
+      keyboard.RIGHT = false;
+      break;
+    case "left":
+      keyboard.LEFT = false;
+      break;
+    case "jump":
+      keyboard.SPACE = false;
+      break;
+    case "throw":
+      keyboard.D = false;
+      break;
+  }
+  event.preventDefault();
+}

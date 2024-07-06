@@ -93,7 +93,7 @@
           class="overlay-icon overlay-icon-menu"
           id="menu"
           onclick="toggleInfobox(event)"
-          ontouchstart="toggleMenu(event)"
+          ontouchstart="toggleInfobox(event)"
         >
           <img src="assets/menu.svg" />
         </div>
@@ -112,7 +112,15 @@
           style="display: none"
         />
       </div>
-      
+       <!-- home -->
+       <div
+       class="overlay-icon d-none"
+       id="home"
+       onclick="window.location.reload()"
+       ontouchstart="window.location.reload()"
+     >
+         <img src="assets/house-solid.svg" />
+       </div>
         <!-- fullscreen  -->
         <div
         class="overlay-icon fullscreen"
@@ -145,6 +153,13 @@
         </div>
       </div>
       <div id="endPage" class="end-page d-none">
+        <div
+        class="overlay-icon home"
+        id="home"
+        onclick="window.location.reload()"
+        ontouchstart="window.location.reload()">
+          <img src="assets/house-solid.svg" />
+        </div>
         <div
           class="restart-btn"
           onclick="restartGame(event)"

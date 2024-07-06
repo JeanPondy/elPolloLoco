@@ -124,6 +124,10 @@ h1 {
   cursor: pointer;
   color: #ffd500;
 }
+.home {
+  padding-top: 48px;
+  padding-left: 600px;
+}
 
 /* Stil für die Informationsbox */
 .info-box {
@@ -350,10 +354,16 @@ h1 {
   }
 }
 /* Standardmäßig menu, audiobtn und fullscreen ausblenden, wenn Bildschirmbreite <= 768px */
-@media (max-width: 768px) {
-  #menu,
+@media (max-width: 1024px) {
   #fullscreen {
     display: none;
+  }
+}
+@media (max-width: 768px) {
+  .Game-instructions {
+    font-size: 16px;
+    color: rgb(255, 249, 197);
+    padding: 8px;
   }
 }
 

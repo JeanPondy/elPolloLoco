@@ -39,6 +39,7 @@ function startGame(event) {
   checkGameEnd();
   backgroundSound.play();
   showSmallScreen();
+  document.getElementById("home").classList.remove("d-none");
 }
 
 /**
@@ -46,7 +47,7 @@ function startGame(event) {
  */
 function showSmallScreen() {
   document.getElementById("audiobtn").classList.remove("d-none");
-  if (window.innerWidth <= 768) {
+  if (window.innerWidth <= 1024) {
     document
       .querySelectorAll("#control-icons .direction, #control-icons .option")
       .forEach((element) => element.classList.remove("d-none"));
@@ -122,6 +123,7 @@ function showEndPage() {
   setTimeout(() => {
     document.getElementById("endPage").classList.remove("d-none");
     document.getElementById("control-icons").classList.add("d-none");
+    //document.getElementById("home").classList.remove("d-none");
   }, 1000);
   backgroundSound.pause();
 }

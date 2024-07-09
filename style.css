@@ -28,6 +28,7 @@ canvas {
   display: block;
   background-color: black;
   width: 100%;
+  height: 100%;
 }
 
 /* Stil für Überschrift 1 (h1) */
@@ -110,6 +111,8 @@ h1 {
 
 /* Stil für Bilder innerhalb von Overlay-Icons */
 .overlay-icon > img {
+  position: relative;
+  padding-top: 0px;
   height: 30px;
   width: 30px;
 }
@@ -125,8 +128,10 @@ h1 {
   color: #ffd500;
 }
 .home {
-  padding-top: 48px;
-  padding-left: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
 }
 
 /* Stil für die Informationsbox */
@@ -314,6 +319,15 @@ h1 {
 .link-section:hover {
   color: rgb(32, 165, 204);
   text-decoration: dashed;
+}
+
+#overlay-icons {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  top: 64px;
+  /* Anpassen, je nach gewünschtem Abstand von oben */
+  right: 24px; /* Anpassen, je nach gewünschtem Abstand von rechts */
 }
 /* ----------------------------------------------------------------------- */
 

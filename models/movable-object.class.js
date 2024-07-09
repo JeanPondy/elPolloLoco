@@ -121,10 +121,12 @@ class MovableObject extends DrawableObject {
    * @param {number} val The value to hit the object with.
    */
   hit(val) {
-    this.energy -= val;
-    this.lastHit = new Date().getTime();
-    if (this.energy < 0) {
-      this.energy = 0;
+    if (!this.isDead()) {
+      this.energy -= val;
+      this.lastHit = new Date().getTime();
+      if (this.energy < 0) {
+        this.energy = 0;
+      }
     }
   }
 

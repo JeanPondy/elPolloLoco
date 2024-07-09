@@ -6,7 +6,7 @@ let gameEndInterval;
 let audio = true;
 
 let game_over_sound = new Audio("audio/gameOver.mp3");
-let winning_sound = new Audio("audio/win.mp3");
+let winning_sound = new Audio("audio/winning_sound.mp3");
 let backgroundSound = new Audio("audio/backgroundSound.mp3");
 backgroundSound.volume = 0.05;
 backgroundSound.loop = true;
@@ -17,8 +17,10 @@ let isRestarted = false;
 let gameOverSoundPlayed = false;
 let winningSoundPlayed = false;
 
-let smallDevice = window.matchMedia("(max-width: 1100px)");
-let touchDevice = window.matchMedia("(pointer: coarse)").matches;
+const smallDevice = window.matchMedia("(max-width: 1100px)");
+const touchDevice = window.matchMedia("(pointer: coarse)").matches;
+
+window.onload = maxWindow;
 
 window.addEventListener("keydown", startGame);
 
@@ -40,6 +42,7 @@ function startGame(event) {
   backgroundSound.play();
   showSmallScreen();
   document.getElementById("home").classList.remove("d-none");
+  document.getElementById("fullscreen").classList.remove("d-none");
 }
 
 /**
@@ -59,7 +62,11 @@ function showSmallScreen() {
  */
 function restartGame(event) {
   backgroundSound.pause();
+  winning_sound.pause();
+  game_over_sound.pause();
   backgroundSound.currentTime = 0;
+  winning_sound.currentTime = 0;
+  game_over_sound.currentTime = 0;
   startGame(event);
   document.getElementById("overlay-icons").classList.remove("d-none");
   backgroundSound.play();
@@ -80,7 +87,7 @@ function initGame() {
  * Updates the visibility of the control icons box.
  */
 function updateControlsBox() {
-  let el = document.getElementById("control-icons");
+  const el = document.getElementById("control-icons");
   if (el) {
     el.classList.remove("d-none");
   } else {
@@ -93,9 +100,9 @@ function updateControlsBox() {
  */
 function showGameScreen() {
   canvas = document.getElementById("canvas");
-  let startpage = document.getElementById("startpage");
-  let endpage = document.getElementById("endPage");
-  let helpbox = document.getElementById("help-box");
+  const startpage = document.getElementById("startpage");
+  const endpage = document.getElementById("endPage");
+  const helpbox = document.getElementById("help-box");
   updateControlsBox();
   canvas.classList.remove("d-none");
   startpage.classList.add("d-none");
@@ -109,11 +116,12 @@ function showGameScreen() {
 function checkGameEnd() {
   gameEndInterval = setInterval(() => {
     if (world.gameEnd) {
-      clearInterval(gameEndInterval);
+      clearInterval(gameEndInterval); // Clear the gameEndInterval
       showEndPage();
+
       document.getElementById("overlay-icons").classList.add("d-none");
     }
-  }, 1000 / 20);
+  }, 50); // Check every 50ms for immediate response
 }
 
 /**
@@ -123,7 +131,8 @@ function showEndPage() {
   setTimeout(() => {
     document.getElementById("endPage").classList.remove("d-none");
     document.getElementById("control-icons").classList.add("d-none");
-    //document.getElementById("home").classList.remove("d-none");
+    //document.getElementById("overlay-icons").classList.add("d-none");
+    // document.getElementById("home").classList.remove("d-none");
   }, 1000);
   backgroundSound.pause();
 }
@@ -132,7 +141,7 @@ function showEndPage() {
  * Updates the visibility of the help box based on the screen size.
  */
 function updateHelpbox() {
-  let el = document.getElementById("help-box");
+  const el = document.getElementById("help-box");
   if (smallDevice.matches) {
     el.classList.add("d-none");
     menuOpen = false;
@@ -147,7 +156,7 @@ function updateHelpbox() {
  * @param {Event} event - The event object triggering the toggle.
  */
 function toggleInfobox(event) {
-  let el = document.getElementById("infobox");
+  const el = document.getElementById("infobox");
   event.preventDefault();
   if (event.type === "click" || event.type === "touchstart") {
     el.classList.toggle("d-none");
@@ -159,15 +168,11 @@ function toggleInfobox(event) {
  * @param {Event} event - The event object triggering the toggle.
  */
 function toggleMenu(event) {
-  let el = document.getElementById("help-box");
+  const el = document.getElementById("help-box");
   if (event) {
     event.preventDefault();
   }
-  if (el.classList.contains("d-none")) {
-    el.classList.remove("d-none");
-  } else {
-    el.classList.add("d-none");
-  }
+  el.classList.toggle("d-none");
 }
 
 /**
@@ -175,18 +180,40 @@ function toggleMenu(event) {
  * @param {Event} event - The event object triggering the toggle.
  */
 function toggleFullScreen(event) {
-  let elem = document.getElementById("mainContainer");
+  const elem = document.getElementById("mainContainer");
   event.preventDefault();
   if (event.type === "click" || event.type === "touchstart") {
     if (!document.fullscreenElement) {
-      elem.requestFullscreen().catch((err) => {
-        alert(
-          `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`
-        );
-      });
+      elem
+        .requestFullscreen()
+        .then(() => {
+          adjustCanvasAndOverlaySize(true);
+        })
+        .catch((err) => {
+          alert(
+            `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`
+          );
+        });
     } else {
-      document.exitFullscreen();
+      document.exitFullscreen().then(() => {
+        adjustCanvasAndOverlaySize(false);
+      });
     }
+  }
+}
+
+function adjustCanvasAndOverlaySize(fullscreen) {
+  const overlay = document.querySelector(".overlay");
+  if (fullscreen) {
+    canvas.style.width = "100vw";
+    canvas.style.height = "100vh";
+    overlay.style.width = "100vw";
+    overlay.style.height = "100vh";
+  } else {
+    canvas.style.width = ""; // Reset to original width
+    canvas.style.height = ""; // Reset to original height
+    overlay.style.width = ""; // Reset to original width
+    overlay.style.height = ""; // Reset to original height
   }
 }
 
@@ -250,4 +277,23 @@ function unmuteAudio(event) {
   backgroundSound.play().catch((error) => {
     console.error("Audio playback failed:", error);
   });
+}
+
+/**
+ * Maximizes the game window.
+ */
+function maxWindow() {
+  window.moveTo(0, 0);
+
+  if (document.all) {
+    top.window.resizeTo(screen.availWidth, screen.availHeight);
+  } else if (document.layers || document.getElementById) {
+    if (
+      top.window.outerHeight < screen.availHeight ||
+      top.window.outerWidth < screen.availWidth
+    ) {
+      top.window.outerHeight = screen.availHeight;
+      top.window.outerWidth = screen.availWidth;
+    }
+  }
 }

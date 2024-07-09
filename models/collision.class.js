@@ -55,7 +55,7 @@ class Collision {
         this.world.bottlescore += 1;
         this.world.bottlesBar.setPercentage(this.world.bottlescore * 20);
         bottle.removeObject();
-        if (!isMuted) {
+        if (!isMuted && !this.world.character.isDead()) {
           this.world.bottle_sound.play();
         }
       }
@@ -76,7 +76,7 @@ class Collision {
         this.world.coinscore += 1;
         this.world.coinsBar.setPercentage(this.world.coinscore * 20);
         coin.removeBoss();
-        if (!isMuted) {
+        if (!isMuted && !this.world.character.isDead()) {
           this.world.coin_sound.play();
         }
       }
@@ -85,9 +85,12 @@ class Collision {
 
   /**
    * Handles collisions between enemies and the character.
-   * @param {number} [val=15] - The damage value to apply.
+   * @param {number} [val=25] - The damage value to apply.
    */
-  enemiesHitCharacter(val = 15) {
+  enemiesHitCharacter(val = 25) {
+    if (this.isEndbossDefeated() || this.world.character.isDead()) {
+      return;
+    }
     this.world.level.enemies.forEach((enemy) => {
       if (
         this.world.character.isColliding(enemy) &&
@@ -98,7 +101,7 @@ class Collision {
       ) {
         this.world.character.hit(val);
         this.world.statusBar.setPercentage(this.world.character.energy);
-        if (!isMuted) {
+        if (!isMuted && !this.world.character.isDead()) {
           this.world.playHurtSound();
         }
       }
@@ -109,6 +112,9 @@ class Collision {
    * Handles collisions between small chickens and the character.
    */
   chickenSmallHitCharacter() {
+    if (this.isEndbossDefeated() || this.world.character.isDead()) {
+      return;
+    }
     this.world.level.enemies
       .filter((enemy) => enemy instanceof ChickenSmall)
       .forEach((enemy) => {
@@ -119,10 +125,10 @@ class Collision {
           !this.world.character.isAboveGround() &&
           enemy.energy > 0
         ) {
-          if (!isMuted) {
+          if (!isMuted && !this.world.character.isDead()) {
             this.world.hurt_sound.play();
           }
-          this.world.character.hit(10);
+          this.world.character.hit(25);
           this.world.character.lastAction = new Date().getTime();
           this.world.statusBar.setPercentage(this.world.character.energy);
         }
@@ -133,6 +139,9 @@ class Collision {
    * Handles collisions between regular chickens and the character.
    */
   chickenHitCharacter() {
+    if (this.isEndbossDefeated() || this.world.character.isDead()) {
+      return;
+    }
     this.world.level.enemies
       .filter((enemy) => enemy instanceof Chicken)
       .forEach((enemy) => {
@@ -143,7 +152,7 @@ class Collision {
           !this.world.character.isAboveGround() &&
           enemy.energy > 0
         ) {
-          this.world.character.hit(20);
+          this.world.character.hit(25);
           this.world.character.lastAction = new Date().getTime();
           this.world.statusBar.setPercentage(this.world.character.energy);
         }
@@ -160,6 +169,9 @@ class Collision {
    * Handles collisions between the endboss and the character.
    */
   endbossHitCharacter() {
+    if (this.isEndbossDefeated() || this.world.character.isDead()) {
+      return;
+    }
     this.world.level.enemies
       .filter((enemy) => enemy instanceof Endboss)
       .forEach((enemy) => {
@@ -171,7 +183,7 @@ class Collision {
           this.world.character.energy = 0;
           this.world.character.lastAction = new Date().getTime();
           this.world.statusBar.setPercentage(this.world.character.energy);
-          if (!isMuted) {
+          if (!isMuted && !this.world.character.isDead()) {
             this.world.playHurtSound();
           }
         }
@@ -193,6 +205,9 @@ class Collision {
    * Handles collisions between the character and enemies.
    */
   characterHitEnemies() {
+    if (this.isEndbossDefeated() || this.world.character.isDead()) {
+      return;
+    }
     this.world.level.enemies
       .filter(
         (enemy) =>
@@ -228,7 +243,7 @@ class Collision {
    * @param {Enemy} enemy - The enemy involved in the collision.
    */
   handleEnemyCollision(enemy) {
-    if (!isMuted) {
+    if (!isMuted && !this.world.character.isDead()) {
       this.world.collisionCharacterEnemies_sound.play();
     }
 
@@ -275,6 +290,9 @@ class Collision {
    */
   characterHitEndbossWithBottle() {
     const val = 35;
+    if (this.isEndbossDefeated() || this.world.character.isDead()) {
+      return;
+    }
     this.world.throwableObjects.forEach((bottle) => {
       let endboss = this.world.level.enemies.find(
         (enemy) => enemy instanceof Endboss && enemy.active
@@ -283,7 +301,7 @@ class Collision {
         endboss.endbossHit(val);
         bottle.splash();
         bottle.removeObject();
-        if (!isMuted) {
+        if (!isMuted && !this.world.character.isDead()) {
           this.world.splash_sound.play();
         }
         this.world.endbossBar.setPercentage(endboss.energy);

@@ -47,7 +47,7 @@ class Endboss extends MovableObject {
       "img/4_enemie_boss_chicken/2_alert/G12.png",
     ];
     this.nugget_sound = new Audio("audio/hurt4.mp3");
-    this.gamewon_sound = new Audio("audio/dyingChicken.mp3"); //win sound
+    //this.gamewon_sound = new Audio("audio/dyingChicken.mp3"); //win sound
 
     this.hadFirstContact = false;
     this.loadImage(this.IMAGES_WALKING[0]);
@@ -107,7 +107,7 @@ class Endboss extends MovableObject {
    */
   endbossDead() {
     if (!isMuted) {
-      this.gamewon_sound.play();
+      //this.gamewon_sound.play();
     }
     world.gameEnd = true;
     world.gameWon = true;

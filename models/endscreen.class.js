@@ -1,10 +1,12 @@
 class Endscreen {
   static gameOverSoundPlayed = false;
   static winningSoundPlayed = false;
+
   constructor(gameWon) {
     this.gameWon = gameWon;
     this.loadImage();
   }
+
   /**
    * Loads the appropriate image based on the game outcome (win or loss).
    * If the game is won, it plays a winning sound. Otherwise, it calls the gameOver method.

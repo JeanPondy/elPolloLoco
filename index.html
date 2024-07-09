@@ -32,6 +32,7 @@
     <script src="./js/game.js"></script>
   </head>
   <body onload="preloadMedia() ">
+    
     <h1 class="h1">El Pollo Loco</h1>
     <div class="link-section" id="linksection">
       <span class="link" onclick="openImpressum()">Impressum</span>
@@ -123,12 +124,12 @@
        </div>
         <!-- fullscreen  -->
         <div
-        class="overlay-icon fullscreen"
+        class="overlay-icon fullscreen d-none"
         id="fullscreen"
         onclick="toggleFullScreen(event)"
         ontouchstart="toggleFullScreen(event)"
       >
-          <img src="assets/fullscreen.svg" />
+          <img class="overlay-icon " src="assets/fullscreen.svg" />
         </div>
       </div>
   <!-- Mobile -->
@@ -171,5 +172,6 @@
     </div>
     <div class="turn-phone-overlay">Turn the screen to play the game</div>
     </div>
+  
   </body>
 </html>

@@ -102,12 +102,16 @@ class Character extends MovableObject {
 
   startAnimations() {
     this.movingAnimations = setInterval(() => {
-      this.walking_sound.pause();
-      if (this.world) {
-        this.characterMoveRight();
-        this.characterMoveLeft();
-        this.characterJump();
-        this.world.camera_x = -this.x + 30;
+      if (this.isDead()) {
+        this.walking_sound.pause();
+        clearInterval(gameEndInterval);
+      } else {
+        if (this.world) {
+          this.characterMoveRight();
+          this.characterMoveLeft();
+          this.characterJump();
+          this.world.camera_x = -this.x + 30;
+        }
       }
     }, 1000 / 60);
     this.startCharacterAnimations();
@@ -240,7 +244,7 @@ class Character extends MovableObject {
       clearInterval(this.movingAnimations);
       this.loadImage(this.IMAGES_DEAD[3]);
       clearInterval(this.world.level.enemies[6].movingAnimations);
-    }, 1000);
+    }, 100);
   }
 
   /**
